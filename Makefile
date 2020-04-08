@@ -8,6 +8,9 @@
 NAME	= plazza
 
 SRC	=	src/Error/Error.cpp	\
+		src/Parser/Parser.cpp	\
+		src/Reception/Reception.cpp	\
+		src/UserShell/UserShell.cpp	\
 
 SRC_MAIN	=	src/main.cpp	\
 
@@ -16,7 +19,7 @@ NAME_TESTS	=	unit_test
 SRC_TESTS =		$(SRC)	\
 				tests/tests_redirect.cpp	\
 
-CXXFLAGS += 	-W -Wall -Wextra -Wshadow -Werror -Iinclude -Iinclude/Error
+CXXFLAGS += 	-W -Wall -Wextra -Wshadow -Werror -Iinclude
 
 LDFLAGS =
 

@@ -5,13 +5,9 @@
 ** TODO: add description
 */
 
-#include <Error.hpp>
+#include <Error/Error.hpp>
 
 using namespace Plazza;
-
-/*
- * MAIN CLASS ERROR
- */
 
 PlazzaError::PlazzaError(const std::string &message, const std::string &component) : _message(message), _component(component)
 {
@@ -27,17 +23,13 @@ const char * PlazzaError::what() const noexcept
     return _message.c_str();
 }
 
-/*
- * PARSER CLASS ERROR
- */
-
 ParserError::ParserError(const std::string &message, const std::string &component) : PlazzaError(message, component)
 {
 }
 
-/*
- * USERSHELL CLASS ERROR
- */
+ReceptionError::ReceptionError(const std::string &message, const std::string &component) : PlazzaError(message, component)
+{
+}
 
 UserShellError::UserShellError(const std::string &message, const std::string &component) : PlazzaError(message, component)
 {

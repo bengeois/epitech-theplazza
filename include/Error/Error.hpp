@@ -36,6 +36,16 @@ namespace Plazza
             std::string _component;
     };
 
+    class ReceptionError : public PlazzaError
+    {
+    public:
+        explicit ReceptionError(const std::string &message, const std::string &component = "Unknown");
+        ~ReceptionError() override = default;
+    private:
+        std::string _message;
+        std::string _component;
+    };
+
     class UserShellError : public PlazzaError
     {
         public:
