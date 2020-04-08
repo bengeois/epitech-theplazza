@@ -7,20 +7,32 @@
 
 #include "Reception/Reception.hpp"
 
+#include <iostream>
+
 using namespace Plazza;
 
 Reception::Reception(float cookingMultiplier, int cooksPerKitchen, float stockTime) :
 _cookingMultiplier(cookingMultiplier),
 _cooksPerKitchen(cooksPerKitchen),
 _stockTime(stockTime),
-_shell(std::make_unique<UserShell>())
+_shell(std::make_unique<UserShell>()),
+_running(true)
 {
 
 }
 
 void Reception::run()
 {
-    while (1) {
-        _shell->getUserCommand();
+    std::string command;
+    while (_running) {
+        try {
+            command = _shell->getUserCommand();
+        } catch (const UserShellError &e) {
+            throw e;
+        }
+        if (!command.empty())
+            std::cout << command << std::endl;
+        if (!_shell->isShellActive())
+            _running = false;
     }
 }

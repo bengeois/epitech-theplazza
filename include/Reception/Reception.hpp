@@ -28,6 +28,8 @@ namespace Plazza
             float _stockTime;
 
             std::unique_ptr<UserShell> _shell;
+
+            bool _running;
     };
 }
 
