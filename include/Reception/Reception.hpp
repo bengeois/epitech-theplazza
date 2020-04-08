@@ -9,6 +9,8 @@
 #define CPP_PLAZZA_2019_RECEPTION_HPP
 
 #include "Error/Error.hpp"
+#include <UserShell/UserShell.hpp>
+#include <memory>
 
 namespace Plazza
 {
@@ -16,7 +18,16 @@ namespace Plazza
     {
         public:
             Reception(float cookingMultiplier, int _cooksPerKitchen, float _stockTime);
-            ~Reception();
+            ~Reception() = default;
+
+            void run();
+
+        private:
+            float _cookingMultiplier;
+            int _cooksPerKitchen;
+            float _stockTime;
+
+            std::unique_ptr<UserShell> _shell;
     };
 }
 

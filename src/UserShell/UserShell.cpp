@@ -6,3 +6,18 @@
 */
 
 #include "UserShell/UserShell.hpp"
+
+using namespace Plazza;
+
+UserShell::UserShell()
+{
+}
+
+UserShell::~UserShell()
+{
+}
+
+void UserShell::getUserCommand()
+{
+
+}

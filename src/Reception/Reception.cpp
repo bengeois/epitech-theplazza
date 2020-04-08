@@ -9,7 +9,18 @@
 
 using namespace Plazza;
 
-Reception::Reception(float cookingMultiplier, int _cooksPerKitchen, float _stockTime)
+Reception::Reception(float cookingMultiplier, int cooksPerKitchen, float stockTime) :
+_cookingMultiplier(cookingMultiplier),
+_cooksPerKitchen(cooksPerKitchen),
+_stockTime(stockTime),
+_shell(std::make_unique<UserShell>())
 {
 
+}
+
+void Reception::run()
+{
+    while (1) {
+        _shell->getUserCommand();
+    }
 }

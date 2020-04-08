@@ -15,6 +15,8 @@ namespace Plazza
         public:
             UserShell();
             ~UserShell();
+
+            void getUserCommand();
         private:
     };
 }
