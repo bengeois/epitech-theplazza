@@ -7,7 +7,7 @@
 
 NAME	= plazza
 
-SRC	=
+SRC	=	src/Error/Error.cpp	\
 
 SRC_MAIN	=	src/main.cpp	\
 
@@ -16,9 +16,9 @@ NAME_TESTS	=	unit_test
 SRC_TESTS =		$(SRC)	\
 				tests/tests_redirect.cpp	\
 
-CXXFLAGS += 	-W -Wall -Wextra -Wshadow -Werror -I include
+CXXFLAGS += 	-W -Wall -Wextra -Wshadow -Werror -Iinclude -Iinclude/Error
 
-LDFLAGS =	
+LDFLAGS =
 
 LDFLAGS_TESTS = -lcriterion --coverage	\
 
