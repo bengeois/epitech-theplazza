@@ -20,14 +20,21 @@ namespace Plazza
             Client(const std::string &addr = "127.0.0.1", int port = 21);
             ~Client();
 
-            void read() const;
+            void read();
+            void write();
+            void write(const std::string &msg);
             void translateSelect(const fd_set &readfs, const fd_set &writefs);
             void setFdSet(fd_set *readfs, fd_set *writefs);
+            const std::string getData();
+            bool isWriting() const;
 
         private:
             int _fd;
             sockaddr_in _addr;
             std::queue<char> _msg;
+            bool _write = false;
+            bool _read = false;
+            std::string _data;
     };
 } // namespace Plazza
 

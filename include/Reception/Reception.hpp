@@ -25,7 +25,7 @@ namespace Plazza
             void run();
 
         private:
-            void translateCommand(const std::string &command) const;
+            void translateCommand(const std::string &command);
             void resetFdSet(fd_set *readfs, fd_set *writefs);
             void translateSelect(const fd_set &read, const fd_set &writefs);
 

@@ -41,8 +41,10 @@ void Server::bindPort(int port)
     _addr.sin_addr.s_addr = INADDR_ANY;
     if (bind(_fd, (struct sockaddr *)(&_addr), sizeof(_addr)) < 0)
         throw ServerError("Unable to bind this port " + std::to_string(_port), "bindPort");
+    socklen_t len = sizeof(_addr);
+    getsockname(_fd, (sockaddr *)(&_addr), &len);
+    _port = ntohs(_addr.sin_port);
 }
-
 void Server::newConnection()
 {
     sockaddr_in client;
