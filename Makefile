@@ -11,6 +11,7 @@ SRC	=	src/Error/Error.cpp	\
 		src/Parser/Parser.cpp	\
 		src/Reception/Reception.cpp	\
 		src/UserShell/UserShell.cpp	\
+		src/Kitchen/Kitchen.cpp	\
 
 SRC_MAIN	=	src/main.cpp	\
 
@@ -21,7 +22,7 @@ SRC_TESTS =		$(SRC)	\
 
 CXXFLAGS += 	-W -Wall -Wextra -Wshadow -Werror -Iinclude
 
-LDFLAGS =
+LDFLAGS = -lpthread
 
 LDFLAGS_TESTS = -lcriterion --coverage	\
 

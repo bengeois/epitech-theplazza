@@ -35,3 +35,6 @@ UserShellError::UserShellError(const std::string &message, const std::string &co
 {
 }
 
+KitchenError::KitchenError(const std::string &message, const std::string &component) : PlazzaError(message, component)
+{
+}

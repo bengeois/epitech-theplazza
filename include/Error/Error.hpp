@@ -55,6 +55,16 @@ namespace Plazza
             std::string _message;
             std::string _component;
     };
+
+    class KitchenError : public PlazzaError
+    {
+    public:
+        explicit KitchenError(const std::string &message, const std::string &component = "Unknown");
+        ~KitchenError() override = default;
+    private:
+        std::string _message;
+        std::string _component;
+    };
 }
 
 #endif //CPP_PLAZZA_2019_ERROR_HPP
