@@ -23,6 +23,7 @@ namespace Plazza
             const std::string &getUserCommand();
 
             bool isShellActive();
+            void setFdSet(fd_set *readfd, fd_set *writefs);
 
         private:
             void checkInput();

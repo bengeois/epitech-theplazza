@@ -8,6 +8,7 @@
 #include "Socket/Server.hpp"
 #include "Error/Error.hpp"
 #include <algorithm>
+#include <arpa/inet.h>
 
 using namespace Plazza;
 
@@ -49,10 +50,12 @@ void Server::bindPort()
 {
     for (size_t i = 1; i < 65536; i++) {
         _addr.sin_family = AF_INET;
-        _addr.sin_port = htons(_port);
+        _addr.sin_port = htons(i);
         _addr.sin_addr.s_addr = INADDR_ANY;
         if (bind(_fd, (struct sockaddr *)(&_addr), sizeof(_addr)) < 0)
             continue;
+        _port = i;
+        return;
     }
     throw ServerError("Unable to found a free port, try again after a few moment", "bindPort");
 }
