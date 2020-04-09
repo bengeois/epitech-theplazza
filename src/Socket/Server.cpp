@@ -20,10 +20,7 @@ Server::Server(int port) : _port(port), _fd(socket(AF_INET, SOCK_STREAM, 0))
         throw ServerError("Unable to create a socket", "Server");
     if (setsockopt(_fd, SOL_SOCKET, SO_REUSEADDR, &tmp, sizeof(int)) < 0)
         throw ServerError("Unable to set the fd of the server, try again", "Server");
-    if (_port != -1)
-        bindPort(_port);
-    else
-        bindPort();
+    bindPort(_port);
     if (listen(_fd, 10) < 0)
         throw ServerError("Unable to listen ports", "Server");
 }
@@ -44,20 +41,6 @@ void Server::bindPort(int port)
     _addr.sin_addr.s_addr = INADDR_ANY;
     if (bind(_fd, (struct sockaddr *)(&_addr), sizeof(_addr)) < 0)
         throw ServerError("Unable to bind this port " + std::to_string(_port), "bindPort");
-}
-
-void Server::bindPort()
-{
-    for (size_t i = 1; i < 65536; i++) {
-        _addr.sin_family = AF_INET;
-        _addr.sin_port = htons(i);
-        _addr.sin_addr.s_addr = INADDR_ANY;
-        if (bind(_fd, (struct sockaddr *)(&_addr), sizeof(_addr)) < 0)
-            continue;
-        _port = i;
-        return;
-    }
-    throw ServerError("Unable to found a free port, try again after a few moment", "bindPort");
 }
 
 void Server::newConnection()

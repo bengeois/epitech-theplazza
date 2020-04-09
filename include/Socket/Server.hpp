@@ -17,7 +17,7 @@ namespace Plazza
 {
     class Server {
         public:
-            Server(int port = -1);
+            Server(int port = 0);
             ~Server();
 
             int getPort() const;
@@ -26,7 +26,6 @@ namespace Plazza
 
         private:
             void bindPort(int port);
-            void bindPort();
 
             void newConnection();
 
