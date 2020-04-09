@@ -6,33 +6,39 @@
 */
 
 #include "Reception/Reception.hpp"
+#include "Socket/Client.hpp"
 
 #include <iostream>
+#include <sys/ipc.h>
+#include <sys/msg.h>
 
 using namespace Plazza;
 
 Reception::Reception(float cookingMultiplier, int cooksPerKitchen, float stockTime) :
-_cookingMultiplier(cookingMultiplier),
-_cooksPerKitchen(cooksPerKitchen),
-_stockTime(stockTime),
-_shell(std::make_unique<UserShell>()),
-_running(true)
+    _cookingMultiplier(cookingMultiplier),
+    _cooksPerKitchen(cooksPerKitchen),
+    _stockTime(stockTime),
+    _shell(std::make_unique<UserShell>()),
+    _running(true)
 {
 
 }
 
 void Reception::run()
-{
+try {
     std::string command;
     while (_running) {
-        try {
-            command = _shell->getUserCommand();
-        } catch (const UserShellError &e) {
-            throw e;
-        }
+        command = _shell->getUserCommand();
         if (!command.empty())
-            std::cout << command << std::endl;
+            translateCommand(command);
         if (!_shell->isShellActive())
             _running = false;
     }
+} catch (const UserShellError &e) {
+    throw e;
+}
+
+void Reception::translateCommand(const std::string &command) const
+{
+    (void)command;
 }

@@ -38,3 +38,11 @@ UserShellError::UserShellError(const std::string &message, const std::string &co
 KitchenError::KitchenError(const std::string &message, const std::string &component) : PlazzaError(message, component)
 {
 }
+
+ServerError::ServerError(const std::string &message, const std::string &component) : PlazzaError(message, component)
+{
+}
+
+ClientError::ClientError(const std::string &message, const std::string &component) : PlazzaError(message, component)
+{
+}

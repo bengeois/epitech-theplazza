@@ -31,19 +31,13 @@ namespace Plazza
         public:
             explicit ParserError(const std::string &message, const std::string &component = "Unknown");
             ~ParserError() override = default;
-        private:
-            std::string _message;
-            std::string _component;
     };
 
     class ReceptionError : public PlazzaError
     {
-    public:
-        explicit ReceptionError(const std::string &message, const std::string &component = "Unknown");
-        ~ReceptionError() override = default;
-    private:
-        std::string _message;
-        std::string _component;
+        public:
+            explicit ReceptionError(const std::string &message, const std::string &component = "Unknown");
+            ~ReceptionError() override = default;
     };
 
     class UserShellError : public PlazzaError
@@ -51,9 +45,20 @@ namespace Plazza
         public:
             explicit UserShellError(const std::string &message, const std::string &component = "Unknown");
             ~UserShellError() override = default;
-        private:
-            std::string _message;
-            std::string _component;
+    };
+
+    class ServerError : public PlazzaError
+    {
+        public:
+            explicit ServerError(const std::string &message, const std::string &component = "Unknown");
+            ~ServerError() override = default;
+    };
+
+    class ClientError : public PlazzaError
+    {
+        public:
+            explicit ClientError(const std::string &message, const std::string &component = "Unknown");
+            ~ClientError() override = default;
     };
 
     class KitchenError : public PlazzaError
@@ -61,9 +66,6 @@ namespace Plazza
     public:
         explicit KitchenError(const std::string &message, const std::string &component = "Unknown");
         ~KitchenError() override = default;
-    private:
-        std::string _message;
-        std::string _component;
     };
 }
 

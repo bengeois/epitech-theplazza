@@ -11,6 +11,8 @@
 #include "Error/Error.hpp"
 #include <UserShell/UserShell.hpp>
 #include <memory>
+#include "Socket/Client.hpp"
+#include "Socket/Server.hpp"
 
 namespace Plazza
 {
@@ -23,11 +25,15 @@ namespace Plazza
             void run();
 
         private:
+            void translateCommand(const std::string &command) const;
+
+        private:
             float _cookingMultiplier;
             int _cooksPerKitchen;
             float _stockTime;
 
             std::unique_ptr<UserShell> _shell;
+            std::unique_ptr<Server> _server;
 
             bool _running;
     };

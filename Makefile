@@ -12,6 +12,8 @@ SRC	=	src/Error/Error.cpp	\
 		src/Reception/Reception.cpp	\
 		src/UserShell/UserShell.cpp	\
 		src/Kitchen/Kitchen.cpp	\
+		src/Socket/Client.cpp	\
+		src/Socket/Server.cpp	\
 
 SRC_MAIN	=	src/main.cpp	\
 
@@ -20,7 +22,7 @@ NAME_TESTS	=	unit_test
 SRC_TESTS =		$(SRC)	\
 				tests/tests_redirect.cpp	\
 
-CXXFLAGS += 	-W -Wall -Wextra -Wshadow -Werror -Iinclude
+CXXFLAGS += 	-W -Wall -Wextra -Iinclude
 
 LDFLAGS = -lpthread
 
