@@ -11,7 +11,9 @@ SRC	=	src/Error/Error.cpp	\
 		src/Parser/Parser.cpp	\
 		src/Reception/Reception.cpp	\
 		src/UserShell/UserShell.cpp	\
+		src/Pizza/APizza.cpp	\
 		src/Kitchen/Kitchen.cpp	\
+		src/Stock/Stock.cpp	\
 
 SRC_MAIN	=	src/main.cpp	\
 

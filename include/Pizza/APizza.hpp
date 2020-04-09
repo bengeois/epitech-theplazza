@@ -5,8 +5,10 @@
 ** TODO: add description
 */
 
-#ifndef CPP_PLAZZA_2019_PIZZA_HPP
-#define CPP_PLAZZA_2019_PIZZA_HPP
+#ifndef CPP_PLAZZA_2019_APIZZA_HPP
+#define CPP_PLAZZA_2019_APIZZA_HPP
+
+#include "IPizza.hpp"
 
 namespace Plazza
 {
@@ -26,6 +28,18 @@ namespace Plazza
         XL = 8,
         XXL = 16,
     };
+
+    class APizza : public IPizza
+    {
+        public:
+            APizza();
+            ~APizza();
+
+            bool cook();
+            void getIngredient();
+
+        private:
+    };
 }
 
-#endif //CPP_PLAZZA_2019_PIZZA_HPP
+#endif //CPP_PLAZZA_2019_APIZZA_HPP

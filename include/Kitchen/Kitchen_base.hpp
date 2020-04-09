@@ -9,8 +9,6 @@
 #define CPP_PLAZZA_2019_KITCHEN_HPP
 
 #include "Error/Error.hpp"
-#include "Pizza/APizza.hpp"
-#include "Stock/Stock.hpp"
 #include <future>
 #include <vector>
 #include <queue>
@@ -25,8 +23,8 @@ namespace Plazza
             Kitchen(size_t cooks);
             ~Kitchen();
 
-            auto enqueue(const std::shared_ptr<APizza>& pizza) -> std::future<bool>;
-            // ENQUEUE Renvoie un bool true lorsque la fabrication est terminée
+            template<class F, class ... Args>
+            auto enqueue(F&& f, Args&&... args) -> std::future<typename std::result_of<F(Args...)>::type>;
 
         private:
             std::vector< std::thread > _cooks;
@@ -39,7 +37,7 @@ namespace Plazza
             bool _stop;
             size_t _cookNb;
 
-            std::shared_ptr<Stock> _stock;
+            //Stock _stock;
     };
 
     inline Kitchen::Kitchen(size_t cooks) : _stop(false), _cookNb(cooks)
@@ -66,15 +64,14 @@ namespace Plazza
         }
     }
 
-    auto Kitchen::enqueue(const std::shared_ptr<APizza> &pizza) -> std::future<bool>
+    template<class F, class... Args>
+    inline auto Kitchen::enqueue(F&&f, Args&&... args) -> std::future<typename std::result_of<F(Args...)>::type>
     {
+        using return_type = typename std::result_of<F(Args...)>::type;
 
-        auto task = std::make_shared<std::packaged_task<bool()>>([pizza, this](){
-            pizza->cook();
-            return true;
-        });
+        auto task = std::make_shared<std::packaged_task<return_type()>>(std::bind(std::forward<F>(f), std::forward<Args>(args)...));
 
-        std::future<bool> res = task->get_future();
+        std::future<return_type> res = task->get_future();
 
         {
             std::unique_lock<std::mutex> lock(_queue_mutex);
