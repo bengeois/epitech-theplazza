@@ -32,7 +32,7 @@ Client::Client(const std::string &addr, int port) : _fd(socket(AF_INET, SOCK_STR
 Client::~Client()
 {
 }
-#include <iostream>
+
 void Client::read()
 {
     char buffer[1] = {0};
@@ -43,15 +43,12 @@ void Client::read()
     if (len == 0)
         return;
     _data.push_back(buffer[0]);
-    std::cout << "Read : " << getData().size() << std::endl;
-    std::cout << "Read (after getData) : " << _data.size() << std::endl;
 }
 
 void Client::write()
 {
     if (::write(_fd, &_msg.front(), 1) == -1)
         throw ClientError("Fail write data", "writeClient");
-    std::cout << "Writing : " << _msg.front() << std::endl;
     _msg.pop();
     if (_msg.empty()) {
         _write = false;
