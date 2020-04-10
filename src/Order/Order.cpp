@@ -115,13 +115,13 @@ std::unique_ptr<IPizza> Order::getNextPizza() const
 
     if (pizza == _pizzas.end())
         throw OrderError("No more pizza");
-    std::map<IPizza::PizzaType, std::unique_ptr<IPizza> (Order::*)() const> pizzas;
+    std::map<IPizza::PizzaType, std::unique_ptr<IPizza> (Order::*)(IPizza::PizzaSize) const> pizzas;
 
     pizzas[IPizza::Americana] = &Order::createAmericana;
     pizzas[IPizza::Fantasia] = &Order::createFantasia;
     pizzas[IPizza::Margarita] = &Order::createMargarita;
     pizzas[IPizza::Regina] = &Order::createRegina;
-    return ((this->*pizzas[std::get<0>(*pizza)])());
+    return ((this->*pizzas[std::get<0>(*pizza)])(std::get<1>(*pizza)));
 }
 
 void Order::addPizzaFinish(IPizza::PizzaType type, IPizza::PizzaSize size)
@@ -152,22 +152,22 @@ bool Order::isFinish() const
     return (pizza == _pizzas.end());
 }
 
-std::unique_ptr<IPizza> Order::createMargarita() const
+std::unique_ptr<IPizza> Order::createMargarita(IPizza::PizzaSize size) const
 {
-    return (std::make_unique<Margarita>());
+    return (std::make_unique<Margarita>(size));
 }
 
-std::unique_ptr<IPizza> Order::createAmericana() const
+std::unique_ptr<IPizza> Order::createAmericana(IPizza::PizzaSize size) const
 {
-    return (std::make_unique<Americana>());
+    return (std::make_unique<Americana>(size));
 }
 
-std::unique_ptr<IPizza> Order::createRegina() const
+std::unique_ptr<IPizza> Order::createRegina(IPizza::PizzaSize size) const
 {
-    return (std::make_unique<Regina>());
+    return (std::make_unique<Regina>(size));
 }
 
-std::unique_ptr<IPizza> Order::createFantasia() const
+std::unique_ptr<IPizza> Order::createFantasia(IPizza::PizzaSize size) const
 {
-    return (std::make_unique<Fantasia>());
+    return (std::make_unique<Fantasia>(size));
 }

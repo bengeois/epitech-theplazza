@@ -9,6 +9,8 @@
 #define CPP_PLAZZA_2019_IPIZZA_HPP
 
 #include <map>
+#include <iostream>
+#include <memory>
 
 namespace Plazza
 {
@@ -37,7 +39,11 @@ namespace Plazza
 
             virtual bool cook() = 0;
             virtual const std::map<size_t, size_t> &getIngredient() = 0;
+            virtual const std::string &getName() const = 0;
+            virtual PizzaSize getSize() const = 0;
     };
 }
+
+std::ostream &operator<<(std::ostream &os, const std::unique_ptr<Plazza::IPizza> &pizza);
 
 #endif //CPP_PLAZZA_2019_IPIZZA_HPP

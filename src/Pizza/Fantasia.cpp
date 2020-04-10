@@ -9,7 +9,7 @@
 
 using namespace Plazza;
 
-Fantasia::Fantasia()
+Fantasia::Fantasia(PizzaSize size) : APizza("Fantasia", size)
 {
 }
 

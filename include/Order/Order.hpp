@@ -36,10 +36,10 @@ namespace Plazza
             void nextPizza(std::string &order);
             const std::string nextWord(std::string &order) const;
 
-            std::unique_ptr<IPizza> createMargarita() const;
-            std::unique_ptr<IPizza> createAmericana() const;
-            std::unique_ptr<IPizza> createRegina() const;
-            std::unique_ptr<IPizza> createFantasia() const;
+            std::unique_ptr<IPizza> createMargarita(IPizza::PizzaSize size) const;
+            std::unique_ptr<IPizza> createAmericana(IPizza::PizzaSize size) const;
+            std::unique_ptr<IPizza> createRegina(IPizza::PizzaSize size) const;
+            std::unique_ptr<IPizza> createFantasia(IPizza::PizzaSize size) const;
 
         private:
             int _id;

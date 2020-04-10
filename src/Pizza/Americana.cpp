@@ -9,7 +9,7 @@
 
 using namespace Plazza;
 
-Americana::Americana()
+Americana::Americana(PizzaSize size) : APizza("Americana", size)
 {
 }
 

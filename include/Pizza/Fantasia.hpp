@@ -14,7 +14,7 @@ namespace Plazza
 {
     class Fantasia : public APizza {
         public:
-            Fantasia();
+            Fantasia(PizzaSize size);
             ~Fantasia();
 
         private:

@@ -14,7 +14,7 @@ namespace Plazza
 {
     class Americana : public APizza {
         public:
-            Americana();
+            Americana(PizzaSize size);
             ~Americana();
 
         private:

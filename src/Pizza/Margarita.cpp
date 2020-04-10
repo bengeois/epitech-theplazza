@@ -9,7 +9,7 @@
 
 using namespace Plazza;
 
-Margarita::Margarita()
+Margarita::Margarita(PizzaSize size) : APizza("Margarita", size)
 {
 }
 

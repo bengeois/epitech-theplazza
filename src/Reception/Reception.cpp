@@ -67,7 +67,6 @@ try {
     if (child == 0) {
 
         exit(0);
-    } else {
     }
 } catch (const ParserError &e) {
     std::cout << "Invalid command" << std::endl;
