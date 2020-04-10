@@ -60,14 +60,16 @@ void Reception::resetFdSet(fd_set *readfs, fd_set *writefs)
 }
 
 void Reception::translateCommand(const std::string &command)
-{
+try {
     (void)command;
+    Order order(command);
     int child = fork();
 
     if (child == 0) {
-        Order order(command);
 
         exit(0);
     } else {
     }
+} catch (const ParserError &e) {
+    std::cout << "Invalid command" << std::endl;
 }
