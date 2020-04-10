@@ -9,7 +9,7 @@
 #define CPP_PLAZZA_2019_KITCHEN_HPP
 
 #include "Error/Error.hpp"
-#include "Pizza/APizza.hpp"
+#include "Pizza/IPizza.hpp"
 #include "Stock/Stock.hpp"
 #include <future>
 #include <vector>
@@ -22,13 +22,15 @@ namespace Plazza
     class Kitchen
     {
         public:
-            explicit Kitchen(size_t cooks);
+            explicit Kitchen(size_t cooks, float stockTime);
             ~Kitchen();
 
             // ENQUEUE Renvoie un bool true lorsque la fabrication est terminée
-            auto enqueue(const std::shared_ptr<APizza> &pizza) -> std::future<bool>;
+            auto enqueue(const std::shared_ptr<IPizza> &pizza) -> std::future<bool>;
 
             void run();
+
+            void canAcceptPizza(const std::shared_ptr<IPizza> &pizza);
 
         private:
             std::vector<std::thread> _cooks;

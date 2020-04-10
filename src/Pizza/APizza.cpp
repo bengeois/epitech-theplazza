@@ -21,6 +21,7 @@ bool APizza::cook()
     return true;
 }
 
-void APizza::getIngredient()
+const std::map<size_t, size_t> &APizza::getIngredient()
 {
+    return _ingredients;
 }

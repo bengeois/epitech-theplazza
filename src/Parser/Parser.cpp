@@ -8,7 +8,7 @@
 #include <sstream>
 #include "Parser/Parser.hpp"
 
-Plazza::Parser::Parser(int argc, char **argv) try : _argv(std::vector<std::string>(argv + 1, argv + argc)), _cookingMultiplier(0), _cooksPerKitchen(0), _stockTime(0)
+Plazza::Parser::Parser(int argc, char **argv) try : _argv(std::vector<std::string>(argv + 1, argv + argc)), _cookingMultiplier(0), _cooksPerKitchen(0), _regenerateTime(0)
 {
 } catch (const std::exception &e) {
     throw ParserError("Invalid number of argument.", "Parser");
@@ -21,7 +21,7 @@ void Plazza::Parser::build()
 
     if ((std::istringstream(_argv[0]) >> _cookingMultiplier).fail()
     || (std::istringstream(_argv[1]) >> _cooksPerKitchen).fail()
-    || (std::istringstream(_argv[2]) >> _stockTime).fail())
+    || (std::istringstream(_argv[2]) >> _regenerateTime).fail())
         throw ParserError("Bad argument.", "Parser");
 
     if (_cooksPerKitchen < 1)
@@ -38,7 +38,7 @@ int Plazza::Parser::getCooksPerKitchen() const
     return _cooksPerKitchen;
 }
 
-float Plazza::Parser::getStockTime() const
+float Plazza::Parser::getRegenerateTime() const
 {
-    return _stockTime;
+    return _regenerateTime;
 }

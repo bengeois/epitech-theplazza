@@ -9,7 +9,10 @@
 
 using namespace Plazza;
 
-Kitchen::Kitchen(size_t cooks) : _stop(false), _cookNb(cooks)
+Kitchen::Kitchen(size_t cooks, float stockTime) :
+_stop(false),
+_cookNb(cooks),
+_stock(std::make_shared<Stock>(Stock(stockTime)))
 {
     for (size_t i = 0; i < _cookNb; i++) {
         _cooks.emplace_back([this](){
@@ -45,7 +48,7 @@ Kitchen::~Kitchen()
 }
 
 
-auto Kitchen::enqueue(const std::shared_ptr<APizza> &pizza) -> std::future<bool>
+auto Kitchen::enqueue(const std::shared_ptr<IPizza> &pizza) -> std::future<bool>
 {
 
     auto task = std::make_shared<std::packaged_task<bool()>>([pizza, this](){
@@ -70,6 +73,11 @@ auto Kitchen::enqueue(const std::shared_ptr<APizza> &pizza) -> std::future<bool>
 }
 
 void Kitchen::run()
+{
+
+}
+
+void Kitchen::canAcceptPizza(const std::shared_ptr<IPizza> &pizza)
 {
 
 }

@@ -33,12 +33,14 @@ namespace Plazza
     {
         public:
             APizza();
-            ~APizza();
+            ~APizza() override;
 
-            bool cook();
-            void getIngredient();
+            bool cook() override;
+            const std::map<size_t, size_t> &getIngredient() override;
 
         private:
+            std::map<size_t , size_t> _ingredients;
+
     };
 }
 

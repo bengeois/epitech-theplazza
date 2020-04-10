@@ -9,6 +9,8 @@
 #define CPP_PLAZZA_2019_KITCHEN_HPP
 
 #include "Error/Error.hpp"
+#include "Kitchen.hpp"
+
 #include <future>
 #include <vector>
 #include <queue>
@@ -97,6 +99,7 @@ namespace Plazza
         for (std::thread &cook : _cooks)
             cook.join();
     }
+
 }
 
 #endif //CPP_PLAZZA_2019_KITCHEN_HPP

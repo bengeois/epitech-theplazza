@@ -9,7 +9,9 @@
 #define CPP_PLAZZA_2019_STOCK_HPP
 
 #include <map>
-#include "Pizza/APizza.hpp"
+#include <memory>
+#include <chrono>
+#include "Pizza/IPizza.hpp"
 
 namespace Plazza
 {
@@ -30,12 +32,21 @@ namespace Plazza
     class Stock
     {
         public:
-            explicit Stock(size_t stockTime);
+            explicit Stock(float regenerateTime);
             ~Stock() = default;
 
+            void regenerateIngredient();
+
+            void reserveIngredient(const std::shared_ptr<IPizza> &pizza);
+
+            bool canCookPizza(const std::shared_ptr<IPizza> &pizza) const;
+
+            void setRegenerateTime(float regenerateTime);
+            float getRegenerateTime() const;
 
         private:
-            size_t _stockTime;
+            float _regenerateTime;
+            std::chrono::steady_clock::time_point _beginRegeneration;
 
             std::map<size_t , size_t> _stock;
     };

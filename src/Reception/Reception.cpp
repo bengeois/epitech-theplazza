@@ -14,10 +14,10 @@
 
 using namespace Plazza;
 
-Reception::Reception(float cookingMultiplier, int cooksPerKitchen, float stockTime) :
+Reception::Reception(float cookingMultiplier, int cooksPerKitchen, float regenerateTime) :
     _cookingMultiplier(cookingMultiplier),
     _cooksPerKitchen(cooksPerKitchen),
-    _stockTime(stockTime),
+    _regenerateTime(regenerateTime),
     _shell(std::make_unique<UserShell>()),
     _server(std::make_unique<Server>()),
     _running(true)
@@ -84,4 +84,34 @@ void Reception::translateCommand(const std::string &command)
         exit(0);
     } else {
     }
+}
+
+float Reception::getCookingMultiplier() const
+{
+    return _cookingMultiplier;
+}
+
+int Reception::getCooksPerKitchen() const
+{
+    return _cooksPerKitchen;
+}
+
+float Reception::getRegenerateTime() const
+{
+    return _regenerateTime;
+}
+
+void Reception::setCookingMultiplier(float cookingMultiplier)
+{
+    _cookingMultiplier = cookingMultiplier;
+}
+
+void Reception::setCooksPerKitchen(int cooksPerKitchen)
+{
+    _cooksPerKitchen = cooksPerKitchen;
+}
+
+void Reception::setRegenerateTime(float regenerateTime)
+{
+    _regenerateTime = regenerateTime;
 }

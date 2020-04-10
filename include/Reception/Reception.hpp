@@ -24,6 +24,14 @@ namespace Plazza
 
             void run();
 
+            float getCookingMultiplier() const;
+            int getCooksPerKitchen() const;
+            float getRegenerateTime() const;
+
+            void setCookingMultiplier(float cookingMultiplier);
+            void setCooksPerKitchen(int cooksPerKitchen);
+            void setRegenerateTime(float regenerateTime);
+
         private:
             void translateCommand(const std::string &command);
             void resetFdSet(fd_set *readfs, fd_set *writefs);
@@ -32,7 +40,7 @@ namespace Plazza
         private:
             float _cookingMultiplier;
             int _cooksPerKitchen;
-            float _stockTime;
+            float _regenerateTime;
 
             std::unique_ptr<UserShell> _shell;
             std::unique_ptr<Server> _server;

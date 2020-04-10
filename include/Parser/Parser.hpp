@@ -24,13 +24,13 @@ namespace Plazza
 
             float getCookingMultiplier() const;
             int getCooksPerKitchen() const;
-            float getStockTime() const;
+            float getRegenerateTime() const;
 
         private:
             const std::vector<std::string> _argv;
             float _cookingMultiplier;
             int _cooksPerKitchen;
-            float _stockTime;
+            float _regenerateTime;
     };
 }
 

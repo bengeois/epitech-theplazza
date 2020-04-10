@@ -8,6 +8,8 @@
 #ifndef CPP_PLAZZA_2019_IPIZZA_HPP
 #define CPP_PLAZZA_2019_IPIZZA_HPP
 
+#include <map>
+
 namespace Plazza
 {
     class IPizza
@@ -16,7 +18,7 @@ namespace Plazza
             virtual ~IPizza() = default;
 
             virtual bool cook() = 0;
-            virtual void getIngredient() = 0;
+            virtual const std::map<size_t, size_t> &getIngredient() = 0;
     };
 }
 

@@ -27,5 +27,7 @@ int main(void)
         std::cout << result.get() << ' ';
     std::cout << std::endl;
 
+
+    std::cout << pool.enqueue(pizza).get() << std::endl;
     return 0;
 }
