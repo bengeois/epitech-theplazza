@@ -12,7 +12,7 @@
 
 namespace Plazza
 {
-    class Americana {
+    class Americana : public APizza {
         public:
             Americana();
             ~Americana();

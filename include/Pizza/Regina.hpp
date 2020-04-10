@@ -12,7 +12,7 @@
 
 namespace Plazza
 {
-    class Regina {
+    class Regina : public APizza {
         public:
             Regina();
             ~Regina();

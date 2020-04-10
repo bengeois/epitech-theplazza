@@ -61,8 +61,7 @@ void Reception::resetFdSet(fd_set *readfs, fd_set *writefs)
 
 void Reception::translateCommand(const std::string &command)
 try {
-    (void)command;
-    Order order(command);
+    std::unique_ptr<Order> order = std::make_unique<Order>(command);
     int child = fork();
 
     if (child == 0) {
