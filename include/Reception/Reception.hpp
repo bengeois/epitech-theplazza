@@ -13,6 +13,7 @@
 #include <memory>
 #include "Socket/Client.hpp"
 #include "Socket/Server.hpp"
+#include "Order/Order.hpp"
 
 namespace Plazza
 {
@@ -44,6 +45,7 @@ namespace Plazza
 
             std::unique_ptr<UserShell> _shell;
             std::unique_ptr<Server> _server;
+            std::vector<std::unique_ptr<Order>> _orders;
 
             bool _running;
     };

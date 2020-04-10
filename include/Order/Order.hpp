@@ -8,14 +8,35 @@
 #ifndef ORDER_HPP_
 #define ORDER_HPP_
 
+#include "Pizza/IPizza.hpp"
+#include "Pizza/Margarita.hpp"
+#include <string>
+#include <memory>
+#include <vector>
+
+using finish_t = bool;
+using send_t = bool;
+
 namespace Plazza
 {
     class Order {
         public:
-            Order();
+            Order(const std::string &order);
             ~Order();
 
+            std::unique_ptr<IPizza> getNextPizza() const;
+            void addPizzaFinish(IPizza::PizzaType type, IPizza::PizzaSize size);
+            void pack();
+            bool isFinish() const;
+
         private:
+            void nextPizza(std::string &order);
+            const std::string nextWord(std::string &order) const;
+
+        private:
+            int _id;
+            const std::string _order;
+            std::vector<std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t>> _pizzas;
     };
 } // namespace Plazza
 

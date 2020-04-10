@@ -60,30 +60,18 @@ void Reception::resetFdSet(fd_set *readfs, fd_set *writefs)
 }
 
 void Reception::translateCommand(const std::string &command)
-{
+try {
     (void)command;
+    Order order(command);
     int child = fork();
 
     if (child == 0) {
-        // Client client("127.0.0.1", _server->getPort());
-
-        // client.write("Coucou\n");
-
-        // fd_set writefs;
-        // fd_set readfs;
-
-        // while (1) {
-        //     resetFdSet(&readfs, &writefs);
-        //     FD_SET(1, &readfs);
-        //     client.setFdSet(&readfs, &writefs);
-        //     if (select(FD_SETSIZE, &readfs, &writefs, NULL, NULL) < 0)
-        //         throw ReceptionError("Select fail", "Select");
-        //     client.translateSelect(readfs, writefs);
-        // }
 
         exit(0);
     } else {
     }
+} catch (const ParserError &e) {
+    std::cout << "Invalid command" << std::endl;
 }
 
 float Reception::getCookingMultiplier() const

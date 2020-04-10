@@ -46,3 +46,7 @@ ServerError::ServerError(const std::string &message, const std::string &componen
 ClientError::ClientError(const std::string &message, const std::string &component) : PlazzaError(message, component)
 {
 }
+
+OrderError::OrderError(const std::string &message, const std::string &component) : PlazzaError(message, component)
+{
+}
