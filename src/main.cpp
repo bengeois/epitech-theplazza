@@ -24,4 +24,5 @@ int main(int argc, char **argv)
         std::cout << "[PLAZZA]" << " {" << e.getComponent() << "} " << e.what() << std::endl;
         return PLAZZA_ERROR;
     }
+    return (EXIT_SUCCESS);
 }

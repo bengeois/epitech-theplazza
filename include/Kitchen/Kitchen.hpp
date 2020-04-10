@@ -11,11 +11,13 @@
 #include "Error/Error.hpp"
 #include "Pizza/IPizza.hpp"
 #include "Stock/Stock.hpp"
+#include "Utils.hpp"
 #include <future>
 #include <vector>
 #include <queue>
 #include <memory>
 #include <functional>
+#include <algorithm>
 
 namespace Plazza
 {
@@ -32,7 +34,12 @@ namespace Plazza
 
             bool canAcceptPizza(const std::shared_ptr<IPizza> &pizza);
 
+            void checkFinishOrder();
+
         private:
+            bool _stop;
+
+            size_t _cookNb;
             std::vector<std::thread> _cooks;
 
             std::queue<std::function<void()>> _tasks;
@@ -40,10 +47,9 @@ namespace Plazza
             std::mutex _queue_mutex;
             std::condition_variable _condition;
 
-            bool _stop;
-            size_t _cookNb;
-
             std::shared_ptr<Stock> _stock;
+
+            std::vector<std::pair<std::pair<size_t, std::shared_ptr<IPizza>>, std::future<bool>>> _orders;
     };
 }
 

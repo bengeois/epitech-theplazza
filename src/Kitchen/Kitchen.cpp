@@ -14,6 +14,7 @@ _stop(false),
 _cookNb(cooks),
 _stock(std::make_shared<Stock>(Stock(stockTime)))
 {
+    _cooks.reserve(_cookNb);
     for (size_t i = 0; i < _cookNb; i++) {
         _cooks.emplace_back([this](){
             while (true) {
@@ -76,6 +77,7 @@ auto Kitchen::enqueue(const std::shared_ptr<IPizza> &pizza) -> std::future<bool>
 void Kitchen::run()
 {
     while (!_stop) {
+        this->checkFinishOrder();
         _stock->regenerateIngredient();
     }
 }
@@ -83,4 +85,16 @@ void Kitchen::run()
 bool Kitchen::canAcceptPizza(const std::shared_ptr<IPizza> &pizza)
 {
     return (_stock->canCookPizza(pizza));
+}
+
+void Kitchen::checkFinishOrder()
+{
+    for (const auto &order : _orders) {
+        if (future_ready(order.second)) {
+            //SEND TO RECEPTION
+        }
+    }
+    _orders.erase(std::remove_if(_orders.begin(), _orders.end(), [](const auto &order){
+        return future_ready(order.second);
+    }), _orders.end());
 }
