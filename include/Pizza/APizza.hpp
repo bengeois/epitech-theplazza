@@ -22,7 +22,7 @@ namespace Plazza
             const std::map<size_t, size_t> &getIngredient() override;
 
         private:
-            std::map<size_t , size_t> _ingredients;
+            std::map<size_t, size_t> _ingredients;
 
     };
 }

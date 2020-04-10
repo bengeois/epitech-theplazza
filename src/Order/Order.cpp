@@ -109,13 +109,34 @@ void Order::nextPizza(std::string &order)
 
 std::unique_ptr<IPizza> Order::getNextPizza() const
 {
-    return (std::make_unique<Margarita>());
+    auto pizza = std::find_if_not(_pizzas.begin(), _pizzas.end(), [](const std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t> &pizza) {
+        return (std::get<3>(pizza));
+    });
+
+    if (pizza == _pizzas.end())
+        throw OrderError("No more pizza");
+    std::map<IPizza::PizzaType, std::unique_ptr<IPizza> (Order::*)() const> pizzas;
+
+    pizzas[IPizza::Americana] = &Order::createAmericana;
+    pizzas[IPizza::Fantasia] = &Order::createFantasia;
+    pizzas[IPizza::Margarita] = &Order::createMargarita;
+    pizzas[IPizza::Regina] = &Order::createRegina;
+    return ((this->*pizzas[std::get<0>(*pizza)])());
 }
 
 void Order::addPizzaFinish(IPizza::PizzaType type, IPizza::PizzaSize size)
 {
-    (void)type;
-    (void)size;
+    if (isFinish())
+        throw OrderError("Unable to add pizza", "addPizzaFinish");
+    auto pizza = std::find_if(_pizzas.begin(), _pizzas.end(), [&type, &size](const std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t> &pizza) {
+        if (std::get<2>(pizza))
+            return (false);
+        if (std::get<0>(pizza) == type && std::get<1>(pizza) == size)
+            return (true);
+        return (false);
+    });
+
+    std::get<2>(*pizza) = true;
 }
 
 void Order::pack()
@@ -129,4 +150,24 @@ bool Order::isFinish() const
     });
 
     return (pizza == _pizzas.end());
+}
+
+std::unique_ptr<IPizza> Order::createMargarita() const
+{
+    return (std::make_unique<Margarita>());
+}
+
+std::unique_ptr<IPizza> Order::createAmericana() const
+{
+    return (std::make_unique<Americana>());
+}
+
+std::unique_ptr<IPizza> Order::createRegina() const
+{
+    return (std::make_unique<Regina>());
+}
+
+std::unique_ptr<IPizza> Order::createFantasia() const
+{
+    return (std::make_unique<Fantasia>());
 }
