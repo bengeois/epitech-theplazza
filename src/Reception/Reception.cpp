@@ -65,21 +65,7 @@ void Reception::translateCommand(const std::string &command)
     int child = fork();
 
     if (child == 0) {
-        // Client client("127.0.0.1", _server->getPort());
-
-        // client.write("Coucou\n");
-
-        // fd_set writefs;
-        // fd_set readfs;
-
-        // while (1) {
-        //     resetFdSet(&readfs, &writefs);
-        //     FD_SET(1, &readfs);
-        //     client.setFdSet(&readfs, &writefs);
-        //     if (select(FD_SETSIZE, &readfs, &writefs, NULL, NULL) < 0)
-        //         throw ReceptionError("Select fail", "Select");
-        //     client.translateSelect(readfs, writefs);
-        // }
+        Order order(command);
 
         exit(0);
     } else {

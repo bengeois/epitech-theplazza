@@ -67,6 +67,13 @@ namespace Plazza
         explicit KitchenError(const std::string &message, const std::string &component = "Unknown");
         ~KitchenError() override = default;
     };
+
+    class OrderError : public PlazzaError
+    {
+    public:
+        explicit OrderError(const std::string &message, const std::string &component = "Unknown");
+        ~OrderError() override = default;
+    };
 }
 
 #endif //CPP_PLAZZA_2019_ERROR_HPP
