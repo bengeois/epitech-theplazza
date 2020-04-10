@@ -28,6 +28,8 @@ namespace Plazza
             // ENQUEUE Renvoie un bool true lorsque la fabrication est terminée
             auto enqueue(const std::shared_ptr<APizza> &pizza) -> std::future<bool>;
 
+            void run();
+
         private:
             std::vector<std::thread> _cooks;
 

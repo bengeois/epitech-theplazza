@@ -33,6 +33,18 @@ Kitchen::Kitchen(size_t cooks) : _stop(false), _cookNb(cooks)
     }
 }
 
+Kitchen::~Kitchen()
+{
+    {
+        std::unique_lock<std::mutex> lock(_queue_mutex);
+        _stop = true;
+    }
+    _condition.notify_all();
+    for (std::thread &cook : _cooks)
+        cook.join();
+}
+
+
 auto Kitchen::enqueue(const std::shared_ptr<APizza> &pizza) -> std::future<bool>
 {
 
@@ -57,13 +69,7 @@ auto Kitchen::enqueue(const std::shared_ptr<APizza> &pizza) -> std::future<bool>
     return res;
 }
 
-Kitchen::~Kitchen()
+void Kitchen::run()
 {
-    {
-        std::unique_lock<std::mutex> lock(_queue_mutex);
-        _stop = true;
-    }
-    _condition.notify_all();
-    for (std::thread &cook : _cooks)
-        cook.join();
+
 }

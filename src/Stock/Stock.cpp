@@ -8,3 +8,9 @@
 #include "Stock/Stock.hpp"
 
 using namespace Plazza;
+
+Stock::Stock(size_t stockTime) : _stockTime(stockTime)
+{
+    for ( const auto e : Plazza::availableIngredients)
+        _stock[e] = 5;
+}
