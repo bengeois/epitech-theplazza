@@ -70,9 +70,6 @@ void Order::nextPizza(std::string &order)
     int nb = 0;
     bool error = true;
 
-    std::cout << "Type : " << typeWord << std::endl;
-    std::cout << "Size : " << sizeWord << std::endl;
-    std::cout << "Number : " << numberWord << std::endl;
     for (size_t i = 0; i < 4; i++) {
         if (types[i].second != typeWord)
             continue;
