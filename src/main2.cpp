@@ -14,7 +14,7 @@ using namespace Plazza;
 
 int main(void)
 {
-    Kitchen pool(4);
+    Kitchen pool(4, 4);
     std::vector< std::future<bool> > results;
     std::shared_ptr<APizza> pizza = std::make_shared<APizza>(APizza());
     for(int i = 0; i < 8; ++i) {
@@ -27,6 +27,7 @@ int main(void)
         std::cout << result.get() << ' ';
     std::cout << std::endl;
 
+    pool.run();
 
     std::cout << pool.enqueue(pizza).get() << std::endl;
     return 0;

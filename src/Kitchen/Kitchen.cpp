@@ -64,6 +64,7 @@ auto Kitchen::enqueue(const std::shared_ptr<IPizza> &pizza) -> std::future<bool>
         if (_stop)
             throw KitchenError("Kitchen Closed", "Kitchen");
 
+        _stock->reserveIngredient(pizza);
         _tasks.emplace([task](){
             (*task)();
         });
@@ -74,10 +75,12 @@ auto Kitchen::enqueue(const std::shared_ptr<IPizza> &pizza) -> std::future<bool>
 
 void Kitchen::run()
 {
-
+    while (!_stop) {
+        _stock->regenerateIngredient();
+    }
 }
 
-void Kitchen::canAcceptPizza(const std::shared_ptr<IPizza> &pizza)
+bool Kitchen::canAcceptPizza(const std::shared_ptr<IPizza> &pizza)
 {
-
+    return (_stock->canCookPizza(pizza));
 }

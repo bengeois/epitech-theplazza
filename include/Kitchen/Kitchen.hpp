@@ -30,7 +30,7 @@ namespace Plazza
 
             void run();
 
-            void canAcceptPizza(const std::shared_ptr<IPizza> &pizza);
+            bool canAcceptPizza(const std::shared_ptr<IPizza> &pizza);
 
         private:
             std::vector<std::thread> _cooks;
