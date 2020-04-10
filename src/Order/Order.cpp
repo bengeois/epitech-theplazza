@@ -12,19 +12,19 @@
 
 using namespace Plazza;
 
-const std::pair<PizzaType, const std::string> types[] = {
-    {std::make_pair(Regina, "regina")},
-    {std::make_pair(Margarita, "margarita")},
-    {std::make_pair(Americana, "americana")},
-    {std::make_pair(Fantasia, "fantasia")},
+const std::pair<IPizza::PizzaType, const std::string> types[] = {
+    {std::make_pair(IPizza::Regina, "regina")},
+    {std::make_pair(IPizza::Margarita, "margarita")},
+    {std::make_pair(IPizza::Americana, "americana")},
+    {std::make_pair(IPizza::Fantasia, "fantasia")},
 };
 
-const std::pair<PizzaSize, const std::string> sizes[] = {
-    {std::make_pair(S, "S")},
-    {std::make_pair(M, "M")},
-    {std::make_pair(L, "L")},
-    {std::make_pair(XL, "XL")},
-    {std::make_pair(XXL, "XXL")},
+const std::pair<IPizza::PizzaSize, const std::string> sizes[] = {
+    {std::make_pair(IPizza::S, "S")},
+    {std::make_pair(IPizza::M, "M")},
+    {std::make_pair(IPizza::L, "L")},
+    {std::make_pair(IPizza::XL, "XL")},
+    {std::make_pair(IPizza::XXL, "XXL")},
 };
 
 Order::Order(const std::string &order) : _order(order)
@@ -65,8 +65,8 @@ void Order::nextPizza(std::string &order)
     std::string typeWord = nextWord(order);
     std::string sizeWord = nextWord(order);
     std::string numberWord = nextWord(order);
-    PizzaType type;
-    PizzaSize size;
+    IPizza::PizzaType type;
+    IPizza::PizzaSize size;
     int nb = 0;
     bool error = true;
 
@@ -109,10 +109,13 @@ void Order::nextPizza(std::string &order)
 
 std::unique_ptr<IPizza> Order::getNextPizza() const
 {
+    return (std::make_unique<Margarita>());
 }
 
-void Order::addPizzaFinish(PizzaType type, PizzaSize size)
+void Order::addPizzaFinish(IPizza::PizzaType type, IPizza::PizzaSize size)
 {
+    (void)type;
+    (void)size;
 }
 
 void Order::pack()
@@ -121,7 +124,7 @@ void Order::pack()
 
 bool Order::isFinish() const
 {
-    auto pizza = std::find_if_not(_pizzas.begin(), _pizzas.end(), [](const std::tuple<PizzaType, PizzaSize, finish_t, send_t> &pizza) {
+    auto pizza = std::find_if_not(_pizzas.begin(), _pizzas.end(), [](const std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t> &pizza) {
         return (std::get<2>(pizza));
     });
 
