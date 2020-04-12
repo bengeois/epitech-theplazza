@@ -12,7 +12,7 @@
 
 using namespace Plazza;
 
-Order::Order(const std::string &order) : _order(order)
+Order::Order(const std::string &order, int cookingMultiplier) : _order(order), _cookingMultiplier(cookingMultiplier)
 {
     static int id = 0;
     std::string tmpOrder = order;
@@ -141,22 +141,22 @@ bool Order::isFinish() const
 
 std::shared_ptr<IPizza> Order::createMargarita(IPizza::PizzaSize size) const
 {
-    return (std::make_shared<Margarita>(size));
+    return (std::make_shared<Margarita>(size, _cookingMultiplier));
 }
 
 std::shared_ptr<IPizza> Order::createAmericana(IPizza::PizzaSize size) const
 {
-    return (std::make_shared<Americana>(size));
+    return (std::make_shared<Americana>(size, _cookingMultiplier));
 }
 
 std::shared_ptr<IPizza> Order::createRegina(IPizza::PizzaSize size) const
 {
-    return (std::make_shared<Regina>(size));
+    return (std::make_shared<Regina>(size, _cookingMultiplier));
 }
 
 std::shared_ptr<IPizza> Order::createFantasia(IPizza::PizzaSize size) const
 {
-    return (std::make_shared<Fantasia>(size));
+    return (std::make_shared<Fantasia>(size, _cookingMultiplier));
 }
 
 int Order::getId() const

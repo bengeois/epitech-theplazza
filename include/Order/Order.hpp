@@ -24,7 +24,7 @@ namespace Plazza
 {
     class Order {
         public:
-            Order(const std::string &order);
+            Order(const std::string &order, int cookingMultiplier);
             ~Order();
 
             std::shared_ptr<IPizza> getNextPizza() const;
@@ -46,6 +46,7 @@ namespace Plazza
         private:
             int _id;
             const std::string _order;
+            int _cookingMultiplier;
             std::vector<std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t>> _pizzas;
     };
 } // namespace Plazza

@@ -64,7 +64,7 @@ void Reception::resetFdSet(fd_set *readfs, fd_set *writefs)
 
 void Reception::translateCommand(const std::string &command)
 try {
-    std::shared_ptr<Order> order = std::make_shared<Order>(command);
+    std::shared_ptr<Order> order = std::make_shared<Order>(command, _cookingMultiplier);
 
     std::cout << order << std::endl;
 
