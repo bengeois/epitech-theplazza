@@ -67,14 +67,29 @@ try {
     // while (!_orders[_orders.size() - 1]->isFinish()) {
     //     std::shared_ptr<IPizza> pizza = _orders[_orders.size() - 1]->getNextPizza();
     // }
+    if (fork() == 0)
+        newKitchen();
 } catch (const ParserError &e) {
     std::cout << "Invalid command" << std::endl;
 }
 
 void Reception::newKitchen()
 {
-    Kitchen kitchen(_cooksPerKitchen, _regenerateTime);
+    Client client(_server->getPort());
+    fd_set writefs;
+    fd_set readfs;
 
+    FD_ZERO(&writefs);
+    FD_ZERO(&readfs);
+
+    while (client.getData() != "200\n") {
+        resetFdSet(&readfs, &writefs);
+        client.setFdSet(&readfs, &writefs);
+        if (select(FD_SETSIZE, &readfs, &writefs, NULL, NULL) < 0)
+            throw ReceptionError("Select fail", "Select");
+        client.translateSelect(readfs, writefs);
+    }
+    std::cout << "New kitchen create" << std::endl;
     exit(0);
 }
 

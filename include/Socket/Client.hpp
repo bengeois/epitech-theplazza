@@ -18,6 +18,7 @@ namespace Plazza
         public:
             Client(int fd, sockaddr_in &addr);
             Client(const std::string &addr = "127.0.0.1", int port = 21);
+            Client(int port = 21, const std::string &addr = "127.0.0.1");
             ~Client();
 
             void read();
@@ -27,6 +28,9 @@ namespace Plazza
             void setFdSet(fd_set *readfs, fd_set *writefs);
             const std::string getData();
             bool isWriting() const;
+
+        private:
+            void createClient(const std::string &addr, int port);
 
         private:
             int _fd;

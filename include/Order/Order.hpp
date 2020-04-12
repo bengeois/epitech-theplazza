@@ -50,6 +50,6 @@ namespace Plazza
     };
 } // namespace Plazza
 
-std::ostream &operator<<(std::ostream &os, const std::unique_ptr<Plazza::Order> &order);
+std::ostream &operator<<(std::ostream &os, const std::shared_ptr<Plazza::Order> &order);
 
 #endif /* !ORDER_HPP_ */

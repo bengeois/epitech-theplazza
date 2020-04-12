@@ -9,6 +9,7 @@
 #include "Error/Error.hpp"
 #include <algorithm>
 #include <arpa/inet.h>
+#include <iostream>
 
 using namespace Plazza;
 
@@ -53,7 +54,9 @@ void Server::newConnection()
 
     if (_fd == -1)
         throw ServerError("Unable to connect with the client", "newConnection");
+    std::cout << "{SERVER} new connection send 200 to the client" << std::endl;
     _clients.push_back(std::make_unique<Client>(fd, client));
+    _clients[_clients.size() - 1]->write("200\n");
 }
 
 void Server::translateSelect(const fd_set &readfs, const fd_set &writefs)

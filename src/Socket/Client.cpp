@@ -9,15 +9,29 @@
 #include "Error/Error.hpp"
 #include <arpa/inet.h>
 #include <unistd.h>
+#include <iostream>
 
 using namespace Plazza;
 
-Client::Client(int fd, sockaddr_in &addr) : _fd(fd), _addr(addr)
+Client::Client(int fd, sockaddr_in &addr) : _fd(fd), _addr(addr), _read(true)
 {
-    _read = true;
 }
 
-Client::Client(const std::string &addr, int port) : _fd(socket(AF_INET, SOCK_STREAM, 0))
+Client::Client(const std::string &addr, int port) : _fd(socket(AF_INET, SOCK_STREAM, 0)), _read(true)
+{
+    createClient(addr, port);
+}
+
+Client::Client(int port, const std::string &addr) : _fd(socket(AF_INET, SOCK_STREAM, 0)), _read(true)
+{
+    createClient(addr, port);
+}
+
+Client::~Client()
+{
+}
+
+void Client::createClient(const std::string &addr, int port)
 {
     if (_fd == -1)
         throw ClientError("Unable to create a socket", "Client");
@@ -26,11 +40,6 @@ Client::Client(const std::string &addr, int port) : _fd(socket(AF_INET, SOCK_STR
     _addr.sin_addr.s_addr = inet_addr(addr.c_str());
     if (connect(_fd, (sockaddr *)(&_addr), sizeof(_addr)) < 0)
         throw ClientError("Unable to connect to the client", "Client");
-    _read = true;
-}
-
-Client::~Client()
-{
 }
 
 void Client::read()
@@ -42,11 +51,13 @@ void Client::read()
         throw ClientError("Fail to read data", "readClient");
     if (len == 0)
         return;
+    std::cout << "{CLIENT} receive " << buffer[0] << std::endl;
     _data.push_back(buffer[0]);
 }
 
 void Client::write()
 {
+    std::cout << "{CLIENT} send " << _msg.front() << std::endl;
     if (::write(_fd, &_msg.front(), 1) == -1)
         throw ClientError("Fail write data", "writeClient");
     _msg.pop();
@@ -91,6 +102,7 @@ const std::string Client::getData()
         return (data);
     data = _data.substr(0, i);
     _data.erase(0, i + 1);
+    data += "\n";
     return (data);
 }
 

@@ -169,7 +169,7 @@ const std::vector<std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, sen
     return (_pizzas);
 }
 
-std::ostream &operator<<(std::ostream &os, const std::unique_ptr<Plazza::Order> &order)
+std::ostream &operator<<(std::ostream &os, const std::shared_ptr<Plazza::Order> &order)
 {
     std::map<IPizza::PizzaType, std::string> types = {
         {IPizza::Regina, "regina"},
