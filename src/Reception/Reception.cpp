@@ -82,6 +82,7 @@ void Reception::newKitchen()
     FD_ZERO(&writefs);
     FD_ZERO(&readfs);
 
+    // Connection to server
     while (client.getData() != "200\n") {
         resetFdSet(&readfs, &writefs);
         client.setFdSet(&readfs, &writefs);
