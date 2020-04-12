@@ -12,21 +12,6 @@
 
 using namespace Plazza;
 
-const std::pair<IPizza::PizzaType, const std::string> types[] = {
-    {std::make_pair(IPizza::Regina, "regina")},
-    {std::make_pair(IPizza::Margarita, "margarita")},
-    {std::make_pair(IPizza::Americana, "americana")},
-    {std::make_pair(IPizza::Fantasia, "fantasia")},
-};
-
-const std::pair<IPizza::PizzaSize, const std::string> sizes[] = {
-    {std::make_pair(IPizza::S, "S")},
-    {std::make_pair(IPizza::M, "M")},
-    {std::make_pair(IPizza::L, "L")},
-    {std::make_pair(IPizza::XL, "XL")},
-    {std::make_pair(IPizza::XXL, "XXL")},
-};
-
 Order::Order(const std::string &order) : _order(order)
 {
     static int id = 0;
@@ -62,33 +47,35 @@ const std::string Order::nextWord(std::string &order) const
 
 void Order::nextPizza(std::string &order)
 {
+    std::map<std::string, IPizza::PizzaType> types = {
+        {"regina", IPizza::Regina},
+        {"margarita", IPizza::Margarita},
+        {"americana", IPizza::Americana},
+        {"fantasia", IPizza::Fantasia},
+    };
+
+    std::map<std::string, IPizza::PizzaSize> sizes = {
+        {"S", IPizza::S},
+        {"M", IPizza::M},
+        {"L", IPizza::L},
+        {"XL", IPizza::XL},
+        {"XXL", IPizza::XXL},
+    };
+
     std::string typeWord = nextWord(order);
     std::string sizeWord = nextWord(order);
     std::string numberWord = nextWord(order);
     IPizza::PizzaType type;
     IPizza::PizzaSize size;
     int nb = 0;
-    bool error = true;
 
-    for (size_t i = 0; i < 4; i++) {
-        if (types[i].second != typeWord)
-            continue;
-        type = types[i].first;
-        error = false;
-        break;
+    try {
+        type = types[typeWord];
+        size = sizes[sizeWord];
+    } catch(const std::exception& e) {
+        throw ParserError("Wrong command", "nextPizza");
     }
-    if (error)
-        throw ParserError("Wrong parsing, cannot find the type", "nextPizza");
-    error = true;
-    for (size_t i = 0; i < 5; i++) {
-        if (sizes[i].second != sizeWord)
-            continue;
-        size = sizes[i].first;
-        error = false;
-        break;
-    }
-    if (error)
-        throw ParserError("Wrong argument, cannot find the size", "nextPizza");
+
     if (numberWord[0] != 'x')
         throw ParserError("Wrong argument, cannot find the number", "nextPizza");
     std::string tmpNumber = "";
@@ -170,4 +157,40 @@ std::unique_ptr<IPizza> Order::createRegina(IPizza::PizzaSize size) const
 std::unique_ptr<IPizza> Order::createFantasia(IPizza::PizzaSize size) const
 {
     return (std::make_unique<Fantasia>(size));
+}
+
+int Order::getId() const
+{
+    return (_id);
+}
+
+const std::vector<std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t>> &Order::getPizzas() const
+{
+    return (_pizzas);
+}
+
+std::ostream &operator<<(std::ostream &os, const std::unique_ptr<Plazza::Order> &order)
+{
+    std::map<IPizza::PizzaType, std::string> types = {
+        {IPizza::Regina, "regina"},
+        {IPizza::Margarita, "margarita"},
+        {IPizza::Americana, "americana"},
+        {IPizza::Fantasia, "fantasia"},
+    };
+
+    std::map<IPizza::PizzaSize, std::string> sizes = {
+        {IPizza::S, "S"},
+        {IPizza::M, "M"},
+        {IPizza::L, "L"},
+        {IPizza::XL, "XL"},
+        {IPizza::XXL, "XXL"},
+    };
+
+    const std::vector<std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t>> pizzas = order->getPizzas();
+
+    os << "----------------Order " << order->getId() << "----------------" << std::endl;
+    std::for_each(pizzas.begin(), pizzas.end(), [&os, &types, &sizes](const std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t> &pizza) {
+        os << "1 " << types[std::get<0>(pizza)] << " of size " << sizes[std::get<1>(pizza)] << std::endl;
+    });
+    return (os);
 }

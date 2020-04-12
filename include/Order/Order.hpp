@@ -31,6 +31,8 @@ namespace Plazza
             void addPizzaFinish(IPizza::PizzaType type, IPizza::PizzaSize size);
             void pack();
             bool isFinish() const;
+            int getId() const;
+            const std::vector<std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t>> &getPizzas() const;
 
         private:
             void nextPizza(std::string &order);
@@ -47,5 +49,7 @@ namespace Plazza
             std::vector<std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t>> _pizzas;
     };
 } // namespace Plazza
+
+std::ostream &operator<<(std::ostream &os, const std::unique_ptr<Plazza::Order> &order);
 
 #endif /* !ORDER_HPP_ */

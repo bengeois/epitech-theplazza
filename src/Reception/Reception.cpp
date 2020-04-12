@@ -61,13 +61,8 @@ void Reception::resetFdSet(fd_set *readfs, fd_set *writefs)
 
 void Reception::translateCommand(const std::string &command)
 try {
-    std::unique_ptr<Order> order = std::make_unique<Order>(command);
-    int child = fork();
-
-    if (child == 0) {
-
-        exit(0);
-    }
+    _orders.push_back(std::make_unique<Order>(command));
+    std::cout << _orders[_orders.size() - 1] << std::endl;
 } catch (const ParserError &e) {
     std::cout << "Invalid command" << std::endl;
 }
