@@ -11,6 +11,7 @@
 #include <map>
 #include <iostream>
 #include <memory>
+#include <thread>
 
 namespace Plazza
 {
@@ -33,14 +34,15 @@ namespace Plazza
                 XL = 8,
                 XXL = 16,
             };
-        
         public:
             virtual ~IPizza() = default;
 
-            virtual bool cook() = 0;
-            virtual const std::map<size_t, size_t> &getIngredient() = 0;
-            virtual const std::string &getName() const = 0;
+            virtual PizzaType getType() const = 0;
             virtual PizzaSize getSize() const = 0;
+
+            virtual const std::map<size_t, size_t> &getIngredient() = 0;
+
+            virtual bool cook() const = 0;
     };
 }
 

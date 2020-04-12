@@ -9,16 +9,8 @@
 
 using namespace Plazza;
 
-APizza::APizza(const std::string &name, PizzaSize size) : _name(name), _size(size)
+APizza::APizza(PizzaType type, PizzaSize size, long cookingMultiplier) : _type(type), _size(size), _cookingMultiplier(cookingMultiplier)
 {
-
-}
-
-APizza::~APizza() = default;
-
-bool APizza::cook()
-{
-    return true;
 }
 
 const std::map<size_t, size_t> &APizza::getIngredient()
@@ -28,12 +20,12 @@ const std::map<size_t, size_t> &APizza::getIngredient()
 
 IPizza::PizzaSize APizza::getSize() const
 {
-    return (_size);
+    return _size;
 }
 
-const std::string &APizza::getName() const
+IPizza::PizzaType APizza::getType() const
 {
-    return (_name);
+    return _type;
 }
 
 std::ostream &operator<<(std::ostream &os, const std::unique_ptr<Plazza::IPizza> &pizza)
@@ -46,6 +38,6 @@ std::ostream &operator<<(std::ostream &os, const std::unique_ptr<Plazza::IPizza>
     sizes[IPizza::PizzaSize::XL] = "XL";
     sizes[IPizza::PizzaSize::XXL] = "XXL";
 
-    os << "Pizza " << pizza->getName() << " " << sizes[pizza->getSize()];
+    os << "Pizza " << pizza->getType() << " " << sizes[pizza->getSize()];
     return (os);
 }

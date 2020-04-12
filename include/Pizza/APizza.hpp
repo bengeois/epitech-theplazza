@@ -15,18 +15,21 @@ namespace Plazza
     class APizza : public IPizza
     {
         public:
-            APizza(const std::string &name, PizzaSize size);
-            ~APizza() override;
+            APizza(PizzaType type, PizzaSize size, long cookingMultiplier);
+            ~APizza() override = default;
 
-            bool cook() override;
+
+            PizzaType getType() const override;
+            PizzaSize getSize() const override;
+
             const std::map<size_t, size_t> &getIngredient() override;
 
-            PizzaSize getSize() const override;
-            const std::string &getName() const override;
+            bool cook() const override = 0;
 
-        private:
-            const std::string _name;
-            PizzaSize _size;
+        protected:
+            const PizzaType _type;
+            const PizzaSize _size;
+            const long _cookingMultiplier;
             std::map<size_t, size_t> _ingredients;
 
     };

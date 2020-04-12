@@ -14,10 +14,10 @@ namespace Plazza
 {
     class Margarita : public APizza {
         public:
-            Margarita(PizzaSize size);
-            ~Margarita();
+            Margarita(PizzaSize size, long cookingMultiplier);
+            ~Margarita() override = default;
 
-        private:
+            bool cook() const override;
     };
 } // namespace Plazza
 

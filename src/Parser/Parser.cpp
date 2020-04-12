@@ -31,7 +31,7 @@ void Plazza::Parser::build()
         throw ParserError("Must be 1 cook per kitchen minimum", "Parser");
 }
 
-float Plazza::Parser::getCookingMultiplier() const
+long Plazza::Parser::getCookingMultiplier() const
 {
     return _cookingMultiplier;
 }

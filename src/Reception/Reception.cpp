@@ -16,7 +16,8 @@
 
 using namespace Plazza;
 
-Reception::Reception(float cookingMultiplier, int cooksPerKitchen, float regenerateTime) :
+Reception::Reception(long cookingMultiplier, int cooksPerKitchen, float
+regenerateTime) :
     _cookingMultiplier(cookingMultiplier),
     _cooksPerKitchen(cooksPerKitchen),
     _regenerateTime(regenerateTime),
@@ -69,7 +70,7 @@ try {
 
     for (int i = 0; i < _server->getNbClient(); i++) {
         std::shared_ptr<IPizza> pizza = order->getNextPizza();
-        _server->getClientAt(i)->write(std::string(order->getId() + " " + pizza->getName() + " " + Utils::getStringPizzaSize(pizza->getSize())));
+        //_server->getClientAt(i)->write(std::string(order->getId() + " " + pizza->getName() + " " + Utils::getStringPizzaSize(pizza->getSize())));
     }
 
     _orders.push_back(order);
@@ -104,7 +105,7 @@ void Reception::newKitchen()
     exit(0);
 }
 
-float Reception::getCookingMultiplier() const
+long Reception::getCookingMultiplier() const
 {
     return _cookingMultiplier;
 }
@@ -119,7 +120,7 @@ float Reception::getRegenerateTime() const
     return _regenerateTime;
 }
 
-void Reception::setCookingMultiplier(float cookingMultiplier)
+void Reception::setCookingMultiplier(long cookingMultiplier)
 {
     _cookingMultiplier = cookingMultiplier;
 }

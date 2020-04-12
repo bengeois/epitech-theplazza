@@ -5,14 +5,23 @@
 ** Americana
 */
 
+#include "Stock/Stock.hpp"
 #include "Pizza/Americana.hpp"
 
 using namespace Plazza;
 
-Americana::Americana(PizzaSize size) : APizza("Americana", size)
+Americana::Americana(PizzaSize size, long cookingMultiplier) :
+    APizza(PizzaType::Americana, size, cookingMultiplier)
 {
+    _ingredients.at(Ingredient::DOE) = 1;
+    _ingredients.at(Ingredient::TOMATO) = 1;
+    _ingredients.at(Ingredient::GRUYERE) = 1;
+    _ingredients.at(Ingredient::STEAK) = 1;
 }
 
-Americana::~Americana()
+bool Americana::cook() const
 {
+    std::this_thread::sleep_for(std::chrono::seconds(2 * _cookingMultiplier));
+    return true;
 }
+

@@ -17,6 +17,7 @@ namespace Plazza
 {
     enum Ingredient
     {
+        DOE,
         TOMATO,
         GRUYERE,
         HAM,
@@ -27,7 +28,7 @@ namespace Plazza
         CHIEF_LOVE,
     };
 
-    static const Ingredient availableIngredients[] = {TOMATO, GRUYERE, HAM, MUSHROOMS, STEAK, EGGPLANT, GOAT_CHEESE, CHIEF_LOVE};
+    static const Ingredient availableIngredients[] = {DOE, TOMATO, GRUYERE, HAM, MUSHROOMS, STEAK, EGGPLANT, GOAT_CHEESE, CHIEF_LOVE};
 
     class Stock
     {

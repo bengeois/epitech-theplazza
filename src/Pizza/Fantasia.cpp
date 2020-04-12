@@ -5,14 +5,23 @@
 ** Fantasia
 */
 
+#include "Stock/Stock.hpp"
 #include "Pizza/Fantasia.hpp"
 
 using namespace Plazza;
 
-Fantasia::Fantasia(PizzaSize size) : APizza("Fantasia", size)
+Fantasia::Fantasia(PizzaSize size, long cookingMultiplier) :
+    APizza(PizzaType::Fantasia, size, cookingMultiplier)
 {
+    _ingredients.at(Ingredient::DOE) = 1;
+    _ingredients.at(Ingredient::TOMATO) = 1;
+    _ingredients.at(Ingredient::EGGPLANT) = 1;
+    _ingredients.at(Ingredient::GOAT_CHEESE) = 1;
+    _ingredients.at(Ingredient::CHIEF_LOVE) = 1;
 }
 
-Fantasia::~Fantasia()
+bool Fantasia::cook() const
 {
+    std::this_thread::sleep_for(std::chrono::seconds(4 * _cookingMultiplier));
+    return true;
 }

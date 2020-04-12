@@ -20,16 +20,17 @@ namespace Plazza
     class Reception
     {
         public:
-            Reception(float cookingMultiplier, int _cooksPerKitchen, float _stockTime);
+            Reception(long cookingMultiplier, int _cooksPerKitchen, float
+            _stockTime);
             ~Reception() = default;
 
             void run();
 
-            float getCookingMultiplier() const;
+            long getCookingMultiplier() const;
             int getCooksPerKitchen() const;
             float getRegenerateTime() const;
 
-            void setCookingMultiplier(float cookingMultiplier);
+            void setCookingMultiplier(long cookingMultiplier);
             void setCooksPerKitchen(int cooksPerKitchen);
             void setRegenerateTime(float regenerateTime);
 
@@ -40,7 +41,7 @@ namespace Plazza
             void newKitchen();
 
         private:
-            float _cookingMultiplier;
+            long _cookingMultiplier;
             int _cooksPerKitchen;
             float _regenerateTime;
 
