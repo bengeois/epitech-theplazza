@@ -27,7 +27,7 @@ namespace Plazza
             Order(const std::string &order);
             ~Order();
 
-            std::unique_ptr<IPizza> getNextPizza() const;
+            std::shared_ptr<IPizza> getNextPizza() const;
             void addPizzaFinish(IPizza::PizzaType type, IPizza::PizzaSize size);
             void pack();
             bool isFinish() const;
@@ -38,10 +38,10 @@ namespace Plazza
             void nextPizza(std::string &order);
             const std::string nextWord(std::string &order) const;
 
-            std::unique_ptr<IPizza> createMargarita(IPizza::PizzaSize size) const;
-            std::unique_ptr<IPizza> createAmericana(IPizza::PizzaSize size) const;
-            std::unique_ptr<IPizza> createRegina(IPizza::PizzaSize size) const;
-            std::unique_ptr<IPizza> createFantasia(IPizza::PizzaSize size) const;
+            std::shared_ptr<IPizza> createMargarita(IPizza::PizzaSize size) const;
+            std::shared_ptr<IPizza> createAmericana(IPizza::PizzaSize size) const;
+            std::shared_ptr<IPizza> createRegina(IPizza::PizzaSize size) const;
+            std::shared_ptr<IPizza> createFantasia(IPizza::PizzaSize size) const;
 
         private:
             int _id;

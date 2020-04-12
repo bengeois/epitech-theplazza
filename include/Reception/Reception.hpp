@@ -37,6 +37,7 @@ namespace Plazza
             void translateCommand(const std::string &command);
             void resetFdSet(fd_set *readfs, fd_set *writefs);
             void translateSelect(const fd_set &read, const fd_set &writefs);
+            void newKitchen();
 
         private:
             float _cookingMultiplier;
@@ -45,7 +46,7 @@ namespace Plazza
 
             std::unique_ptr<UserShell> _shell;
             std::unique_ptr<Server> _server;
-            std::vector<std::unique_ptr<Order>> _orders;
+            std::vector<std::shared_ptr<Order>> _orders;
 
             bool _running;
     };

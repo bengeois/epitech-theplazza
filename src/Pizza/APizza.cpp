@@ -46,6 +46,6 @@ std::ostream &operator<<(std::ostream &os, const std::unique_ptr<Plazza::IPizza>
     sizes[IPizza::PizzaSize::XL] = "XL";
     sizes[IPizza::PizzaSize::XXL] = "XXL";
 
-    os << "Pizza " << pizza->getName() << sizes[pizza->getSize()];
+    os << "Pizza " << pizza->getName() << " " << sizes[pizza->getSize()];
     return (os);
 }

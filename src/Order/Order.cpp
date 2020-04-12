@@ -94,7 +94,7 @@ void Order::nextPizza(std::string &order)
         throw OrderError("No more pizza");
 }
 
-std::unique_ptr<IPizza> Order::getNextPizza() const
+std::shared_ptr<IPizza> Order::getNextPizza() const
 {
     auto pizza = std::find_if_not(_pizzas.begin(), _pizzas.end(), [](const std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t> &pizza) {
         return (std::get<3>(pizza));
@@ -102,7 +102,7 @@ std::unique_ptr<IPizza> Order::getNextPizza() const
 
     if (pizza == _pizzas.end())
         throw OrderError("No more pizza");
-    std::map<IPizza::PizzaType, std::unique_ptr<IPizza> (Order::*)(IPizza::PizzaSize) const> pizzas;
+    std::map<IPizza::PizzaType, std::shared_ptr<IPizza> (Order::*)(IPizza::PizzaSize) const> pizzas;
 
     pizzas[IPizza::Americana] = &Order::createAmericana;
     pizzas[IPizza::Fantasia] = &Order::createFantasia;
@@ -139,24 +139,24 @@ bool Order::isFinish() const
     return (pizza == _pizzas.end());
 }
 
-std::unique_ptr<IPizza> Order::createMargarita(IPizza::PizzaSize size) const
+std::shared_ptr<IPizza> Order::createMargarita(IPizza::PizzaSize size) const
 {
-    return (std::make_unique<Margarita>(size));
+    return (std::make_shared<Margarita>(size));
 }
 
-std::unique_ptr<IPizza> Order::createAmericana(IPizza::PizzaSize size) const
+std::shared_ptr<IPizza> Order::createAmericana(IPizza::PizzaSize size) const
 {
-    return (std::make_unique<Americana>(size));
+    return (std::make_shared<Americana>(size));
 }
 
-std::unique_ptr<IPizza> Order::createRegina(IPizza::PizzaSize size) const
+std::shared_ptr<IPizza> Order::createRegina(IPizza::PizzaSize size) const
 {
-    return (std::make_unique<Regina>(size));
+    return (std::make_shared<Regina>(size));
 }
 
-std::unique_ptr<IPizza> Order::createFantasia(IPizza::PizzaSize size) const
+std::shared_ptr<IPizza> Order::createFantasia(IPizza::PizzaSize size) const
 {
-    return (std::make_unique<Fantasia>(size));
+    return (std::make_shared<Fantasia>(size));
 }
 
 int Order::getId() const

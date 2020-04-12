@@ -7,6 +7,7 @@
 
 #include "Reception/Reception.hpp"
 #include "Socket/Client.hpp"
+#include "Kitchen/Kitchen.hpp"
 
 #include <iostream>
 #include <sys/ipc.h>
@@ -63,8 +64,18 @@ void Reception::translateCommand(const std::string &command)
 try {
     _orders.push_back(std::make_unique<Order>(command));
     std::cout << _orders[_orders.size() - 1] << std::endl;
+    while (!_orders[_orders.size() - 1]->isFinish()) {
+        std::shared_ptr<IPizza> pizza = _orders[_orders.size() - 1]->getNextPizza();
+    }
 } catch (const ParserError &e) {
     std::cout << "Invalid command" << std::endl;
+}
+
+void Reception::newKitchen()
+{
+    Kitchen kitchen(_cooksPerKitchen, _regenerateTime);
+
+    exit(0);
 }
 
 float Reception::getCookingMultiplier() const
