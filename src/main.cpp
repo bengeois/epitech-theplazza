@@ -17,7 +17,11 @@ int main(int argc, char **argv)
         std::unique_ptr<Parser> parser = std::make_unique<Parser>(argc, argv);
         parser->build();
 
-        std::unique_ptr<Reception> interface = std::make_unique<Reception>(parser->getCookingMultiplier(), parser->getCooksPerKitchen(), parser->getRegenerateTime());
+        std::unique_ptr<Reception> interface = std::make_unique<Reception>(
+            parser->getCookingMultiplier(),
+            parser->getCooksPerKitchen(),
+            parser->getRegenerateTime()
+        );
         interface->run();
 
     } catch (const PlazzaError &e) {

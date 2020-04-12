@@ -84,6 +84,8 @@ void Kitchen::run()
 
 bool Kitchen::canAcceptPizza(const std::shared_ptr<IPizza> &pizza)
 {
+    if (_orders.size() + 1 > (2 * _cookNb))
+        return false;
     return (_stock->canCookPizza(pizza));
 }
 
