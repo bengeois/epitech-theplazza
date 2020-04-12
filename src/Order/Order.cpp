@@ -188,9 +188,10 @@ std::ostream &operator<<(std::ostream &os, const std::unique_ptr<Plazza::Order> 
 
     const std::vector<std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t>> pizzas = order->getPizzas();
 
-    os << "----------------Order " << order->getId() << "----------------" << std::endl;
+    os << "----------------Order " << order->getId() << "----------------";
     std::for_each(pizzas.begin(), pizzas.end(), [&os, &types, &sizes](const std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t> &pizza) {
-        os << "1 " << types[std::get<0>(pizza)] << " of size " << sizes[std::get<1>(pizza)] << std::endl;
+        os << std::endl;
+        os << "1 " << types[std::get<0>(pizza)] << " of size " << sizes[std::get<1>(pizza)] << (std::get<3>(pizza) ? "" : " not send to a kitchen yet") << (std::get<2>(pizza) ? " ready" : "");
     });
     return (os);
 }
