@@ -64,9 +64,9 @@ void Reception::translateCommand(const std::string &command)
 try {
     _orders.push_back(std::make_unique<Order>(command));
     std::cout << _orders[_orders.size() - 1] << std::endl;
-    while (!_orders[_orders.size() - 1]->isFinish()) {
-        std::shared_ptr<IPizza> pizza = _orders[_orders.size() - 1]->getNextPizza();
-    }
+    // while (!_orders[_orders.size() - 1]->isFinish()) {
+    //     std::shared_ptr<IPizza> pizza = _orders[_orders.size() - 1]->getNextPizza();
+    // }
 } catch (const ParserError &e) {
     std::cout << "Invalid command" << std::endl;
 }
