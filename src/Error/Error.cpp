@@ -50,3 +50,7 @@ ClientError::ClientError(const std::string &message, const std::string &componen
 OrderError::OrderError(const std::string &message, const std::string &component) : PlazzaError(message, component)
 {
 }
+
+UtilsError::UtilsError(const std::string &message, const std::string &component) : PlazzaError(message, component)
+{
+}

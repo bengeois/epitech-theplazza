@@ -46,6 +46,7 @@ void Server::bindPort(int port)
     getsockname(_fd, (sockaddr *)(&_addr), &len);
     _port = ntohs(_addr.sin_port);
 }
+
 void Server::newConnection()
 {
     sockaddr_in client;
@@ -63,7 +64,7 @@ void Server::translateSelect(const fd_set &readfs, const fd_set &writefs)
 {
     if (FD_ISSET(_fd, &readfs))
         newConnection();
-    std::for_each(_clients.begin(), _clients.end(), [&readfs, &writefs](const std::unique_ptr<Client> &client) {
+    std::for_each(_clients.begin(), _clients.end(), [&readfs, &writefs](const std::shared_ptr<Client> &client) {
         client->translateSelect(readfs, writefs);
     });
 }
@@ -71,7 +72,19 @@ void Server::translateSelect(const fd_set &readfs, const fd_set &writefs)
 void Server::setFdSet(fd_set *readfs, fd_set *writefs)
 {
     FD_SET(_fd, readfs);
-    std::for_each(_clients.begin(), _clients.end(), [&readfs, &writefs](const std::unique_ptr<Client> &client) {
+    std::for_each(_clients.begin(), _clients.end(), [&readfs, &writefs](const std::shared_ptr<Client> &client) {
         client->setFdSet(readfs, writefs);
     });
+}
+
+int Server::getNbClient() const
+{
+    return (_clients.size());
+}
+
+std::shared_ptr<Client> &Server::getClientAt(int index)
+{
+    if (index >= static_cast<int>(_clients.size()))
+        throw ServerError("Index out of range", "operator[]");
+    return (_clients[index]);
 }

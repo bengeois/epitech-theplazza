@@ -63,16 +63,23 @@ namespace Plazza
 
     class KitchenError : public PlazzaError
     {
-    public:
-        explicit KitchenError(const std::string &message, const std::string &component = "Unknown");
-        ~KitchenError() override = default;
+        public:
+            explicit KitchenError(const std::string &message, const std::string &component = "Unknown");
+            ~KitchenError() override = default;
     };
 
     class OrderError : public PlazzaError
     {
-    public:
-        explicit OrderError(const std::string &message, const std::string &component = "Unknown");
-        ~OrderError() override = default;
+        public:
+            explicit OrderError(const std::string &message, const std::string &component = "Unknown");
+            ~OrderError() override = default;
+    };
+
+    class UtilsError : public PlazzaError
+    {
+        public:
+            explicit UtilsError(const std::string &message, const std::string &component = "Unknown");
+            ~UtilsError() override = default;
     };
 }
 

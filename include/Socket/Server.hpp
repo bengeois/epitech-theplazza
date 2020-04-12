@@ -23,6 +23,8 @@ namespace Plazza
             int getPort() const;
             void translateSelect(const fd_set &readfs, const fd_set &writefs);
             void setFdSet(fd_set *readfs, fd_set *writefs);
+            std::shared_ptr<Client> &getClientAt(int index);
+            int getNbClient() const;
 
         private:
             void bindPort(int port);
@@ -33,7 +35,7 @@ namespace Plazza
             int _port;
             int _fd;
             sockaddr_in _addr;
-            std::vector<std::unique_ptr<Client>> _clients;
+            std::vector<std::shared_ptr<Client>> _clients;
     };
 } // namespace Plazza
 

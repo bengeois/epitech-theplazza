@@ -8,6 +8,7 @@
 #include "Reception/Reception.hpp"
 #include "Socket/Client.hpp"
 #include "Kitchen/Kitchen.hpp"
+#include "Utils.hpp"
 
 #include <iostream>
 #include <sys/ipc.h>
@@ -62,8 +63,17 @@ void Reception::resetFdSet(fd_set *readfs, fd_set *writefs)
 
 void Reception::translateCommand(const std::string &command)
 try {
-    _orders.push_back(std::make_unique<Order>(command));
-    std::cout << _orders[_orders.size() - 1] << std::endl;
+    std::shared_ptr<Order> order = std::make_shared<Order>(command);
+
+    std::cout << order << std::endl;
+
+    for (int i = 0; i < _server->getNbClient(); i++) {
+        std::shared_ptr<IPizza> pizza = order->getNextPizza();
+        _server->getClientAt(i)->write(std::string(order->getId() + " " + pizza->getName() + " " + Utils::getStringPizzaSize(pizza->getSize())));
+    }
+
+    _orders.push_back(order);
+    
     // while (!_orders[_orders.size() - 1]->isFinish()) {
     //     std::shared_ptr<IPizza> pizza = _orders[_orders.size() - 1]->getNextPizza();
     // }
