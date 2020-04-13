@@ -107,7 +107,7 @@ bool Kitchen::canAcceptPizza(const std::shared_ptr<IPizza> &pizza)
 
 void Kitchen::checkFinishOrder(const std::shared_ptr<Client> &client)
 {
-    for (const auto &order : _orders) {
+    _orders.erase(std::remove_if(_orders.begin(), _orders.end(), [client](const auto &order){
         if (future_ready(order.second)) {
             client->write(std::string(
                 "300 "
@@ -117,10 +117,9 @@ void Kitchen::checkFinishOrder(const std::shared_ptr<Client> &client)
                 + " "
                 + Utils::getStringPizzaSize(order.first.second->getSize())
                 + "\n"));
+            return true;
         }
-    }
-    _orders.erase(std::remove_if(_orders.begin(), _orders.end(), [](const auto &order){
-        return future_ready(order.second);
+        return false;
     }), _orders.end());
 }
 
