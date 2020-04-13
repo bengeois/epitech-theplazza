@@ -148,7 +148,6 @@ void Kitchen::checkNewCommand(const std::shared_ptr<Client> &client)
     try {
         client->read();
     } catch (const ClientError &e) {
-        throw e;
     }
 
     std::string pingReception = client->getData();
