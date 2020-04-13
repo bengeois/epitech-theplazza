@@ -10,6 +10,7 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <iostream>
+#include <fcntl.h>
 
 using namespace Plazza;
 
@@ -109,4 +110,26 @@ const std::string Client::getData()
 bool Client::isWriting() const
 {
     return (_write);
+}
+
+bool Client::makeBlocking()
+{
+    int flags;
+
+    flags = fcntl(_fd, F_GETFL, 0);
+    if (flags == -1)
+        return false;
+    flags &= ~O_NONBLOCK;
+    return fcntl(_fd, F_SETFL, flags) != 1;
+}
+
+bool Client::makeNonBlocking()
+{
+    int flags;
+
+    flags = fcntl(_fd, F_GETFL, 0);
+    if (flags == -1)
+        return false;
+    flags |= O_NONBLOCK;
+    return fcntl(_fd, F_SETFL, flags) != 1;
 }

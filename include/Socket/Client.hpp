@@ -29,6 +29,9 @@ namespace Plazza
             const std::string getData();
             bool isWriting() const;
 
+            bool makeBlocking();
+            bool makeNonBlocking();
+
         private:
             void createClient(const std::string &addr, int port);
 
