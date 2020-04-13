@@ -62,6 +62,7 @@ try {
     std::string sizeStr = "";
     size_t i = 4;
 
+    std::cout << "Pizza finish" << std::endl;
     if (order.size() <= 4)
         throw ReceptionError("Invalide response from the client", "tranlateFinishOrder");
     nOrderStr = nextStrFinishOrder(order, i);
@@ -75,6 +76,8 @@ try {
         return (nOrder == order->getId());
     });
 
+    if (orderIt == _orders.end())
+        throw ReceptionError("Fatal error: unable to find the order");
     (*orderIt)->addPizzaFinish(type, size);
     if ((*orderIt)->isFinish()) {
         (*orderIt)->pack();
@@ -177,6 +180,7 @@ try {
     // std::cout << order << std::endl;
 
     std::cout << "Send command" << std::endl;
+    _orders.push_back(order);
     std::for_each(pizzas.begin(), pizzas.end(), [this, &order](std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t> &pizza) {
         // Find a kitchen which can accept the pizza
         for (int i = 0; i < _server->getNbClient(); i++) {
@@ -198,7 +202,6 @@ try {
         if (!clientAcceptOrder(_server->getNbClient() - 1))
             throw ReceptionError("Fatal error : Unable to send the pizza");
     });
-    _orders.push_back(order);
 
 } catch (const ParserError &e) {
     std::cout << "Invalid command" << std::endl;
