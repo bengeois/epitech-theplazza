@@ -90,6 +90,8 @@ void Kitchen::run(const std::shared_ptr<Client> &client)
             _stock->regenerateIngredient();
             this->checkFinishOrder(client);
             this->checkNewCommand(client);
+            while (client->isWriting())
+                client->write();
         }
     } catch (const PlazzaError &e) {
         throw e;
