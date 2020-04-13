@@ -13,6 +13,7 @@
 #include <iostream>
 #include <sys/ipc.h>
 #include <sys/msg.h>
+#include <ctime>
 
 using namespace Plazza;
 
@@ -25,7 +26,17 @@ regenerateTime) :
     _server(std::make_unique<Server>()),
     _running(true)
 {
+    time_t now = time(0);
 
+    tm *info = localtime(&now);
+    _logDirectory += 
+        std::to_string(1900 + info->tm_year) + "-" + 
+        std::to_string(info->tm_mon) + "-" + 
+        std::to_string(info->tm_mday) + "-" +
+        std::to_string(info->tm_hour) + ":" +
+        std::to_string(info->tm_min) + ":" +
+        std::to_string(info->tm_sec);
+    std::cout << "All finish order will be send in logs/" << _logDirectory << std::endl;
 }
 
 void Reception::run()
@@ -80,7 +91,7 @@ try {
         throw ReceptionError("Fatal error: unable to find the order");
     (*orderIt)->addPizzaFinish(type, size);
     if ((*orderIt)->isFinish()) {
-        (*orderIt)->pack();
+        (*orderIt)->pack(_logDirectory);
         _orders.erase(orderIt);
     }
 } catch (const std::exception &e) {
@@ -181,12 +192,14 @@ try {
 
     std::cout << "Send command" << std::endl;
     _orders.push_back(order);
-    std::for_each(pizzas.begin(), pizzas.end(), [this, &order](std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t> &pizza) {
+    int a = 0;
+    std::for_each(pizzas.begin(), pizzas.end(), [this, &order, &a](std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t> &pizza) {
         // Find a kitchen which can accept the pizza
         for (int i = 0; i < _server->getNbClient(); i++) {
             writeOrderToClient(order, i, pizza);
             if (clientAcceptOrder(i)) {
-                std::get<3>(pizza) = true;
+                order->setSend(a, true);
+                a++;
                 return;
             }
         }
@@ -201,6 +214,8 @@ try {
         writeOrderToClient(order, _server->getNbClient() - 1, pizza);
         if (!clientAcceptOrder(_server->getNbClient() - 1))
             throw ReceptionError("Fatal error : Unable to send the pizza");
+        order->setSend(a, true);
+        a++;
     });
 
 } catch (const ParserError &e) {

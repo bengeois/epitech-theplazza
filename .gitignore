@@ -137,3 +137,4 @@ rush3
 
 # End of https://www.gitignore.io/api/c++,code,clion
 *.gc*
+logs/*

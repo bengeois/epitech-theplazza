@@ -11,6 +11,7 @@
 #include <iostream>
 #include "File.hpp"
 #include "Utils.hpp"
+#include <filesystem>
 
 using namespace Plazza;
 
@@ -113,12 +114,18 @@ void Order::addPizzaFinish(IPizza::PizzaType type, IPizza::PizzaSize size)
     std::get<2>(*pizza) = true;
 }
 
-void Order::pack()
+void Order::pack(const std::string &folderPath)
 {
-    std::cout << "Order n°" << std::to_string(_id) << " finish" << std::endl;
-    File file(std::to_string(_id) + ".plazza", std::ios::out);
+    std::filesystem::create_directory("logs");
+    std::filesystem::create_directory("logs/" + folderPath);
 
-    file << "coucou" << std::endl;
+    std::cout << "Order n°" << std::to_string(_id) << " finish" << std::endl;
+    File file("logs/" + folderPath + "/order-" + std::to_string(_id) + ".plazza", std::ios::out);
+
+    file << "----------------Order " << std::to_string(_id) << "----------------" << std::endl;
+    std::for_each(_pizzas.begin(), _pizzas.end(), [&file](const std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t> &pizza) {
+        file << "1 " << Utils::getStringPizzaType(std::get<0>(pizza)) << " of size " << Utils::getStringPizzaSize(std::get<1>(pizza)) << (std::get<3>(pizza) ? "" : " not send to a kitchen yet") << (std::get<2>(pizza) ? " ready" : "") << std::endl;
+    });
 }
 
 bool Order::isFinish() const
@@ -160,29 +167,19 @@ const std::vector<std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, sen
     return (_pizzas);
 }
 
+void Order::setSend(int i, send_t send)
+{
+    std::get<3>(_pizzas[i]) = send;
+}
+
 std::ostream &operator<<(std::ostream &os, const std::shared_ptr<Plazza::Order> &order)
 {
-    std::map<IPizza::PizzaType, std::string> types = {
-        {IPizza::Regina, "regina"},
-        {IPizza::Margarita, "margarita"},
-        {IPizza::Americana, "americana"},
-        {IPizza::Fantasia, "fantasia"},
-    };
-
-    std::map<IPizza::PizzaSize, std::string> sizes = {
-        {IPizza::S, "S"},
-        {IPizza::M, "M"},
-        {IPizza::L, "L"},
-        {IPizza::XL, "XL"},
-        {IPizza::XXL, "XXL"},
-    };
-
     const std::vector<std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t>> pizzas = order->getPizzas();
 
     os << "----------------Order " << order->getId() << "----------------";
-    std::for_each(pizzas.begin(), pizzas.end(), [&os, &types, &sizes](const std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t> &pizza) {
+    std::for_each(pizzas.begin(), pizzas.end(), [&os](const std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t> &pizza) {
         os << std::endl;
-        os << "1 " << types[std::get<0>(pizza)] << " of size " << sizes[std::get<1>(pizza)] << (std::get<3>(pizza) ? "" : " not send to a kitchen yet") << (std::get<2>(pizza) ? " ready" : "");
+        os << "1 " << Utils::getStringPizzaType(std::get<0>(pizza)) << " of size " << Utils::getStringPizzaSize(std::get<1>(pizza)) << (std::get<3>(pizza) ? "" : " not send to a kitchen yet") << (std::get<2>(pizza) ? " ready" : "");
     });
     return (os);
 }

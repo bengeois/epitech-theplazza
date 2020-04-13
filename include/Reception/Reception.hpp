@@ -61,6 +61,7 @@ namespace Plazza
             std::vector<pid_t> _childs;
 
             bool _running;
+            std::string _logDirectory = "";
     };
 }
 

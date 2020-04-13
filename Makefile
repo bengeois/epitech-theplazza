@@ -32,7 +32,7 @@ NAME_TESTS	=	unit_test
 SRC_TESTS =		$(SRC)	\
 				tests/tests_redirect.cpp	\
 
-CXXFLAGS += 	-W -Wall -Wextra -Iinclude
+CXXFLAGS += 	-W -Wall -Wextra -Iinclude -std=c++17
 
 LDFLAGS = -lpthread
 

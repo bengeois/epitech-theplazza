@@ -29,10 +29,11 @@ namespace Plazza
 
             std::shared_ptr<IPizza> getNextPizza() const;
             void addPizzaFinish(IPizza::PizzaType type, IPizza::PizzaSize size);
-            void pack();
+            void pack(const std::string &folerPath);
             bool isFinish() const;
             int getId() const;
             const std::vector<std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t>> &getPizzas() const;
+            void setSend(int i, send_t send);
 
         private:
             void nextPizza(std::string &order);
