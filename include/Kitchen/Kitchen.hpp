@@ -24,7 +24,7 @@ namespace Plazza
     class Kitchen
     {
         public:
-            explicit Kitchen(size_t cooks, float stockTime);
+            explicit Kitchen(size_t cooks, float regenerateTime);
             ~Kitchen();
 
             // ENQUEUE Renvoie un bool true lorsque la fabrication est terminée

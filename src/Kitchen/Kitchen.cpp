@@ -9,10 +9,10 @@
 
 using namespace Plazza;
 
-Kitchen::Kitchen(size_t cooks, float stockTime) :
+Kitchen::Kitchen(size_t cooks, float regenerateTime) :
 _stop(false),
 _cookNb(cooks),
-_stock(std::make_shared<Stock>(Stock(stockTime)))
+_stock(std::make_shared<Stock>(Stock(regenerateTime)))
 {
     _cooks.reserve(_cookNb);
     for (size_t i = 0; i < _cookNb; i++) {

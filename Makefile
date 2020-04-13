@@ -10,6 +10,7 @@ NAME	= plazza
 SRC	=	src/Error/Error.cpp	\
 		src/Parser/Parser.cpp	\
 		src/Reception/Reception.cpp	\
+		src/Reception/KitchenProcess.cpp	\
 		src/UserShell/UserShell.cpp	\
 		src/Pizza/APizza.cpp	\
 		src/Pizza/Americana.cpp		\

@@ -84,27 +84,6 @@ try {
     std::cout << "Invalid command" << std::endl;
 }
 
-void Reception::kitchenProcess()
-{
-    Client client(_server->getPort());
-    fd_set writefs;
-    fd_set readfs;
-
-    FD_ZERO(&writefs);
-    FD_ZERO(&readfs);
-
-    // Connection to server
-    while (client.getData() != "200\n") {
-        resetFdSet(&readfs, &writefs);
-        client.setFdSet(&readfs, &writefs);
-        if (select(FD_SETSIZE, &readfs, &writefs, NULL, NULL) < 0)
-            throw ReceptionError("Select fail", "Select");
-        client.translateSelect(readfs, writefs);
-    }
-    std::cout << "New kitchen create" << std::endl;
-    exit(0);
-}
-
 long Reception::getCookingMultiplier() const
 {
     return _cookingMultiplier;
