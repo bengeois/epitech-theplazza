@@ -10,6 +10,7 @@
 #include <algorithm>
 #include <iostream>
 #include "File.hpp"
+#include "Utils.hpp"
 
 using namespace Plazza;
 
@@ -48,21 +49,6 @@ const std::string Order::nextWord(std::string &order) const
 
 void Order::nextPizza(std::string &order)
 {
-    std::map<std::string, IPizza::PizzaType> types = {
-        {"regina", IPizza::Regina},
-        {"margarita", IPizza::Margarita},
-        {"americana", IPizza::Americana},
-        {"fantasia", IPizza::Fantasia},
-    };
-
-    std::map<std::string, IPizza::PizzaSize> sizes = {
-        {"S", IPizza::S},
-        {"M", IPizza::M},
-        {"L", IPizza::L},
-        {"XL", IPizza::XL},
-        {"XXL", IPizza::XXL},
-    };
-
     std::string typeWord = nextWord(order);
     std::string sizeWord = nextWord(order);
     std::string numberWord = nextWord(order);
@@ -71,9 +57,9 @@ void Order::nextPizza(std::string &order)
     int nb = 0;
 
     try {
-        type = types[typeWord];
-        size = sizes[sizeWord];
-    } catch(const std::exception& e) {
+        type = Utils::getPizzaType(typeWord);
+        size = Utils::getPizzaSize(sizeWord);
+    } catch(const UtilsError& e) {
         throw ParserError("Wrong command", "nextPizza");
     }
 
