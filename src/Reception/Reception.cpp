@@ -44,6 +44,42 @@ void Reception::run()
     }
 }
 
+const std::string Reception::nextStrFinishOrder(const std::string &order, size_t &i) const
+{
+    if (order[i] == ' ')
+        i++;
+    std::string data = "";
+    for (; order[i] != '\n' && order[i] != ' '; i++) {
+        data += order[i];
+    }
+    return (data);
+}
+
+void Reception::translateFinishOrder(const std::string &order)
+{
+    std::string nOrderStr = "";
+    std::string typeStr = "";
+    std::string sizeStr = "";
+    size_t i = 0;
+
+    nOrderStr = nextStrFinishOrder(order, i);
+    typeStr = nextStrFinishOrder(order, i);
+    sizeStr = nextStrFinishOrder(order, i);
+
+    int nOrder = std::stoi(nOrderStr);
+    IPizza::PizzaType type = Utils::getPizzaType(typeStr);
+    IPizza::PizzaSize size = Utils::getPizzaSize(sizeStr);
+    auto orderIt = std::find_if(_orders.begin(), _orders.end(), [&nOrder](std::shared_ptr<Order> &order) -> bool {
+        return (nOrder == order->getId());
+    });
+
+    (*orderIt)->addPizzaFinish(type, size);
+    if ((*orderIt)->isFinish()) {
+        (*orderIt)->pack();
+        _orders.erase(orderIt);
+    }
+}
+
 void Reception::translateSelect(const fd_set &readfs, const fd_set &writefs)
 {
     if (FD_ISSET(1, &readfs)) {
@@ -54,6 +90,12 @@ void Reception::translateSelect(const fd_set &readfs, const fd_set &writefs)
             translateCommand(command);
     }
     _server->translateSelect(readfs, writefs);
+    for (int i = 0; i < _server->getNbClient(); i++) {
+        std::string data;
+        if ((data = _server->getClientAt(i)->getData()).size() == 0)
+            continue;
+        translateFinishOrder(data);
+    }
 }
 
 void Reception::resetFdSet(fd_set *readfs, fd_set *writefs)
@@ -117,7 +159,7 @@ try {
 
     std::for_each(pizzas.begin(), pizzas.end(), [this, &order](std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t> &pizza) {
         // Find a kitchen which can accept the pizza
-        for (size_t i = 0; i < _server->getNbClient(); i++) {
+        for (int i = 0; i < _server->getNbClient(); i++) {
             writeOrderToClient(order, i, pizza);
             if (clientAcceptOrder(i)) {
                 std::get<3>(pizza) = true;

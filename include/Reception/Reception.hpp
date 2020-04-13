@@ -45,6 +45,8 @@ namespace Plazza
             void writeOrderToClient(std::shared_ptr<Order> &order, int i, const std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t> &pizza);
             bool clientAcceptOrder(int i);
             void childConnection();
+            void translateFinishOrder(const std::string &order);
+            const std::string nextStrFinishOrder(const std::string &order, size_t &i) const;
 
         private:
             long _cookingMultiplier;
