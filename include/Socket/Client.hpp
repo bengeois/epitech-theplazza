@@ -31,6 +31,7 @@ namespace Plazza
 
             bool makeBlocking();
             bool makeNonBlocking();
+            bool exist() const;
 
         private:
             void createClient(const std::string &addr, int port);
@@ -42,6 +43,7 @@ namespace Plazza
             bool _write = false;
             bool _read = false;
             std::string _data;
+            bool _exist = true;
     };
 } // namespace Plazza
 

@@ -30,6 +30,7 @@ Client::Client(int port, const std::string &addr) : _fd(socket(AF_INET, SOCK_STR
 
 Client::~Client()
 {
+    close(_fd);
 }
 
 void Client::createClient(const std::string &addr, int port)
@@ -50,8 +51,10 @@ void Client::read()
 
     if ((len = ::read(_fd, buffer, 1)) == -1)
         throw ClientError("Fail to read data", "readClient");
-    if (len == 0)
+    if (len == 0) {
+        _exist = false;
         return;
+    }
     std::cout << "{CLIENT} receive " << buffer[0] << std::endl;
     _data.push_back(buffer[0]);
 }
@@ -132,4 +135,16 @@ bool Client::makeNonBlocking()
         return false;
     flags |= O_NONBLOCK;
     return fcntl(_fd, F_SETFL, flags) != 1;
+}
+
+bool Client::exist() const
+{
+    if (_exist == false)
+        return (false);
+    if (fcntl(_fd, F_GETFD) != -1) {
+        std::cout << _fd << " exist" << std::endl;
+        return (true);
+    }
+    std::cout << _fd << " not exist" << std::endl;
+    return (false);
 }

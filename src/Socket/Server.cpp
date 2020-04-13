@@ -72,6 +72,9 @@ void Server::translateSelect(const fd_set &readfs, const fd_set &writefs)
 void Server::setFdSet(fd_set *readfs, fd_set *writefs)
 {
     FD_SET(_fd, readfs);
+    _clients.erase(std::remove_if(_clients.begin(), _clients.end(), [](const std::shared_ptr<Client> &client) {
+        return (!client->exist());
+    }), _clients.end());
     std::for_each(_clients.begin(), _clients.end(), [&readfs, &writefs](const std::shared_ptr<Client> &client) {
         client->setFdSet(readfs, writefs);
     });
