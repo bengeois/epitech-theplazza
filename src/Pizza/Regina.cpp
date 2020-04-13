@@ -13,11 +13,11 @@ using namespace Plazza;
 Regina::Regina(PizzaSize size, long cookingMultiplier) :
     APizza(PizzaType::Regina, size, cookingMultiplier)
 {
-    _ingredients.at(Ingredient::DOE) = 1;
-    _ingredients.at(Ingredient::TOMATO) = 1;
-    _ingredients.at(Ingredient::GRUYERE) = 1;
-    _ingredients.at(Ingredient::HAM) = 1;
-    _ingredients.at(Ingredient::MUSHROOMS) = 1;
+    _ingredients[Ingredient::DOE] = 1;
+    _ingredients[Ingredient::TOMATO] = 1;
+    _ingredients[Ingredient::GRUYERE] = 1;
+    _ingredients[Ingredient::HAM] = 1;
+    _ingredients[Ingredient::MUSHROOMS] = 1;
 }
 
 bool Regina::cook() const

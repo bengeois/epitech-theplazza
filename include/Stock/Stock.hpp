@@ -17,7 +17,7 @@ namespace Plazza
 {
     enum Ingredient
     {
-        DOE,
+        DOE = 0,
         TOMATO,
         GRUYERE,
         HAM,
