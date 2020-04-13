@@ -174,8 +174,9 @@ try {
     std::shared_ptr<Order> order = std::make_shared<Order>(command, _cookingMultiplier);
 
     std::vector<std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t>> pizzas = order->getPizzas();
-    std::cout << order << std::endl;
+    // std::cout << order << std::endl;
 
+    std::cout << "Send command" << std::endl;
     std::for_each(pizzas.begin(), pizzas.end(), [this, &order](std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t> &pizza) {
         // Find a kitchen which can accept the pizza
         for (int i = 0; i < _server->getNbClient(); i++) {

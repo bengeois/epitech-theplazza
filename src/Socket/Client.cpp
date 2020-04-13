@@ -55,13 +55,13 @@ void Client::read()
         _exist = false;
         return;
     }
-    std::cout << "{CLIENT} receive " << buffer[0] << std::endl;
+    // std::cout << "{CLIENT} receive " << buffer[0] << std::endl;
     _data.push_back(buffer[0]);
 }
 
 void Client::write()
 {
-    std::cout << "{CLIENT} send " << _msg.front() << std::endl;
+    // std::cout << "{CLIENT} send " << _msg.front() << std::endl;
     if (::write(_fd, &_msg.front(), 1) == -1)
         throw ClientError("Fail write data", "writeClient");
     _msg.pop();
@@ -142,9 +142,7 @@ bool Client::exist() const
     if (_exist == false)
         return (false);
     if (fcntl(_fd, F_GETFD) != -1) {
-        std::cout << _fd << " exist" << std::endl;
         return (true);
     }
-    std::cout << _fd << " not exist" << std::endl;
     return (false);
 }

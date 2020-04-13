@@ -55,7 +55,7 @@ void Server::newConnection()
 
     if (_fd == -1)
         throw ServerError("Unable to connect with the client", "newConnection");
-    std::cout << "{SERVER} new connection send 200 to the client" << std::endl;
+    // std::cout << "{SERVER} new connection send 200 to the client" << std::endl;
     _clients.push_back(std::make_unique<Client>(fd, client));
     _clients[_clients.size() - 1]->write("200\n");
 }

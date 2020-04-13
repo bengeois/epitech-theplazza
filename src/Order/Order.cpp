@@ -115,6 +115,7 @@ void Order::addPizzaFinish(IPizza::PizzaType type, IPizza::PizzaSize size)
 
 void Order::pack()
 {
+    std::cout << "Order n°" << std::to_string(_id) << " finish" << std::endl;
     File file(std::to_string(_id) + ".plazza", std::ios::out);
 
     file << "coucou" << std::endl;
