@@ -11,6 +11,7 @@
 #include "Error/Error.hpp"
 #include "Pizza/IPizza.hpp"
 #include "Stock/Stock.hpp"
+#include "Socket/Client.hpp"
 #include "Utils.hpp"
 #include <future>
 #include <vector>
@@ -30,14 +31,18 @@ namespace Plazza
             // ENQUEUE Renvoie un bool true lorsque la fabrication est terminée
             auto enqueue(const std::shared_ptr<IPizza> &pizza) -> std::future<bool>;
 
-            void run();
+            void run(const std::shared_ptr<Client> &client);
 
             bool canAcceptPizza(const std::shared_ptr<IPizza> &pizza);
 
             void checkFinishOrder();
 
+            void checkActivity();
+
         private:
             bool _stop;
+            bool _noActivity;
+            std::chrono::steady_clock::time_point _beginNoActivity;
 
             size_t _cookNb;
             std::vector<std::thread> _cooks;

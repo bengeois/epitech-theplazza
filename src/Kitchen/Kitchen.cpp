@@ -11,6 +11,7 @@ using namespace Plazza;
 
 Kitchen::Kitchen(size_t cooks, float regenerateTime) :
 _stop(false),
+_noActivity(false),
 _cookNb(cooks),
 _stock(std::make_shared<Stock>(Stock(regenerateTime)))
 {
@@ -74,11 +75,12 @@ auto Kitchen::enqueue(const std::shared_ptr<IPizza> &pizza) -> std::future<bool>
     return res;
 }
 
-void Kitchen::run()
+void Kitchen::run(const std::shared_ptr<Client> &client)
 {
     while (!_stop) {
         this->checkFinishOrder();
         _stock->regenerateIngredient();
+        this->checkActivity();
     }
 }
 
@@ -99,4 +101,22 @@ void Kitchen::checkFinishOrder()
     _orders.erase(std::remove_if(_orders.begin(), _orders.end(), [](const auto &order){
         return future_ready(order.second);
     }), _orders.end());
+}
+
+void Kitchen::checkActivity()
+{
+    if (!_orders.empty()) {
+        _noActivity = false;
+        return;
+    }
+    if (!_noActivity) {
+        _noActivity = !_noActivity;
+        _beginNoActivity = std::chrono::steady_clock::now();
+        return;
+    }
+    std::chrono::steady_clock::time_point endNoActivity = std::chrono::steady_clock::now();
+
+    if (std::chrono::duration_cast<std::chrono::seconds>(endNoActivity - _beginNoActivity).count() < 5)
+        return;
+    _stop = true;
 }
