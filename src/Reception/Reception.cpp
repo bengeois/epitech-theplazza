@@ -125,7 +125,6 @@ void Reception::writeOrderToClient(std::shared_ptr<Order> &order, int i, const s
 
 int Reception::getCode(const std::string &res) const
 {
-    int code;
     std::string codeStr = "";
 
     for (int i = 0; res[i] != '\n' && res[i] != ' '; i++) {
