@@ -6,6 +6,7 @@
 */
 
 #include "Pizza/APizza.hpp"
+#include "Pizza/Americana.hpp"
 
 using namespace Plazza;
 

@@ -33,11 +33,11 @@ void Reception::connectKitchen(std::shared_ptr<Client> &client)
 void Reception::kitchenProcess()
 {
     std::shared_ptr<Client> client = std::make_shared<Client>(_server->getPort());
-    std::shared_ptr<Kitchen> kitchen = std::make_shared<Kitchen>(_cooksPerKitchen, _regenerateTime);
+    std::shared_ptr<Kitchen> kitchen = std::make_shared<Kitchen>(_cooksPerKitchen, _regenerateTime, _cookingMultiplier);
 
     try {
         connectKitchen(client);
-        client->makeBlocking();
+        client->makeNonBlocking();
         kitchen->run(client);
     } catch (const PlazzaError &e) {
         std::cout << "[PLAZZA]" << " {" << e.getComponent() << "} " << e.what() << std::endl;

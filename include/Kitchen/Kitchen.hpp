@@ -9,7 +9,7 @@
 #define CPP_PLAZZA_2019_KITCHEN_HPP
 
 #include "Error/Error.hpp"
-#include "Pizza/IPizza.hpp"
+#include "Pizza/APizza.hpp"
 #include "Stock/Stock.hpp"
 #include "Socket/Client.hpp"
 #include "Utils.hpp"
@@ -25,7 +25,7 @@ namespace Plazza
     class Kitchen
     {
         public:
-            explicit Kitchen(size_t cooks, float regenerateTime);
+            explicit Kitchen(size_t cooks, float regenerateTime, long cookingMultiplier);
             ~Kitchen();
 
             // ENQUEUE Renvoie un bool true lorsque la fabrication est terminée
@@ -33,28 +33,40 @@ namespace Plazza
 
             void run(const std::shared_ptr<Client> &client);
 
+            void checkNewCommand(const std::shared_ptr<Client> &client);
             bool canAcceptPizza(const std::shared_ptr<IPizza> &pizza);
 
             void checkFinishOrder(const std::shared_ptr<Client> &client);
 
             void checkActivity();
 
-        private:
-            bool _stop;
-            bool _noActivity;
-            std::chrono::steady_clock::time_point _beginNoActivity;
+            std::shared_ptr<IPizza> createPizzaOrder(APizza::PizzaType type, APizza::PizzaSize size, long cookingMultiplier);
 
-            size_t _cookNb;
-            std::vector<std::thread> _cooks;
+            template <class T>
+                std::shared_ptr<T> createPizzaOrder(APizza::PizzaSize size, long cookingMultiplier) {
+                    std::shared_ptr<T> newPizza = std::make_shared<T>(size, cookingMultiplier);
+                    return newPizza;
+                }
 
-            std::queue<std::function<void()>> _tasks;
 
-            std::mutex _queue_mutex;
-            std::condition_variable _condition;
+            private:
+                bool _stop;
+                bool _noActivity;
+                std::chrono::steady_clock::time_point _beginNoActivity;
 
-            std::shared_ptr<Stock> _stock;
+                long _cookingMultiplier;
 
-            std::vector<std::pair<std::pair<size_t, std::shared_ptr<IPizza>>, std::future<bool>>> _orders;
+                size_t _cookNb;
+                std::vector<std::thread> _cooks;
+
+                std::queue<std::function<void()>> _tasks;
+
+                std::mutex _queue_mutex;
+                std::condition_variable _condition;
+
+                std::shared_ptr<Stock> _stock;
+
+                std::vector<std::pair<std::pair<size_t, std::shared_ptr<IPizza>>, std::future<bool>>> _orders;
     };
 }
 
