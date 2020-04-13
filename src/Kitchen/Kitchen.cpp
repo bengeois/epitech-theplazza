@@ -166,7 +166,9 @@ void Kitchen::checkNewCommand(const std::shared_ptr<Client> &client)
         client->write(std::string("100 0\n"));
         return;
     }
-    std::pair<std::pair<size_t, std::shared_ptr<IPizza>>, std::future<bool>> orderAll(std::pair<size_t, std::shared_ptr<IPizza>>(orderID, preparationPizza), enqueue(preparationPizza));
+    // A AMELIORER
+    //std::pair<std::pair<size_t, std::shared_ptr<IPizza>>, std::future<bool>> orderAll(std::pair<size_t, std::shared_ptr<IPizza>>(orderID, preparationPizza), enqueue(preparationPizza));
+    _orders.emplace_back(std::pair<std::pair<size_t, std::shared_ptr<IPizza>>, std::future<bool>>(std::pair<size_t, std::shared_ptr<IPizza>>(orderID, preparationPizza), enqueue(preparationPizza)));
     client->write(std::string("100 1\n"));
 }
 
