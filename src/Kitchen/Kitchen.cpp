@@ -162,11 +162,11 @@ void Kitchen::checkNewCommand(const std::shared_ptr<Client> &client)
 
     std::shared_ptr<IPizza> preparationPizza = createPizzaOrder(Utils::getPizzaType(pizzaType), Utils::getPizzaSize(pizzaSize), _cookingMultiplier);
     if (!canAcceptPizza(preparationPizza)) {
-        client->write(std::string("100 " + std::to_string(orderID) + " 0\n"));
+        client->write(std::string("100 0\n"));
         return;
     }
     std::pair<std::pair<size_t, std::shared_ptr<IPizza>>, std::future<bool>> orderAll(std::pair<size_t, std::shared_ptr<IPizza>>(orderID, preparationPizza), enqueue(preparationPizza));
-    client->write(std::string("100 " + std::to_string(orderID) + " 1\n"));
+    client->write(std::string("100 1\n"));
 }
 
 std::shared_ptr<IPizza> Kitchen::createPizzaOrder(APizza::PizzaType type, APizza::PizzaSize size, long cookingMultiplier)
