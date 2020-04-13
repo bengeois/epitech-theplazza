@@ -42,6 +42,10 @@ namespace Plazza
             void kitchenProcess();
             void connectKitchen(std::shared_ptr<Client> &client);
 
+            void writeOrderToClient(std::shared_ptr<Order> &order, int i, const std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t> &pizza);
+            bool clientAcceptOrder(int i);
+            void childConnection();
+
         private:
             long _cookingMultiplier;
             int _cooksPerKitchen;
@@ -50,6 +54,7 @@ namespace Plazza
             std::unique_ptr<UserShell> _shell;
             std::unique_ptr<Server> _server;
             std::vector<std::shared_ptr<Order>> _orders;
+            std::vector<pid_t> _childs;
 
             bool _running;
     };

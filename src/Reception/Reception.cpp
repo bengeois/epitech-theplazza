@@ -62,24 +62,82 @@ void Reception::resetFdSet(fd_set *readfs, fd_set *writefs)
     FD_ZERO(writefs);
 }
 
+void Reception::writeOrderToClient(std::shared_ptr<Order> &order, int i, const std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t> &pizza)
+{
+    _server->getClientAt(i)->write(std::string(order->getId() + " " + Utils::getStringPizzaType(std::get<0>(pizza)) + " " + Utils::getStringPizzaSize(std::get<1>(pizza))));
+    fd_set writefs;
+    fd_set readfs;
+
+    while (_server->getClientAt(i)->isWriting()) {
+        resetFdSet(&readfs, &writefs);
+        _server->getClientAt(i)->setFdSet(&readfs, &writefs);
+        if (select(FD_SETSIZE, &readfs, &writefs, NULL, NULL) < 0)
+            throw ReceptionError("Select fail", "Select");
+        _server->getClientAt(i)->translateSelect(readfs, writefs);
+    }
+}
+
+bool Reception::clientAcceptOrder(int i)
+{
+    std::string data = "";
+    fd_set writefs;
+    fd_set readfs;
+
+    while ((data = _server->getClientAt(i)->getData()).size() == 0) {
+        resetFdSet(&readfs, &writefs);
+        _server->getClientAt(i)->setFdSet(&readfs, &writefs);
+        if (select(FD_SETSIZE, &readfs, &writefs, NULL, NULL) < 0)
+            throw ReceptionError("Select fail", "Select");
+        _server->getClientAt(i)->translateSelect(readfs, writefs);
+    }
+    if (data == "1\n")
+        return (true);
+    return (false);
+}
+
+void Reception::childConnection()
+{
+    int fd = _server->getFd();
+    fd_set writefs;
+    fd_set readfs;
+
+    resetFdSet(&readfs, &writefs);
+    FD_SET(fd, &readfs);
+    if (select(FD_SETSIZE, &readfs, &writefs, NULL, NULL) < 0)
+        throw ReceptionError("Select fail", "Select");
+    _server->newConnection();
+}
+
 void Reception::translateCommand(const std::string &command)
 try {
     std::shared_ptr<Order> order = std::make_shared<Order>(command, _cookingMultiplier);
 
+    std::vector<std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t>> pizzas = order->getPizzas();
     std::cout << order << std::endl;
 
-    for (int i = 0; i < _server->getNbClient(); i++) {
-        std::shared_ptr<IPizza> pizza = order->getNextPizza();
-        //_server->getClientAt(i)->write(std::string(order->getId() + " " + pizza->getName() + " " + Utils::getStringPizzaSize(pizza->getSize())));
-    }
+    std::for_each(pizzas.begin(), pizzas.end(), [this, &order](std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t> &pizza) {
+        // Find a kitchen which can accept the pizza
+        for (size_t i = 0; i < _server->getNbClient(); i++) {
+            writeOrderToClient(order, i, pizza);
+            if (clientAcceptOrder(i)) {
+                std::get<3>(pizza) = true;
+                return;
+            }
+        }
+        // Fork if no kitchen can take the pizza
+        pid_t child = fork();
 
+        if (child == -1)
+            throw ReceptionError("Fork failed");
+        if (child == 0)
+            kitchenProcess();
+        childConnection();
+        writeOrderToClient(order, _server->getNbClient() - 1, pizza);
+        if (!clientAcceptOrder(_server->getNbClient() - 1))
+            throw ReceptionError("Fatal error : Unable to send the pizza");
+    });
     _orders.push_back(order);
-    
-    // while (!_orders[_orders.size() - 1]->isFinish()) {
-    //     std::shared_ptr<IPizza> pizza = _orders[_orders.size() - 1]->getNextPizza();
-    // }
-    if (fork() == 0)
-        kitchenProcess();
+
 } catch (const ParserError &e) {
     std::cout << "Invalid command" << std::endl;
 }

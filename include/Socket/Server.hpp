@@ -25,11 +25,12 @@ namespace Plazza
             void setFdSet(fd_set *readfs, fd_set *writefs);
             std::shared_ptr<Client> &getClientAt(int index);
             int getNbClient() const;
+            int getFd() const;
+            void newConnection();
 
         private:
             void bindPort(int port);
 
-            void newConnection();
 
         private:
             int _port;

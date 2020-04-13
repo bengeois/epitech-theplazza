@@ -88,3 +88,8 @@ std::shared_ptr<Client> &Server::getClientAt(int index)
         throw ServerError("Index out of range", "operator[]");
     return (_clients[index]);
 }
+
+int Server::getFd() const
+{
+    return (_fd);
+}
