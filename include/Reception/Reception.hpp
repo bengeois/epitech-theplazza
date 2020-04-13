@@ -53,6 +53,9 @@ namespace Plazza
             bool isStatusCommand(const std::string &command) const;
             void statusCommand();
 
+            void sendStatus(int i);
+            void waitResponseStatus(int i);
+
         private:
             long _cookingMultiplier;
             int _cooksPerKitchen;

@@ -109,8 +109,45 @@ bool Reception::isStatusCommand(const std::string &command) const
     return (name == "status");
 }
 
+void Reception::sendStatus(int i)
+{
+    _server->getClientAt(i)->write("500\n");
+    fd_set writefs;
+    fd_set readfs;
+
+    while (_server->getClientAt(i)->isWriting()) {
+        resetFdSet(&readfs, &writefs);
+        _server->getClientAt(i)->setFdSet(&readfs, &writefs);
+        if (select(FD_SETSIZE, &readfs, &writefs, NULL, NULL) < 0)
+            throw ReceptionError("Select fail", "Select");
+        _server->getClientAt(i)->translateSelect(readfs, writefs);
+    }
+}
+
+void Reception::waitResponseStatus(int i)
+{
+    std::string data = "";
+    fd_set writefs;
+    fd_set readfs;
+
+    while (data.size() == 0 || getCode(data) != 400) {
+        resetFdSet(&readfs, &writefs);
+        _server->getClientAt(i)->setFdSet(&readfs, &writefs);
+        if (select(FD_SETSIZE, &readfs, &writefs, NULL, NULL) < 0)
+            throw ReceptionError("Select fail", "Select");
+        _server->getClientAt(i)->translateSelect(readfs, writefs);
+        data = _server->getClientAt(i)->getData();
+        if (data.size() != 0 && getCode(data) == 300)
+            translateFinishOrder(data);
+    }
+}
+
 void Reception::statusCommand()
 {
+    for (int i = 0; i < _server->getNbClient(); i++) {
+        sendStatus(i);
+        waitResponseStatus(i);
+    }
 }
 
 void Reception::translateSelect(const fd_set &readfs, const fd_set &writefs)
