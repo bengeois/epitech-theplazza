@@ -81,6 +81,13 @@ namespace Plazza
             explicit UtilsError(const std::string &message, const std::string &component = "Unknown");
             ~UtilsError() override = default;
     };
+
+    class FileError : public PlazzaError
+    {
+        public:
+            explicit FileError(const std::string &message, const std::string &component = "Unknown");
+            ~FileError() override = default;
+    };
 }
 
 #endif //CPP_PLAZZA_2019_ERROR_HPP

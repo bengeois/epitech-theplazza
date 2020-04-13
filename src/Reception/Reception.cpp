@@ -106,7 +106,7 @@ void Reception::resetFdSet(fd_set *readfs, fd_set *writefs)
 
 void Reception::writeOrderToClient(std::shared_ptr<Order> &order, int i, const std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t> &pizza)
 {
-    _server->getClientAt(i)->write(std::string(order->getId() + " " + Utils::getStringPizzaType(std::get<0>(pizza)) + " " + Utils::getStringPizzaSize(std::get<1>(pizza))));
+    _server->getClientAt(i)->write(std::string(std::to_string(order->getId()) + " " + Utils::getStringPizzaType(std::get<0>(pizza)) + " " + Utils::getStringPizzaSize(std::get<1>(pizza))));
     fd_set writefs;
     fd_set readfs;
 

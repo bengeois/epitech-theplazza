@@ -23,6 +23,7 @@ SRC	=	src/Error/Error.cpp	\
 		src/Socket/Server.cpp	\
 		src/Order/Order.cpp		\
 		src/Utils/Utils.cpp		\
+		src/File.cpp		\
 
 SRC_MAIN	=	src/main.cpp	\
 
