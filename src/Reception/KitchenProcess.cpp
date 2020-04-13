@@ -37,6 +37,7 @@ void Reception::kitchenProcess()
 
     try {
         connectKitchen(client);
+        client->makeBlocking();
         kitchen->run(client);
     } catch (const PlazzaError &e) {
         std::cout << "[PLAZZA]" << " {" << e.getComponent() << "} " << e.what() << std::endl;

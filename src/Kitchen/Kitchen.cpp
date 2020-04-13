@@ -78,8 +78,9 @@ auto Kitchen::enqueue(const std::shared_ptr<IPizza> &pizza) -> std::future<bool>
 void Kitchen::run(const std::shared_ptr<Client> &client)
 {
     while (!_stop) {
-        this->checkFinishOrder();
+        this->checkFinishOrder(client);
         _stock->regenerateIngredient();
+        client->read();
         this->checkActivity();
     }
 }
@@ -91,11 +92,17 @@ bool Kitchen::canAcceptPizza(const std::shared_ptr<IPizza> &pizza)
     return (_stock->canCookPizza(pizza));
 }
 
-void Kitchen::checkFinishOrder()
+void Kitchen::checkFinishOrder(const std::shared_ptr<Client> &client)
 {
     for (const auto &order : _orders) {
         if (future_ready(order.second)) {
-            //SEND TO RECEPTION
+            client->write(std::string(
+                std::to_string(order.first.first)
+                + " "
+                + Utils::getStringPizzaType(order.first.second->getType())
+                + " "
+                + Utils::getStringPizzaSize(order.first.second->getSize())
+                + "\n"));
         }
     }
     _orders.erase(std::remove_if(_orders.begin(), _orders.end(), [](const auto &order){

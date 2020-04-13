@@ -35,7 +35,7 @@ namespace Plazza
 
             bool canAcceptPizza(const std::shared_ptr<IPizza> &pizza);
 
-            void checkFinishOrder();
+            void checkFinishOrder(const std::shared_ptr<Client> &client);
 
             void checkActivity();
 
