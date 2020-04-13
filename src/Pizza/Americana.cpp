@@ -13,10 +13,10 @@ using namespace Plazza;
 Americana::Americana(PizzaSize size, long cookingMultiplier) :
     APizza(PizzaType::Americana, size, cookingMultiplier)
 {
-    _ingredients.at(Ingredient::DOE) = 1;
-    _ingredients.at(Ingredient::TOMATO) = 1;
-    _ingredients.at(Ingredient::GRUYERE) = 1;
-    _ingredients.at(Ingredient::STEAK) = 1;
+    _ingredients[Ingredient::DOE] = 1;
+    _ingredients[Ingredient::TOMATO] = 1;
+    _ingredients[Ingredient::GRUYERE] = 1;
+    _ingredients[Ingredient::STEAK] = 1;
 }
 
 bool Americana::cook() const

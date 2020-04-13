@@ -13,9 +13,9 @@ using namespace Plazza;
 Margarita::Margarita(PizzaSize size, long cookingMultiplier) :
 APizza(PizzaType::Margarita, size, cookingMultiplier)
 {
-    _ingredients.at(Ingredient::DOE) = 1;
-    _ingredients.at(Ingredient::TOMATO) = 1;
-    _ingredients.at(Ingredient::GRUYERE) = 1;
+    _ingredients[Ingredient::DOE] = 1;
+    _ingredients[Ingredient::TOMATO] = 1;
+    _ingredients[Ingredient::GRUYERE] = 1;
 }
 
 bool Margarita::cook() const

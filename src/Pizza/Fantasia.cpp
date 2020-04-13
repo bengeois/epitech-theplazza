@@ -13,11 +13,11 @@ using namespace Plazza;
 Fantasia::Fantasia(PizzaSize size, long cookingMultiplier) :
     APizza(PizzaType::Fantasia, size, cookingMultiplier)
 {
-    _ingredients.at(Ingredient::DOE) = 1;
-    _ingredients.at(Ingredient::TOMATO) = 1;
-    _ingredients.at(Ingredient::EGGPLANT) = 1;
-    _ingredients.at(Ingredient::GOAT_CHEESE) = 1;
-    _ingredients.at(Ingredient::CHIEF_LOVE) = 1;
+    _ingredients[Ingredient::DOE] = 1;
+    _ingredients[Ingredient::TOMATO] = 1;
+    _ingredients[Ingredient::EGGPLANT] = 1;
+    _ingredients[Ingredient::GOAT_CHEESE] = 1;
+    _ingredients[Ingredient::CHIEF_LOVE] = 1;
 }
 
 bool Fantasia::cook() const
