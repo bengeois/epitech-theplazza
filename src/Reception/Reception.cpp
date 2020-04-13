@@ -141,7 +141,7 @@ bool Reception::clientAcceptOrder(int i)
     fd_set writefs;
     fd_set readfs;
 
-    while (data.size() != 0 && getCode(data) != 100) {
+    while (data.size() == 0 || getCode(data) != 100) {
         resetFdSet(&readfs, &writefs);
         _server->getClientAt(i)->setFdSet(&readfs, &writefs);
         if (select(FD_SETSIZE, &readfs, &writefs, NULL, NULL) < 0)
