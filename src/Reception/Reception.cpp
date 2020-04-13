@@ -79,12 +79,12 @@ try {
     //     std::shared_ptr<IPizza> pizza = _orders[_orders.size() - 1]->getNextPizza();
     // }
     if (fork() == 0)
-        newKitchen();
+        kitchenProcess();
 } catch (const ParserError &e) {
     std::cout << "Invalid command" << std::endl;
 }
 
-void Reception::newKitchen()
+void Reception::kitchenProcess()
 {
     Client client(_server->getPort());
     fd_set writefs;

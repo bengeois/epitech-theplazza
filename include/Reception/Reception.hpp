@@ -38,7 +38,7 @@ namespace Plazza
             void translateCommand(const std::string &command);
             void resetFdSet(fd_set *readfs, fd_set *writefs);
             void translateSelect(const fd_set &read, const fd_set &writefs);
-            void newKitchen();
+            void kitchenProcess();
 
         private:
             long _cookingMultiplier;
