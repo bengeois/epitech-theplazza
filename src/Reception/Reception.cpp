@@ -98,14 +98,33 @@ try {
     throw ReceptionError("Invalid response for the client", "translateFinishOrder");
 }
 
+bool Reception::isStatusCommand(const std::string &command) const
+{
+    std::string name = "";
+
+    for (size_t i = 0; command[i] && (command[i] == ' ' || command[i] == '\t'); i++);
+    for (size_t i = 0; command[i] && command[i] != ' ' && command[i] != '\t'; i++) {
+        name += command[i];
+    }
+    return (name == "status");
+}
+
+void Reception::statusCommand()
+{
+}
+
 void Reception::translateSelect(const fd_set &readfs, const fd_set &writefs)
 {
     if (FD_ISSET(1, &readfs)) {
         std::string command;
 
         std::getline(std::cin, command);
-        if (!command.empty())
-            translateCommand(command);
+        if (!command.empty()) {
+            if (isStatusCommand(command))
+                statusCommand();
+            else
+                translateCommand(command);
+        }
     }
     _server->translateSelect(readfs, writefs);
     for (int i = 0; i < _server->getNbClient(); i++) {

@@ -50,6 +50,9 @@ namespace Plazza
 
             int getCode(const std::string &res) const;
 
+            bool isStatusCommand(const std::string &command) const;
+            void statusCommand();
+
         private:
             long _cookingMultiplier;
             int _cooksPerKitchen;
