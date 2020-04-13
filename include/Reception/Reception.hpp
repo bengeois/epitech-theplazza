@@ -48,6 +48,8 @@ namespace Plazza
             void translateFinishOrder(const std::string &order);
             const std::string nextStrFinishOrder(const std::string &order, size_t &i) const;
 
+            int getCode(const std::string &res) const;
+
         private:
             long _cookingMultiplier;
             int _cooksPerKitchen;

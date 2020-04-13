@@ -56,12 +56,14 @@ const std::string Reception::nextStrFinishOrder(const std::string &order, size_t
 }
 
 void Reception::translateFinishOrder(const std::string &order)
-{
+try {
     std::string nOrderStr = "";
     std::string typeStr = "";
     std::string sizeStr = "";
-    size_t i = 0;
+    size_t i = 4;
 
+    if (order.size() <= 4)
+        throw ReceptionError("Invalide response from the client", "tranlateFinishOrder");
     nOrderStr = nextStrFinishOrder(order, i);
     typeStr = nextStrFinishOrder(order, i);
     sizeStr = nextStrFinishOrder(order, i);
@@ -78,6 +80,8 @@ void Reception::translateFinishOrder(const std::string &order)
         (*orderIt)->pack();
         _orders.erase(orderIt);
     }
+} catch (const std::exception &e) {
+    throw ReceptionError("Invalid response for the client", "translateFinishOrder");
 }
 
 void Reception::translateSelect(const fd_set &readfs, const fd_set &writefs)
@@ -119,20 +123,36 @@ void Reception::writeOrderToClient(std::shared_ptr<Order> &order, int i, const s
     }
 }
 
+int Reception::getCode(const std::string &res) const
+{
+    int code;
+    std::string codeStr = "";
+
+    for (int i = 0; res[i] != '\n' && res[i] != ' '; i++) {
+        if (!(res[i] >= '0' && res[i] <= '9'))
+            throw ReceptionError("Invalid code response", "getCode");
+        codeStr += res[i];
+    }
+    return (std::stoi(codeStr));
+}
+
 bool Reception::clientAcceptOrder(int i)
 {
     std::string data = "";
     fd_set writefs;
     fd_set readfs;
 
-    while ((data = _server->getClientAt(i)->getData()).size() == 0) {
+    while (data.size() != 0 && getCode(data) != 100) {
         resetFdSet(&readfs, &writefs);
         _server->getClientAt(i)->setFdSet(&readfs, &writefs);
         if (select(FD_SETSIZE, &readfs, &writefs, NULL, NULL) < 0)
             throw ReceptionError("Select fail", "Select");
         _server->getClientAt(i)->translateSelect(readfs, writefs);
+        data = _server->getClientAt(i)->getData();
+        if (data.size() != 0 && getCode(data) == 300)
+            translateFinishOrder(data);
     }
-    if (data == "1\n")
+    if (data == "100 1\n")
         return (true);
     return (false);
 }
@@ -146,7 +166,7 @@ void Reception::childConnection()
     resetFdSet(&readfs, &writefs);
     FD_SET(fd, &readfs);
     if (select(FD_SETSIZE, &readfs, &writefs, NULL, NULL) < 0)
-        throw ReceptionError("Select fail", "Select");
+        throw ReceptionError("Select fail", "childConnection");
     _server->newConnection();
 }
 
