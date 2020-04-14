@@ -40,10 +40,10 @@ namespace Plazza
 
             void reserveIngredient(const std::shared_ptr<IPizza> &pizza);
 
-            bool canCookPizza(const std::shared_ptr<IPizza> &pizza) const;
+            [[nodiscard]] bool canCookPizza(const std::shared_ptr<IPizza> &pizza) const;
 
             void setRegenerateTime(float regenerateTime);
-            float getRegenerateTime() const;
+            [[nodiscard]] float getRegenerateTime() const;
 
         private:
             float _regenerateTime;

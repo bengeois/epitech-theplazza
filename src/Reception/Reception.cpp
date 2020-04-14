@@ -73,9 +73,8 @@ try {
     std::string sizeStr = "";
     size_t i = 4;
 
-    std::cout << "Pizza finish" << std::endl;
     if (order.size() <= 4)
-        throw ReceptionError("Invalide response from the client", "tranlateFinishOrder");
+        throw ReceptionError("Invalid reply from the client", "tranlateFinishOrder");
     nOrderStr = nextStrFinishOrder(order, i);
     typeStr = nextStrFinishOrder(order, i);
     sizeStr = nextStrFinishOrder(order, i);
@@ -95,7 +94,7 @@ try {
         _orders.erase(orderIt);
     }
 } catch (const std::exception &e) {
-    throw ReceptionError("Invalid response for the client", "translateFinishOrder");
+    throw ReceptionError("Invalid reply for the client", "translateFinishOrder");
 }
 
 bool Reception::isStatusCommand(const std::string &command) const
@@ -199,7 +198,7 @@ int Reception::getCode(const std::string &res) const
 
     for (int i = 0; res[i] != '\n' && res[i] != ' '; i++) {
         if (!(res[i] >= '0' && res[i] <= '9'))
-            throw ReceptionError("Invalid code response", "getCode");
+            throw ReceptionError("Invalid code reply", "getCode");
         codeStr += res[i];
     }
     return (std::stoi(codeStr));
@@ -244,7 +243,7 @@ try {
     std::vector<std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t>> pizzas = order->getPizzas();
     // std::cout << order << std::endl;
 
-    std::cout << "Send command" << std::endl;
+    std::cout << "[RECEPTION] Order sent to the kitchens" << std::endl;
     _orders.push_back(order);
     int a = 0;
     std::for_each(pizzas.begin(), pizzas.end(), [this, &order, &a](std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t> &pizza) {

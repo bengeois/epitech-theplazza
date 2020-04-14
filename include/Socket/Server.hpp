@@ -17,15 +17,15 @@ namespace Plazza
 {
     class Server {
         public:
-            Server(int port = 0);
+            explicit Server(int port = 0);
             ~Server();
 
-            int getPort() const;
+            [[nodiscard]] int getPort() const;
             void translateSelect(const fd_set &readfs, const fd_set &writefs);
             void setFdSet(fd_set *readfs, fd_set *writefs);
             std::shared_ptr<Client> &getClientAt(int index);
-            int getNbClient() const;
-            int getFd() const;
+            [[nodiscard]] int getNbClient() const;
+            [[nodiscard]] int getFd() const;
             void newConnection();
 
         private:

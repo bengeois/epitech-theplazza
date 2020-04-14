@@ -17,7 +17,7 @@ namespace Plazza
             Regina(PizzaSize size, long cookingMultiplier);
             ~Regina() override = default;
 
-            bool cook() const override;
+            [[nodiscard]] bool cook() const override;
     };
 } // namespace Plazza
 

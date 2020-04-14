@@ -27,22 +27,22 @@ namespace Plazza
             Order(const std::string &order, int cookingMultiplier);
             ~Order();
 
-            std::shared_ptr<IPizza> getNextPizza() const;
+            [[nodiscard]] std::shared_ptr<IPizza> getNextPizza() const;
             void addPizzaFinish(IPizza::PizzaType type, IPizza::PizzaSize size);
             void pack(const std::string &folerPath);
-            bool isFinish() const;
-            int getId() const;
-            const std::vector<std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t>> &getPizzas() const;
+            [[nodiscard]] bool isFinish() const;
+            [[nodiscard]] int getId() const;
+            [[nodiscard]] const std::vector<std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t>> &getPizzas() const;
             void setSend(int i, send_t send);
 
         private:
             void nextPizza(std::string &order);
             const std::string nextWord(std::string &order) const;
 
-            std::shared_ptr<IPizza> createMargarita(IPizza::PizzaSize size) const;
-            std::shared_ptr<IPizza> createAmericana(IPizza::PizzaSize size) const;
-            std::shared_ptr<IPizza> createRegina(IPizza::PizzaSize size) const;
-            std::shared_ptr<IPizza> createFantasia(IPizza::PizzaSize size) const;
+            [[nodiscard]] std::shared_ptr<IPizza> createMargarita(IPizza::PizzaSize size) const;
+            [[nodiscard]] std::shared_ptr<IPizza> createAmericana(IPizza::PizzaSize size) const;
+            [[nodiscard]] std::shared_ptr<IPizza> createRegina(IPizza::PizzaSize size) const;
+            [[nodiscard]] std::shared_ptr<IPizza> createFantasia(IPizza::PizzaSize size) const;
 
         private:
             int _id;

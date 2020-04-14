@@ -17,7 +17,7 @@ namespace Plazza
             Fantasia(PizzaSize size, long cookingMultiplier);
             ~Fantasia() override = default;
 
-            bool cook() const override;
+            [[nodiscard]] bool cook() const override;
     };
 } // namespace Plazza
 

@@ -22,9 +22,9 @@ namespace Plazza
 
             void build();
 
-            long getCookingMultiplier() const;
-            int getCooksPerKitchen() const;
-            float getRegenerateTime() const;
+            [[nodiscard]] long getCookingMultiplier() const;
+            [[nodiscard]] int getCooksPerKitchen() const;
+            [[nodiscard]] float getRegenerateTime() const;
 
         private:
             const std::vector<std::string> _argv;

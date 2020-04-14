@@ -17,7 +17,7 @@ namespace Plazza
             Americana(PizzaSize size, long cookingMultiplier);
             ~Americana() override = default;
 
-            bool cook() const override;
+            [[nodiscard]] bool cook() const override;
     };
 } // namespace Plazza
 

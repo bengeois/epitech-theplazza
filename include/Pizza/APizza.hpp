@@ -19,12 +19,12 @@ namespace Plazza
             ~APizza() override = default;
 
 
-            PizzaType getType() const override;
-            PizzaSize getSize() const override;
+            [[nodiscard]] PizzaType getType() const override;
+            [[nodiscard]] PizzaSize getSize() const override;
 
             const std::map<size_t, size_t> &getIngredient() override;
 
-            bool cook() const override = 0;
+            [[nodiscard]] bool cook() const override = 0;
 
         protected:
             const PizzaType _type;

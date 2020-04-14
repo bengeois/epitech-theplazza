@@ -17,7 +17,7 @@ namespace Plazza
             Margarita(PizzaSize size, long cookingMultiplier);
             ~Margarita() override = default;
 
-            bool cook() const override;
+            [[nodiscard]] bool cook() const override;
     };
 } // namespace Plazza
 

@@ -39,7 +39,7 @@ namespace Plazza
 
             void checkActivity();
 
-            int getID() const;
+            [[nodiscard]] int getID() const;
 
             std::shared_ptr<IPizza> createPizzaOrder(APizza::PizzaType type, APizza::PizzaSize size, long cookingMultiplier);
 

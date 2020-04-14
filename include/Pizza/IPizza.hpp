@@ -37,12 +37,12 @@ namespace Plazza
         public:
             virtual ~IPizza() = default;
 
-            virtual PizzaType getType() const = 0;
-            virtual PizzaSize getSize() const = 0;
+            [[nodiscard]] virtual PizzaType getType() const = 0;
+            [[nodiscard]] virtual PizzaSize getSize() const = 0;
 
             virtual const std::map<size_t, size_t> &getIngredient() = 0;
 
-            virtual bool cook() const = 0;
+            [[nodiscard]] virtual bool cook() const = 0;
     };
 }
 

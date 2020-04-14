@@ -17,8 +17,8 @@ namespace Plazza
     class Client {
         public:
             Client(int fd, sockaddr_in &addr);
-            Client(const std::string &addr = "127.0.0.1", int port = 21);
-            Client(int port = 21, const std::string &addr = "127.0.0.1");
+            explicit Client(const std::string &addr = "127.0.0.1", int port = 21);
+            explicit Client(int port = 21, const std::string &addr = "127.0.0.1");
             ~Client();
 
             void read();
@@ -27,11 +27,11 @@ namespace Plazza
             void translateSelect(const fd_set &readfs, const fd_set &writefs);
             void setFdSet(fd_set *readfs, fd_set *writefs);
             const std::string getData();
-            bool isWriting() const;
+            [[nodiscard]] bool isWriting() const;
 
             bool makeBlocking();
             bool makeNonBlocking();
-            bool exist() const;
+            [[nodiscard]] bool exist() const;
 
         private:
             void createClient(const std::string &addr, int port);

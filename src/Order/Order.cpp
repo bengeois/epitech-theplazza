@@ -117,12 +117,12 @@ void Order::pack(const std::string &folderPath)
     std::filesystem::create_directory("logs");
     std::filesystem::create_directory("logs/" + folderPath);
 
-    std::cout << "Order n°" << std::to_string(_id) << " finish" << std::endl;
+    std::cout << "[RECEPTION] Order n°" << std::to_string(_id) << " completed" << std::endl;
     File file("logs/" + folderPath + "/order-" + std::to_string(_id) + ".plazza", std::ios::out);
 
     file << "----------------Order " << std::to_string(_id) << "----------------" << std::endl;
     std::for_each(_pizzas.begin(), _pizzas.end(), [&file](const std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t> &pizza) {
-        file << "1 " << Utils::getStringPizzaType(std::get<0>(pizza)) << " of size " << Utils::getStringPizzaSize(std::get<1>(pizza)) << (std::get<3>(pizza) ? "" : " not send to a kitchen yet") << (std::get<2>(pizza) ? " ready" : "") << std::endl;
+        file << "1 " << Utils::getStringPizzaType(std::get<0>(pizza)) << " of size " << Utils::getStringPizzaSize(std::get<1>(pizza)) << (std::get<3>(pizza) ? "" : " not send to a kitchen yet") << (std::get<2>(pizza) ? " cooked" : "") << std::endl;
     });
 }
 

@@ -48,9 +48,9 @@ namespace Plazza
             void translateFinishOrder(const std::string &order);
             const std::string nextStrFinishOrder(const std::string &order, size_t &i) const;
 
-            int getCode(const std::string &res) const;
+            [[nodiscard]] int getCode(const std::string &res) const;
 
-            bool isStatusCommand(const std::string &command) const;
+            [[nodiscard]] bool isStatusCommand(const std::string &command) const;
             void statusCommand();
 
             void sendStatus(int i);
