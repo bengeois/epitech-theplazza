@@ -1,0 +1,28 @@
+var searchData=
+[
+  ['_7eamericana',['~Americana',['../class_plazza_1_1_americana.html#a520baa9e278105fb25d44ebb0c2245a6',1,'Plazza::Americana']]],
+  ['_7eapizza',['~APizza',['../class_plazza_1_1_a_pizza.html#a99e5791e895ea005fbabfc6e8796045d',1,'Plazza::APizza']]],
+  ['_7eclient',['~Client',['../class_plazza_1_1_client.html#a840e519ca781888cbd54181572ebe3a7',1,'Plazza::Client']]],
+  ['_7eclienterror',['~ClientError',['../class_plazza_1_1_client_error.html#abaaf31c6704496255f7c5a577271bd9a',1,'Plazza::ClientError']]],
+  ['_7efantasia',['~Fantasia',['../class_plazza_1_1_fantasia.html#a7dd59f4103c1ed0e139e28436a3c874a',1,'Plazza::Fantasia']]],
+  ['_7efile',['~File',['../class_plazza_1_1_file.html#ac704ebdf5f57d7a1c5ddf409d797fb69',1,'Plazza::File']]],
+  ['_7efileerror',['~FileError',['../class_plazza_1_1_file_error.html#a976a389ed6bd882fe4d7075186fecf9b',1,'Plazza::FileError']]],
+  ['_7eipizza',['~IPizza',['../class_plazza_1_1_i_pizza.html#ac650f1da9d7be2a3494027775d148cd1',1,'Plazza::IPizza']]],
+  ['_7ekitchen',['~Kitchen',['../class_plazza_1_1_kitchen.html#a45a8b292b8a8b83e264c3fa521d3a4dd',1,'Plazza::Kitchen']]],
+  ['_7ekitchenerror',['~KitchenError',['../class_plazza_1_1_kitchen_error.html#a6766434cc511874e9d758dee4f0c6967',1,'Plazza::KitchenError']]],
+  ['_7emargarita',['~Margarita',['../class_plazza_1_1_margarita.html#a509a4322a811e3a6ba9726aed2a1d4b0',1,'Plazza::Margarita']]],
+  ['_7eorder',['~Order',['../class_plazza_1_1_order.html#a8fb25876ccbd534465f5f96ef9bb2212',1,'Plazza::Order']]],
+  ['_7eordererror',['~OrderError',['../class_plazza_1_1_order_error.html#ab44e4d96c19ce24439886e9faeaa7195',1,'Plazza::OrderError']]],
+  ['_7eparser',['~Parser',['../class_plazza_1_1_parser.html#a92a4eece21814ec68e27f40afb0993a2',1,'Plazza::Parser']]],
+  ['_7eparsererror',['~ParserError',['../class_plazza_1_1_parser_error.html#a9284b007a78b4f21405680fd613de8ba',1,'Plazza::ParserError']]],
+  ['_7eplazzaerror',['~PlazzaError',['../class_plazza_1_1_plazza_error.html#aacf64f95d2aaf1eb62375325cb5f2714',1,'Plazza::PlazzaError']]],
+  ['_7ereception',['~Reception',['../class_plazza_1_1_reception.html#ae303969b9a08af6e7012d168cd54972c',1,'Plazza::Reception']]],
+  ['_7ereceptionerror',['~ReceptionError',['../class_plazza_1_1_reception_error.html#a90b26b5911acd239cb6b34cbc19e2ed2',1,'Plazza::ReceptionError']]],
+  ['_7eregina',['~Regina',['../class_plazza_1_1_regina.html#a2f852e29d9bd65e9ffaf456054337878',1,'Plazza::Regina']]],
+  ['_7eserver',['~Server',['../class_plazza_1_1_server.html#a4b3aa2579cb1c8cd1d069582c14d0fa6',1,'Plazza::Server']]],
+  ['_7eservererror',['~ServerError',['../class_plazza_1_1_server_error.html#a9a4d6125ac1976a47e64d744f6835856',1,'Plazza::ServerError']]],
+  ['_7estock',['~Stock',['../class_plazza_1_1_stock.html#aab8dba6999960cddf47e1f94554f5997',1,'Plazza::Stock']]],
+  ['_7eusershell',['~UserShell',['../class_plazza_1_1_user_shell.html#a43dc760e4009299f38dc74d86bbc0df4',1,'Plazza::UserShell']]],
+  ['_7eusershellerror',['~UserShellError',['../class_plazza_1_1_user_shell_error.html#a35d92898ee7deacc077bdf32ef125b5b',1,'Plazza::UserShellError']]],
+  ['_7eutilserror',['~UtilsError',['../class_plazza_1_1_utils_error.html#abc9d035072ffbb60544e211ee8a74047',1,'Plazza::UtilsError']]]
+];

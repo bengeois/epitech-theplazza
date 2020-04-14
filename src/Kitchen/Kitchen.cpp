@@ -63,8 +63,7 @@ auto Kitchen::enqueue(const std::shared_ptr<IPizza> &pizza) -> std::future<bool>
 {
 
     auto task = std::make_shared<std::packaged_task<bool()>>([pizza, this](){
-        pizza->cook();
-        return true;
+        return pizza->cook();
     });
 
     std::future<bool> res = task->get_future();

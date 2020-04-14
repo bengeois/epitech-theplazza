@@ -1,0 +1,24 @@
+var searchData=
+[
+  ['getclientat',['getClientAt',['../class_plazza_1_1_server.html#a8c53d8e32ef1ebf49078fe0d19fe80b9',1,'Plazza::Server']]],
+  ['getcomponent',['getComponent',['../class_plazza_1_1_plazza_error.html#a66df02d9fd1323d218e0ebeccfef942e',1,'Plazza::PlazzaError']]],
+  ['getcookingmultiplier',['getCookingMultiplier',['../class_plazza_1_1_parser.html#a7c0f9c1cd3ad0c97284f0665e4e691e6',1,'Plazza::Parser::getCookingMultiplier()'],['../class_plazza_1_1_reception.html#a178a2a378ec0c838092e7d195022adb4',1,'Plazza::Reception::getCookingMultiplier()']]],
+  ['getcooksperkitchen',['getCooksPerKitchen',['../class_plazza_1_1_parser.html#a417cadf6d2de3df700263eaa770cce53',1,'Plazza::Parser::getCooksPerKitchen()'],['../class_plazza_1_1_reception.html#a2aad93580b277b24c6703fe72e764504',1,'Plazza::Reception::getCooksPerKitchen()']]],
+  ['getdata',['getData',['../class_plazza_1_1_client.html#a8dde05958083ce3ce22bb2a3fbff7249',1,'Plazza::Client']]],
+  ['getfd',['getFd',['../class_plazza_1_1_server.html#a327ed5d0e43176e36b4be9ef30914908',1,'Plazza::Server']]],
+  ['getid',['getID',['../class_plazza_1_1_kitchen.html#a89f27b5d0afb147a6e6cdc405b9f50cb',1,'Plazza::Kitchen::getID()'],['../class_plazza_1_1_order.html#a9506e43ee697e335b3e0e3ad04f4d8fa',1,'Plazza::Order::getId()']]],
+  ['getingredient',['getIngredient',['../class_plazza_1_1_a_pizza.html#a7a215e979da008dc26e04a3173e3b04c',1,'Plazza::APizza::getIngredient()'],['../class_plazza_1_1_i_pizza.html#a47c0f85606a7ebdc231be1626a39b64f',1,'Plazza::IPizza::getIngredient()']]],
+  ['getnbclient',['getNbClient',['../class_plazza_1_1_server.html#a59e402ff99548f3da18aa0d1a966c062',1,'Plazza::Server']]],
+  ['getnextline',['getNextLine',['../class_plazza_1_1_file.html#a6e282765e3d9f401373cb6f33a5a3254',1,'Plazza::File']]],
+  ['getnextpizza',['getNextPizza',['../class_plazza_1_1_order.html#a4fac2292cdc5eb00108b647eb046fa07',1,'Plazza::Order']]],
+  ['getpizzas',['getPizzas',['../class_plazza_1_1_order.html#a7322bd1e861f452398f957a6afabe730',1,'Plazza::Order']]],
+  ['getpizzasize',['getPizzaSize',['../class_plazza_1_1_utils.html#a6e9dfab89b9fb3665089a8e66b195a96',1,'Plazza::Utils']]],
+  ['getpizzatype',['getPizzaType',['../class_plazza_1_1_utils.html#a3bc919dd2fe10d6296a7ec3cb985a507',1,'Plazza::Utils']]],
+  ['getport',['getPort',['../class_plazza_1_1_server.html#a099d665edef928c69132033d36253a96',1,'Plazza::Server']]],
+  ['getregeneratetime',['getRegenerateTime',['../class_plazza_1_1_parser.html#a11bd8da666df2db954b39e1ff6a69c8a',1,'Plazza::Parser::getRegenerateTime()'],['../class_plazza_1_1_reception.html#a1aad27c9fedaf54b20713fd21c00ac67',1,'Plazza::Reception::getRegenerateTime()'],['../class_plazza_1_1_stock.html#a8b9427ea8277a5cedb236d22dd3f288f',1,'Plazza::Stock::getRegenerateTime()']]],
+  ['getsize',['getSize',['../class_plazza_1_1_a_pizza.html#a5d9e26ef299b5fa48d4990f13a0c1eab',1,'Plazza::APizza::getSize()'],['../class_plazza_1_1_i_pizza.html#a0260f24ca9d7435f44f1f6b2947909ba',1,'Plazza::IPizza::getSize()']]],
+  ['getstringpizzasize',['getStringPizzaSize',['../class_plazza_1_1_utils.html#a70c4746916ac314a8a8cde49fdbf4db8',1,'Plazza::Utils']]],
+  ['getstringpizzatype',['getStringPizzaType',['../class_plazza_1_1_utils.html#a042287a5dc26501bc3c39648bafdbbc2',1,'Plazza::Utils']]],
+  ['gettype',['getType',['../class_plazza_1_1_a_pizza.html#ab452ba7a335adfdeeb35b9b792a8ddfd',1,'Plazza::APizza::getType()'],['../class_plazza_1_1_i_pizza.html#a136bfabf8c0df7789bc1d9f0f3826d08',1,'Plazza::IPizza::getType()']]],
+  ['getusercommand',['getUserCommand',['../class_plazza_1_1_user_shell.html#a2b038a8bb5ceff598c959d922825e68f',1,'Plazza::UserShell']]]
+];
