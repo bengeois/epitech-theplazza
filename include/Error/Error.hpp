@@ -16,11 +16,13 @@ namespace Plazza
     class PlazzaError : public std::exception
     {
         public:
-            explicit PlazzaError(const std::string &message, const std::string &component = "Unknown");
+            explicit PlazzaError(std::string message, std::string component = "Unknown") noexcept;
             ~PlazzaError() override = default;
+            PlazzaError(const PlazzaError&) noexcept;
+            PlazzaError& operator=(const PlazzaError&) noexcept;
 
-            const std::string &getComponent() const;
-            const char *what() const noexcept override;
+            [[nodiscard]] const std::string &getComponent() const noexcept;
+            [[nodiscard]] const char *what() const noexcept override;
         private:
             std::string _message;
             std::string _component;

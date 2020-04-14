@@ -6,14 +6,15 @@
 */
 
 #include <Error/Error.hpp>
+#include <utility>
 
 using namespace Plazza;
 
-PlazzaError::PlazzaError(const std::string &message, const std::string &component) : _message(message), _component(component)
+PlazzaError::PlazzaError(std::string message, std::string component) noexcept : _message(std::move(message)), _component(std::move(component))
 {
 }
 
-const std::string & PlazzaError::getComponent() const
+const std::string & PlazzaError::getComponent() const noexcept
 {
     return _component;
 }
@@ -21,6 +22,21 @@ const std::string & PlazzaError::getComponent() const
 const char * PlazzaError::what() const noexcept
 {
     return _message.c_str();
+}
+
+PlazzaError::PlazzaError(const PlazzaError &old) noexcept
+{
+    _message = std::string(old._message);
+    _component = std::string(old._component);
+}
+
+PlazzaError &PlazzaError::operator=(const PlazzaError &rhs) noexcept
+{
+    if (this != &rhs) {
+        _message = std::string(rhs._message);
+        _component = std::string(rhs._component);
+    }
+    return *this;
 }
 
 ParserError::ParserError(const std::string &message, const std::string &component) : PlazzaError(message, component)
