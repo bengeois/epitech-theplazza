@@ -67,3 +67,23 @@ IPizza::PizzaSize Utils::getPizzaSize(const std::string &size)
         throw UtilsError("Index out of range", "getPizzaSize");
     return (sizes[size]);
 }
+
+const std::string Utils::getStringIngredient(Ingredient type)
+{
+    std::map<Ingredient, std::string> types = {
+        {DOE, "DOE"},
+        {TOMATO, "TOMATO"},
+        {GRUYERE, "GRUYERE"},
+        {HAM, "HAM"},
+        {MUSHROOMS, "MUSHROOMS"},
+        {STEAK, "STEAK"},
+        {EGGPLANT, "EGGPLANT"},
+        {GOAT_CHEESE, "GOAT_CHEESE"},
+        {CHIEF_LOVE, "CHIEF_LOVE"},
+    };
+
+    types.count(type);
+    if (!types.count(type))
+        throw UtilsError("Index out of range", "getStringIngredient");
+    return (types[type]);
+}

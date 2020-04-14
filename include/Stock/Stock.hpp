@@ -45,6 +45,8 @@ namespace Plazza
             void setRegenerateTime(float regenerateTime);
             [[nodiscard]] float getRegenerateTime() const;
 
+            [[nodiscard]] const std::map<size_t, size_t> &getStock() const;
+
         private:
             float _regenerateTime;
             std::chrono::steady_clock::time_point _beginRegeneration;

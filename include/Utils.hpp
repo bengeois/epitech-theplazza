@@ -10,6 +10,7 @@
 
 #include <future>
 #include "Pizza/IPizza.hpp"
+#include "Stock/Stock.hpp"
 
 namespace Plazza
 {
@@ -25,6 +26,8 @@ namespace Plazza
             static const std::string getStringPizzaSize(IPizza::PizzaSize size);
             static IPizza::PizzaType getPizzaType(const std::string &type);
             static IPizza::PizzaSize getPizzaSize(const std::string &size);
+
+            static const std::string getStringIngredient(Ingredient type);
     };
 }
 #endif //EPITECH_THEPLAZZA_UTILS_HPP

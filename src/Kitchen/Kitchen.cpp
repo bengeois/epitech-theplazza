@@ -157,7 +157,7 @@ void Kitchen::receiveFromReception(const std::shared_ptr<Client> &client)
     std::string pingReception = client->getData();
     if (pingReception.empty())
         return;
-    if (pingReception.substr(0, 2) == "500")
+    if (pingReception.substr(0, 3) == "500")
         return sendKitchenStatus(client);
     return checkNewCommand(client, pingReception);
 }
@@ -166,6 +166,16 @@ void Kitchen::receiveFromReception(const std::shared_ptr<Client> &client)
 void Kitchen::sendKitchenStatus(const std::shared_ptr<Client> &client) const
 {
     std::cout << std::endl << "[KITCHEN " << _id << "]" << std::endl;
+    std::cout << "\t[Number ok cook] " << _cookNb << std::endl;
+    std::cout << "\t[Cooking Time] " << _cookingMultiplier << std::endl;
+    std::cout << "\t[Stock] Regeneration time : " << _stock->getRegenerateTime() << " milliseconds." << std::endl;
+    for (const auto &ingredient : _stock->getStock())
+        std::cout << "\t\t" << Utils::getStringIngredient(static_cast<Ingredient>(ingredient.first)) << " -> " << ingredient.second << std::endl;
+    std::cout << "\t[Order in progress] " << _orders.size() << std::endl;
+    for (const auto &order : _orders)
+        std::cout << "\t\tOrder n°" << order.first.first << " " << Utils::getStringPizzaType(order.first.second->getType()) << " " << Utils::getStringPizzaSize(order.first.second->getSize()) << std::endl;
+
+    std::cout << std::endl;
     client->write(std::string("400\n"));
 }
 

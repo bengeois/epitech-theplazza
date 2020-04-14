@@ -51,3 +51,8 @@ float Stock::getRegenerateTime() const
 {
     return _regenerateTime;
 }
+
+const std::map<size_t, size_t> &Stock::getStock() const
+{
+    return _stock;
+}
