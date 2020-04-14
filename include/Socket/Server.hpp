@@ -31,7 +31,6 @@ namespace Plazza
         private:
             void bindPort(int port);
 
-
         private:
             int _port;
             int _fd;

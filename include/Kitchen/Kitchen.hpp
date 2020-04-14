@@ -28,27 +28,26 @@ namespace Plazza
             explicit Kitchen(size_t cooks, float regenerateTime, long cookingMultiplier);
             ~Kitchen();
 
+            void run(const std::shared_ptr<Client> &client);
+            void checkActivity();
+
             auto enqueue(const std::shared_ptr<IPizza> &pizza) -> std::future<bool>;
 
-            void run(const std::shared_ptr<Client> &client);
-
-            void checkNewCommand(const std::shared_ptr<Client> &client);
+            void receiveFromReception(const std::shared_ptr<Client> &client);
+            void sendKitchenStatus(const std::shared_ptr<Client> &client) const;
+            void checkNewCommand(const std::shared_ptr<Client> &client, const std::string &pingReception);
             bool canAcceptPizza(const std::shared_ptr<IPizza> &pizza);
-
             void checkFinishOrder(const std::shared_ptr<Client> &client);
-
-            void checkActivity();
 
             [[nodiscard]] int getID() const;
 
-            std::shared_ptr<IPizza> createPizzaOrder(APizza::PizzaType type, APizza::PizzaSize size, long cookingMultiplier);
-
             template <class T>
-                std::shared_ptr<T> createPizzaOrder(APizza::PizzaSize size, long cookingMultiplier) {
-                    std::shared_ptr<T> newPizza = std::make_shared<T>(size, cookingMultiplier);
-                    return newPizza;
-                }
+            std::shared_ptr<T> createPizzaOrder(APizza::PizzaSize size, long cookingMultiplier) {
+                std::shared_ptr<T> newPizza = std::make_shared<T>(size, cookingMultiplier);
+                return newPizza;
+            }
 
+            std::shared_ptr<IPizza> createPizzaOrder(APizza::PizzaType type, APizza::PizzaSize size, long cookingMultiplier);
 
             private:
                 int _id;

@@ -90,7 +90,7 @@ void Kitchen::run(const std::shared_ptr<Client> &client)
             this->checkActivity();
             _stock->regenerateIngredient();
             this->checkFinishOrder(client);
-            this->checkNewCommand(client);
+            this->receiveFromReception(client);
             while (client->isWriting())
                 client->write();
         }
@@ -146,11 +146,9 @@ void Kitchen::checkActivity()
     _stop = true;
 }
 
-void Kitchen::checkNewCommand(const std::shared_ptr<Client> &client)
+
+void Kitchen::receiveFromReception(const std::shared_ptr<Client> &client)
 {
-    size_t orderID;
-    std::string pizzaType;
-    std::string pizzaSize;
     try {
         client->read();
     } catch (const ClientError &e) {
@@ -159,6 +157,23 @@ void Kitchen::checkNewCommand(const std::shared_ptr<Client> &client)
     std::string pingReception = client->getData();
     if (pingReception.empty())
         return;
+    if (pingReception.substr(0, 2) == "500")
+        return sendKitchenStatus(client);
+    return checkNewCommand(client, pingReception);
+}
+
+
+void Kitchen::sendKitchenStatus(const std::shared_ptr<Client> &client) const
+{
+    std::cout << std::endl << "[KITCHEN " << _id << "]" << std::endl;
+    client->write(std::string("400\n"));
+}
+
+void Kitchen::checkNewCommand(const std::shared_ptr<Client> &client, const std::string &pingReception)
+{
+    size_t orderID;
+    std::string pizzaType;
+    std::string pizzaSize;
 
     std::istringstream ss(pingReception);
     ss >> orderID;
