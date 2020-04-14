@@ -66,7 +66,7 @@ void Order::nextPizza(std::string &order)
 
     if (numberWord[0] != 'x')
         throw ParserError("Wrong argument, cannot find the number", "nextPizza");
-    std::string tmpNumber = "";
+    std::string tmpNumber;
     for (size_t i = 1; numberWord[i]; i++) {
         tmpNumber += numberWord[i];
     }
@@ -76,9 +76,9 @@ void Order::nextPizza(std::string &order)
         throw ParserError("Wrong argument, wrong number", "nextPizza");
     }
     for (int i = 0; i < nb; i++) {
-        _pizzas.push_back(std::make_tuple(type, size, false, false));
+        _pizzas.emplace_back(type, size, false, false);
     }
-    if (order.size() == 0)
+    if (order.empty())
         throw OrderError("No more pizza");
 }
 
@@ -106,9 +106,7 @@ void Order::addPizzaFinish(IPizza::PizzaType type, IPizza::PizzaSize size)
     auto pizza = std::find_if(_pizzas.begin(), _pizzas.end(), [&type, &size](const std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t> &pizza) {
         if (std::get<2>(pizza))
             return (false);
-        if (std::get<0>(pizza) == type && std::get<1>(pizza) == size)
-            return (true);
-        return (false);
+        return std::get<0>(pizza) == type && std::get<1>(pizza) == size;
     });
 
     std::get<2>(*pizza) = true;

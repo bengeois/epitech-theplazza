@@ -139,10 +139,7 @@ bool Client::makeNonBlocking()
 
 bool Client::exist() const
 {
-    if (_exist == false)
+    if (!_exist)
         return (false);
-    if (fcntl(_fd, F_GETFD) != -1) {
-        return (true);
-    }
-    return (false);
+    return fcntl(_fd, F_GETFD) != -1;
 }

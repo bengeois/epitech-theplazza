@@ -137,7 +137,7 @@ void Reception::waitResponseStatus(int i)
             throw ReceptionError("Select fail", "Select");
         _server->getClientAt(i)->translateSelect(readfs, writefs);
         data = _server->getClientAt(i)->getData();
-        if (data.size() != 0 && getCode(data) == 300)
+        if (!data.empty() && getCode(data) == 300)
             translateFinishOrder(data);
     }
 }
@@ -166,7 +166,7 @@ void Reception::translateSelect(const fd_set &readfs, const fd_set &writefs)
     _server->translateSelect(readfs, writefs);
     for (int i = 0; i < _server->getNbClient(); i++) {
         std::string data;
-        if ((data = _server->getClientAt(i)->getData()).size() == 0)
+        if ((data = _server->getClientAt(i)->getData()).empty())
             continue;
         translateFinishOrder(data);
     }
@@ -211,19 +211,17 @@ bool Reception::clientAcceptOrder(int i)
     fd_set writefs;
     fd_set readfs;
 
-    while (data.size() == 0 || getCode(data) != 100) {
+    while (data.empty() || getCode(data) != 100) {
         resetFdSet(&readfs, &writefs);
         _server->getClientAt(i)->setFdSet(&readfs, &writefs);
         if (select(FD_SETSIZE, &readfs, &writefs, NULL, NULL) < 0)
             throw ReceptionError("Select fail", "Select");
         _server->getClientAt(i)->translateSelect(readfs, writefs);
         data = _server->getClientAt(i)->getData();
-        if (data.size() != 0 && getCode(data) == 300)
+        if (!data.empty() && getCode(data) == 300)
             translateFinishOrder(data);
     }
-    if (data == "100 1\n")
-        return (true);
-    return (false);
+    return data == "100 1\n";
 }
 
 void Reception::childConnection()
