@@ -28,7 +28,6 @@ namespace Plazza
             explicit Kitchen(size_t cooks, float regenerateTime, long cookingMultiplier);
             ~Kitchen();
 
-            // ENQUEUE Renvoie un bool true lorsque la fabrication est terminée
             auto enqueue(const std::shared_ptr<IPizza> &pizza) -> std::future<bool>;
 
             void run(const std::shared_ptr<Client> &client);
@@ -40,6 +39,8 @@ namespace Plazza
 
             void checkActivity();
 
+            int getID() const;
+
             std::shared_ptr<IPizza> createPizzaOrder(APizza::PizzaType type, APizza::PizzaSize size, long cookingMultiplier);
 
             template <class T>
@@ -50,6 +51,7 @@ namespace Plazza
 
 
             private:
+                int _id;
                 bool _stop;
                 bool _noActivity;
                 std::chrono::steady_clock::time_point _beginNoActivity;

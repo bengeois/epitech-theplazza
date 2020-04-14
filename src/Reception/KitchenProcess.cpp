@@ -27,7 +27,6 @@ void Reception::connectKitchen(std::shared_ptr<Client> &client)
             throw ReceptionError("Select fail", "Select");
         client->translateSelect(readfs, writefs);
     }
-    std::cout << "New kitchen create" << std::endl;
 }
 
 void Reception::kitchenProcess()
@@ -38,6 +37,7 @@ void Reception::kitchenProcess()
     try {
         connectKitchen(client);
         client->makeNonBlocking();
+        std::cout << "New kitchen create. ID = " << kitchen->getID() << std::endl;
         kitchen->run(client);
     } catch (const PlazzaError &e) {
         std::cout << "[PLAZZA]" << " {" << e.getComponent() << "} " << e.what() << std::endl;

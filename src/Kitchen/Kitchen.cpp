@@ -6,6 +6,7 @@
 */
 
 #include <sstream>
+#include <zconf.h>
 #include "Pizza/APizza.hpp"
 #include "Pizza/Americana.hpp"
 #include "Pizza/Margarita.hpp"
@@ -22,6 +23,7 @@ _cookingMultiplier(cookingMultiplier),
 _cookNb(cooks),
 _stock(std::make_shared<Stock>(Stock(regenerateTime)))
 {
+    _id = getpid();
     _cooks.reserve(_cookNb);
     for (size_t i = 0; i < _cookNb; i++) {
         _cooks.emplace_back([this](){
@@ -188,4 +190,9 @@ std::shared_ptr<IPizza> Kitchen::createPizzaOrder(APizza::PizzaType type, APizza
     if (type == IPizza::Margarita)
         return createPizzaOrder<Margarita>(size, cookingMultiplier);
     return createPizzaOrder<Regina>(size, cookingMultiplier);
+}
+
+int Kitchen::getID() const
+{
+    return _id;
 }
