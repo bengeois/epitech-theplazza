@@ -98,6 +98,7 @@ void Kitchen::run(const std::shared_ptr<Client> &client)
     } catch (const PlazzaError &e) {
         throw e;
     }
+    std::cout << "[KITCHEN " << _id << "] No more pizza to cook, kitchen close its doors" << std::endl;
 }
 
 bool Kitchen::canAcceptPizza(const std::shared_ptr<IPizza> &pizza)
