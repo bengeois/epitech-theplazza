@@ -19,6 +19,19 @@ Americana::Americana(PizzaSize size, long cookingMultiplier) :
     _ingredients[Ingredient::STEAK] = 1;
 }
 
+Americana::Americana(const Americana &american) : APizza(american)
+{
+}
+
+Americana &Americana::operator=(const Americana &america)
+{
+    _type = america._type;
+    _size = america._size;
+    _cookingMultiplier = america._cookingMultiplier;
+    _ingredients = america._ingredients;
+    return (*this);
+}
+
 bool Americana::cook() const
 {
     std::this_thread::sleep_for(std::chrono::seconds(2 * _cookingMultiplier));

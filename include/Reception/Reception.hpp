@@ -22,7 +22,9 @@ namespace Plazza
         public:
             Reception(long cookingMultiplier, int _cooksPerKitchen, float
             _stockTime);
-            ~Reception() = default;
+            ~Reception();
+            Reception(const Reception &reception);
+            Reception &operator=(const Reception &reception);
 
             void run();
 
@@ -61,12 +63,9 @@ namespace Plazza
             int _cooksPerKitchen;
             float _regenerateTime;
 
-            std::unique_ptr<UserShell> _shell;
             std::unique_ptr<Server> _server;
             std::vector<std::shared_ptr<Order>> _orders;
-            std::vector<pid_t> _childs;
 
-            bool _running;
             std::string _logDirectory = "";
     };
 }

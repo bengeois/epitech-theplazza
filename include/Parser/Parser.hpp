@@ -19,6 +19,8 @@ namespace Plazza
         public:
             Parser(int argc, char **argv);
             ~Parser() = default;
+            Parser(const Parser &parser);
+            Parser &operator=(const Parser &parser);
 
             void build();
 
@@ -27,7 +29,7 @@ namespace Plazza
             [[nodiscard]] float getRegenerateTime() const;
 
         private:
-            const std::vector<std::string> _argv;
+            std::vector<std::string> _argv;
             long _cookingMultiplier;
             int _cooksPerKitchen;
             float _regenerateTime;

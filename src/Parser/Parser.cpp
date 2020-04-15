@@ -8,6 +8,8 @@
 #include <sstream>
 #include "Parser/Parser.hpp"
 
+using namespace Plazza;
+
 Plazza::Parser::Parser(int argc, char **argv) try : _argv(std::vector<std::string>(argv + 1, argv + argc)),
 _cookingMultiplier(0),
 _cooksPerKitchen(0),
@@ -15,6 +17,23 @@ _regenerateTime(0)
 {
 } catch (const std::exception &e) {
     throw ParserError("Invalid number of argument.", "Parser");
+}
+
+Parser::Parser(const Parser &parser) :
+    _argv(parser._argv),
+    _cookingMultiplier(parser._cookingMultiplier),
+    _cooksPerKitchen(parser._cooksPerKitchen),
+    _regenerateTime(parser._regenerateTime)
+{
+}
+
+Parser &Parser::operator=(const Parser &parser)
+{
+    _argv = parser._argv;
+    _cookingMultiplier = parser._cookingMultiplier;
+    _cooksPerKitchen = parser._cooksPerKitchen;
+    _regenerateTime = parser._regenerateTime;
+    return (*this);
 }
 
 void Plazza::Parser::build()

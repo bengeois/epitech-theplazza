@@ -22,9 +22,7 @@ regenerateTime) :
     _cookingMultiplier(cookingMultiplier),
     _cooksPerKitchen(cooksPerKitchen),
     _regenerateTime(regenerateTime),
-    _shell(std::make_unique<UserShell>()),
-    _server(std::make_unique<Server>()),
-    _running(true)
+    _server(std::make_unique<Server>())
 {
     time_t now = time(0);
 
@@ -37,6 +35,31 @@ regenerateTime) :
         std::to_string(info->tm_min) + ":" +
         std::to_string(info->tm_sec);
     std::cout << "All finish order will be send in logs/" << _logDirectory << std::endl;
+}
+
+Reception::Reception(const Reception &reception) :
+    _cookingMultiplier(reception._cookingMultiplier),
+    _cooksPerKitchen(reception._cooksPerKitchen),
+    _regenerateTime(reception._regenerateTime),
+    _server(std::make_unique<Server>(*reception._server)),
+    _orders(reception._orders),
+    _logDirectory(reception._logDirectory)
+{
+}
+
+Reception &Reception::operator=(const Reception &reception)
+{
+    _cookingMultiplier = reception._cookingMultiplier;
+    _cooksPerKitchen = reception._cooksPerKitchen;
+    _regenerateTime = reception._regenerateTime;
+    _server = std::make_unique<Server>(*reception._server);
+    _orders = reception._orders;
+    _logDirectory = reception._logDirectory;
+    return (*this);
+}
+
+Reception::~Reception()
+{
 }
 
 void Reception::run()

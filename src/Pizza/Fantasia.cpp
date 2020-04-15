@@ -20,6 +20,19 @@ Fantasia::Fantasia(PizzaSize size, long cookingMultiplier) :
     _ingredients[Ingredient::CHIEF_LOVE] = 1;
 }
 
+Fantasia::Fantasia(const Fantasia &fantasia) : APizza(fantasia)
+{
+}
+
+Fantasia &Fantasia::operator=(const Fantasia &fantasia)
+{
+    _type = fantasia._type;
+    _size = fantasia._size;
+    _cookingMultiplier = fantasia._cookingMultiplier;
+    _ingredients = fantasia._ingredients;
+    return (*this);
+}
+
 bool Fantasia::cook() const
 {
     std::this_thread::sleep_for(std::chrono::seconds(4 * _cookingMultiplier));

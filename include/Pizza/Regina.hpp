@@ -16,6 +16,8 @@ namespace Plazza
         public:
             Regina(PizzaSize size, long cookingMultiplier);
             ~Regina() override = default;
+            Regina(const Regina &regina);
+            Regina &operator=(const Regina &regina);
 
             [[nodiscard]] bool cook() const override;
     };
