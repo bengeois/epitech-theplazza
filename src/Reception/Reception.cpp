@@ -22,9 +22,7 @@ regenerateTime) :
     _cookingMultiplier(cookingMultiplier),
     _cooksPerKitchen(cooksPerKitchen),
     _regenerateTime(regenerateTime),
-    _shell(std::make_unique<UserShell>()),
-    _server(std::make_unique<Server>()),
-    _running(true)
+    _server(std::make_unique<Server>())
 {
     time_t now = time(0);
 
@@ -37,6 +35,31 @@ regenerateTime) :
         std::to_string(info->tm_min) + ":" +
         std::to_string(info->tm_sec);
     std::cout << "All finish order will be send in logs/" << _logDirectory << std::endl;
+}
+
+Reception::Reception(const Reception &reception) :
+    _cookingMultiplier(reception._cookingMultiplier),
+    _cooksPerKitchen(reception._cooksPerKitchen),
+    _regenerateTime(reception._regenerateTime),
+    _server(std::make_unique<Server>(*reception._server)),
+    _orders(reception._orders),
+    _logDirectory(reception._logDirectory)
+{
+}
+
+Reception &Reception::operator=(const Reception &reception)
+{
+    _cookingMultiplier = reception._cookingMultiplier;
+    _cooksPerKitchen = reception._cooksPerKitchen;
+    _regenerateTime = reception._regenerateTime;
+    _server = std::make_unique<Server>(*reception._server);
+    _orders = reception._orders;
+    _logDirectory = reception._logDirectory;
+    return (*this);
+}
+
+Reception::~Reception()
+{
 }
 
 void Reception::run()
@@ -257,22 +280,23 @@ try {
             }
         }
         // Fork if no kitchen can take the pizza
-        pid_t child = fork();
+        std::shared_ptr<IProcess> process = std::make_shared<Process>();
 
-        if (child == -1)
-            throw ReceptionError("Fork failed");
-        if (child == 0)
+        if (process->isInChild())
             kitchenProcess();
         childConnection();
         writeOrderToClient(order, _server->getNbClient() - 1, pizza);
         if (!clientAcceptOrder(_server->getNbClient() - 1))
             throw ReceptionError("Fatal error : Unable to send the pizza");
         order->setSend(a, true);
+        _process.push_back(process);
         a++;
     });
 
 } catch (const ParserError &e) {
     std::cout << "Invalid command" << std::endl;
+} catch (const ProcessError &e) {
+    throw e;
 }
 
 long Reception::getCookingMultiplier() const

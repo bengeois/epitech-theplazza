@@ -26,6 +26,8 @@ namespace Plazza
         public:
             Order(const std::string &order, int cookingMultiplier);
             ~Order();
+            Order(const Order &order);
+            Order &operator=(const Order &order);
 
             [[nodiscard]] std::shared_ptr<IPizza> getNextPizza() const;
             void addPizzaFinish(IPizza::PizzaType type, IPizza::PizzaSize size);
@@ -46,7 +48,7 @@ namespace Plazza
 
         private:
             int _id;
-            const std::string _order;
+            std::string _order;
             int _cookingMultiplier;
             std::vector<std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t>> _pizzas;
     };

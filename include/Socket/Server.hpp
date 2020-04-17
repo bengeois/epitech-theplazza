@@ -19,6 +19,8 @@ namespace Plazza
         public:
             explicit Server(int port = 0);
             ~Server();
+            Server(const Server &server);
+            Server &operator=(const Server &server);
 
             [[nodiscard]] int getPort() const;
             void translateSelect(const fd_set &readfs, const fd_set &writefs);

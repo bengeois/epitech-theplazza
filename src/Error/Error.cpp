@@ -74,3 +74,7 @@ UtilsError::UtilsError(const std::string &message, const std::string &component)
 FileError::FileError(const std::string &message, const std::string &component) : PlazzaError(message, component)
 {
 }
+
+ProcessError::ProcessError(const std::string &message, const std::string &component) : PlazzaError(message, component)
+{
+}

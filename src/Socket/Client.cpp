@@ -33,6 +33,29 @@ Client::~Client()
     close(_fd);
 }
 
+Client::Client(const Client &client) :
+    _fd(client._fd),
+    _addr(client._addr),
+    _msg(client._msg),
+    _write(client._write),
+    _read(client._read),
+    _data(client._data),
+    _exist(client._exist)
+{
+}
+
+Client &Client::operator=(const Client &client)
+{
+    _fd = client._fd;
+    _addr = client._addr;
+    _msg = client._msg;
+    _write = client._write;
+    _read = client._read;
+    _data = client._data;
+    _exist = client._exist;
+    return (*this);
+}
+
 void Client::createClient(const std::string &addr, int port)
 {
     if (_fd == -1)

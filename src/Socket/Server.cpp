@@ -26,7 +26,22 @@ Server::Server(int port) : _port(port), _fd(socket(AF_INET, SOCK_STREAM, 0))
         throw ServerError("Unable to listen ports", "Server");
 }
 
-Server::~Server() = default;
+Server::~Server()
+{
+}
+
+Server::Server(const Server &server) : _port(server._port), _fd(server._fd), _addr(server._addr), _clients(server._clients)
+{
+}
+
+Server &Server::operator=(const Server &server)
+{
+    _port = server._port;
+    _fd = server._fd;
+    _addr = server._addr;
+    _clients = server._clients;
+    return (*this);
+}
 
 int Server::getPort() const
 {

@@ -20,6 +20,8 @@ namespace Plazza
             explicit Client(const std::string &addr = "127.0.0.1", int port = 21);
             explicit Client(int port = 21, const std::string &addr = "127.0.0.1");
             ~Client();
+            Client(const Client &client);
+            Client &operator=(const Client &client);
 
             void read();
             void write();

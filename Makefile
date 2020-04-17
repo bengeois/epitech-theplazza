@@ -25,6 +25,7 @@ SRC	=	src/Error/Error.cpp	\
 		src/Order/Order.cpp		\
 		src/Utils/Utils.cpp		\
 		src/File.cpp		\
+		src/Process/Process.cpp		\
 
 SRC_MAIN	=	src/main.cpp	\
 

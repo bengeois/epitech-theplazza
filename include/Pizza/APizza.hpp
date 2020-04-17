@@ -18,7 +18,6 @@ namespace Plazza
             APizza(PizzaType type, PizzaSize size, long cookingMultiplier);
             ~APizza() override = default;
 
-
             [[nodiscard]] PizzaType getType() const override;
             [[nodiscard]] PizzaSize getSize() const override;
 
@@ -27,9 +26,9 @@ namespace Plazza
             [[nodiscard]] bool cook() const override = 0;
 
         protected:
-            const PizzaType _type;
-            const PizzaSize _size;
-            const long _cookingMultiplier;
+            PizzaType _type;
+            PizzaSize _size;
+            long _cookingMultiplier;
             std::map<size_t, size_t> _ingredients;
 
     };

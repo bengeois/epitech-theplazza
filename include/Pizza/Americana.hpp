@@ -16,6 +16,8 @@ namespace Plazza
         public:
             Americana(PizzaSize size, long cookingMultiplier);
             ~Americana() override = default;
+            Americana(const Americana &american);
+            Americana &operator=(const Americana &america);
 
             [[nodiscard]] bool cook() const override;
     };
