@@ -19,23 +19,6 @@ _regenerateTime(0)
     throw ParserError("Invalid number of argument.", "Parser");
 }
 
-Parser::Parser(const Parser &parser) :
-    _argv(parser._argv),
-    _cookingMultiplier(parser._cookingMultiplier),
-    _cooksPerKitchen(parser._cooksPerKitchen),
-    _regenerateTime(parser._regenerateTime)
-{
-}
-
-Parser &Parser::operator=(const Parser &parser)
-{
-    _argv = parser._argv;
-    _cookingMultiplier = parser._cookingMultiplier;
-    _cooksPerKitchen = parser._cooksPerKitchen;
-    _regenerateTime = parser._regenerateTime;
-    return (*this);
-}
-
 void Plazza::Parser::build()
 {
     if (_argv.empty() || _argv.size() != 3)

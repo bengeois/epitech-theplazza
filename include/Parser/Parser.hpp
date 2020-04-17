@@ -19,8 +19,8 @@ namespace Plazza
         public:
             Parser(int argc, char **argv);
             ~Parser() = default;
-            Parser(const Parser &parser);
-            Parser &operator=(const Parser &parser);
+            Parser(const Parser &parser) = default;
+            Parser &operator=(const Parser &parser) = default;
 
             void build();
 

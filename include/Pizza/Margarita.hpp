@@ -16,8 +16,8 @@ namespace Plazza
         public:
             Margarita(PizzaSize size, long cookingMultiplier);
             ~Margarita() override = default;
-            Margarita(const Margarita &margarita);
-            Margarita &operator=(const Margarita &margarita);
+            Margarita(const Margarita &margarita) = default;
+            Margarita &operator=(const Margarita &margarita) = default;
 
             [[nodiscard]] bool cook() const override;
     };

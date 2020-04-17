@@ -35,6 +35,8 @@ namespace Plazza
         public:
             explicit Stock(float regenerateTime);
             ~Stock() = default;
+            Stock(const Stock &other) = default;
+            Stock &operator=(const Stock &rhs) = default;
 
             void regenerateIngredient();
 

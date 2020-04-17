@@ -23,15 +23,15 @@ namespace Plazza
         public:
             Reception(long cookingMultiplier, int _cooksPerKitchen, float
             _stockTime);
-            ~Reception();
+            ~Reception() = default;
             Reception(const Reception &reception);
             Reception &operator=(const Reception &reception);
 
             void run();
 
-            long getCookingMultiplier() const;
-            int getCooksPerKitchen() const;
-            float getRegenerateTime() const;
+            [[nodiscard]] long getCookingMultiplier() const;
+            [[nodiscard]] int getCooksPerKitchen() const;
+            [[nodiscard]] float getRegenerateTime() const;
 
             void setCookingMultiplier(long cookingMultiplier);
             void setCooksPerKitchen(int cooksPerKitchen);

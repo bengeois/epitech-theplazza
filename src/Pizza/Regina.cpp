@@ -20,19 +20,6 @@ Regina::Regina(PizzaSize size, long cookingMultiplier) :
     _ingredients[Ingredient::MUSHROOMS] = 1;
 }
 
-Regina::Regina(const Regina &regina) : APizza(regina)
-{
-}
-
-Regina &Regina::operator=(const Regina &regina)
-{
-    _type = regina._type;
-    _size = regina._size;
-    _cookingMultiplier = regina._cookingMultiplier;
-    _ingredients = regina._ingredients;
-    return (*this);
-}
-
 bool Regina::cook() const
 {
     std::this_thread::sleep_for(std::chrono::seconds(2 * _cookingMultiplier));

@@ -19,6 +19,8 @@ namespace Plazza
         public:
             explicit Thread(const std::function<void()> &ft);
             ~Thread() override;
+            Thread(const Thread &other) = default;
+            Thread &operator=(const Thread &rhs) = default;
 
             void join() override;
 

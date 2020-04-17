@@ -20,8 +20,8 @@ namespace Plazza
             explicit Client(const std::string &addr = "127.0.0.1", int port = 21);
             explicit Client(int port = 21, const std::string &addr = "127.0.0.1");
             ~Client();
-            Client(const Client &client);
-            Client &operator=(const Client &client);
+            Client(const Client &client) = default;
+            Client &operator=(const Client &client) = default;
 
             void read();
             void write();
@@ -40,7 +40,7 @@ namespace Plazza
 
         private:
             int _fd;
-            sockaddr_in _addr;
+            sockaddr_in _addr {};
             std::queue<char> _msg;
             bool _write = false;
             bool _read = false;

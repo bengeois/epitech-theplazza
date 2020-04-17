@@ -30,27 +30,6 @@ Order::Order(const std::string &order, int cookingMultiplier) : _order(order), _
     }
 }
 
-Order::~Order()
-{
-}
-
-Order::Order(const Order &order) :
-    _id(order._id),
-    _order(order._order),
-    _cookingMultiplier(order._cookingMultiplier),
-    _pizzas(order._pizzas)
-{
-}
-
-Order &Order::operator=(const Order &order)
-{
-    _id = order._id;
-    _order = order._order;
-    _cookingMultiplier = order._cookingMultiplier;
-    _pizzas = order._pizzas;
-    return (*this);
-}
-
 const std::string Order::nextWord(std::string &order) const
 {
     size_t i = 0;

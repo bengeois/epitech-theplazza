@@ -15,13 +15,13 @@ namespace Plazza
     class Process : public IProcess {
         public:
             Process();
-            ~Process();
-            Process(const Process &process);
-            Process &operator=(const Process &process);
+            ~Process() override;
+            Process(const Process &process) = default;
+            Process &operator=(const Process &process) = default;
 
-            pid_t getPid() const override;
-            bool isInChild() const override;
-            bool isAlive() const override;
+            [[nodiscard]] pid_t getPid() const override;
+            [[nodiscard]] bool isInChild() const override;
+            [[nodiscard]] bool isAlive() const override;
 
         private:
             pid_t _pid;

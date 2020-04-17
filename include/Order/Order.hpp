@@ -25,9 +25,9 @@ namespace Plazza
     class Order {
         public:
             Order(const std::string &order, int cookingMultiplier);
-            ~Order();
-            Order(const Order &order);
-            Order &operator=(const Order &order);
+            ~Order() = default;
+            Order(const Order &order) = default;
+            Order &operator=(const Order &order) = default;
 
             [[nodiscard]] std::shared_ptr<IPizza> getNextPizza() const;
             void addPizzaFinish(IPizza::PizzaType type, IPizza::PizzaSize size);

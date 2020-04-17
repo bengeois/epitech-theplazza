@@ -58,10 +58,6 @@ Reception &Reception::operator=(const Reception &reception)
     return (*this);
 }
 
-Reception::~Reception()
-{
-}
-
 void Reception::run()
 {
     std::string command;

@@ -19,6 +19,8 @@ namespace Plazza
         public:
             UserShell();
             ~UserShell() = default;
+            UserShell(const UserShell &other) = default;
+            UserShell &operator=(const UserShell &rhs) = default;
 
             const std::string &getUserCommand();
 

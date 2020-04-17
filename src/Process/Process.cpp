@@ -22,18 +22,7 @@ Process::~Process()
 {
     if (!isAlive())
         return;
-    if (kill(_pid, SIGKILL) == -1)
-        ProcessError("Fail to kill process" + std::to_string(_pid), "Process");
-}
-
-Process::Process(const Process &process) : _pid(process._pid)
-{
-}
-
-Process &Process::operator=(const Process &process)
-{
-    _pid = process._pid;
-    return (*this);
+    kill(_pid, SIGKILL);
 }
 
 pid_t Process::getPid() const
@@ -43,12 +32,10 @@ pid_t Process::getPid() const
 
 bool Process::isAlive() const
 {
-    if (kill(_pid, 0) == 0)
-        return (true);
-    return (false);
+    return kill(_pid, 0) == 0;
 }
 
 bool Process::isInChild() const
 {
-    return ((!_pid ? true : false));
+    return (((!_pid)));
 }

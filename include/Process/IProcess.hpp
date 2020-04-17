@@ -17,9 +17,9 @@ namespace Plazza
         public:
             virtual ~IProcess() = default;
 
-            virtual pid_t getPid() const = 0;
-            virtual bool isInChild() const = 0;
-            virtual bool isAlive() const = 0;
+            [[nodiscard]] virtual pid_t getPid() const = 0;
+            [[nodiscard]] virtual bool isInChild() const = 0;
+            [[nodiscard]] virtual bool isAlive() const = 0;
     };
 } // namespace Plazza
 
