@@ -280,7 +280,7 @@ try {
             }
         }
         // Fork if no kitchen can take the pizza
-        std::shared_ptr<Process> process = std::make_shared<Process>();
+        std::shared_ptr<IProcess> process = std::make_shared<Process>();
 
         if (process->isInChild())
             kitchenProcess();

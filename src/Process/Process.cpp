@@ -26,6 +26,16 @@ Process::~Process()
         ProcessError("Fail to kill process" + std::to_string(_pid), "Process");
 }
 
+Process::Process(const Process &process) : _pid(process._pid)
+{
+}
+
+Process &Process::operator=(const Process &process)
+{
+    _pid = process._pid;
+    return (*this);
+}
+
 pid_t Process::getPid() const
 {
     return (_pid);

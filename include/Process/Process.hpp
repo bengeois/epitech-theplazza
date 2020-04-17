@@ -8,19 +8,20 @@
 #ifndef PROCESS_HPP_
 #define PROCESS_HPP_
 
-#include <unistd.h>
-#include <sys/types.h>
+#include "IProcess.hpp"
 
 namespace Plazza
 {
-    class Process {
+    class Process : public IProcess {
         public:
             Process();
             ~Process();
+            Process(const Process &process);
+            Process &operator=(const Process &process);
 
-            pid_t getPid() const;
-            bool isInChild() const;
-            bool isAlive() const;
+            pid_t getPid() const override;
+            bool isInChild() const override;
+            bool isAlive() const override;
 
         private:
             pid_t _pid;

@@ -68,7 +68,7 @@ namespace Plazza
             std::vector<std::shared_ptr<Order>> _orders;
 
             std::string _logDirectory = "";
-            std::vector<std::shared_ptr<Process>> _process;
+            std::vector<std::shared_ptr<IProcess>> _process;
     };
 }
 
