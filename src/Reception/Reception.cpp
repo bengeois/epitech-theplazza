@@ -280,22 +280,23 @@ try {
             }
         }
         // Fork if no kitchen can take the pizza
-        pid_t child = fork();
+        std::shared_ptr<Process> process = std::make_shared<Process>();
 
-        if (child == -1)
-            throw ReceptionError("Fork failed");
-        if (child == 0)
+        if (process->isInChild())
             kitchenProcess();
         childConnection();
         writeOrderToClient(order, _server->getNbClient() - 1, pizza);
         if (!clientAcceptOrder(_server->getNbClient() - 1))
             throw ReceptionError("Fatal error : Unable to send the pizza");
         order->setSend(a, true);
+        _process.push_back(process);
         a++;
     });
 
 } catch (const ParserError &e) {
     std::cout << "Invalid command" << std::endl;
+} catch (const ProcessError &e) {
+    throw e;
 }
 
 long Reception::getCookingMultiplier() const
