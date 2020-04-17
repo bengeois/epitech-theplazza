@@ -25,8 +25,9 @@ _stock(std::make_shared<Stock>(Stock(regenerateTime)))
 {
     _id = getpid();
     _cooks.reserve(_cookNb);
-    for (size_t i = 0; i < _cookNb; i++) {
-        _cooks.emplace_back([this](){
+
+    std::function<void()> ft = [this]()
+        {
             while (true) {
 
                 std::function<void()> task;
@@ -43,8 +44,10 @@ _stock(std::make_shared<Stock>(Stock(regenerateTime)))
                 }
                 task();
             }
-        });
-    }
+        };
+
+    for (size_t i = 0; i < _cookNb; i++)
+        _cooks.emplace_back(std::make_shared<Thread>(ft));
 }
 
 Kitchen::~Kitchen()
@@ -54,8 +57,8 @@ Kitchen::~Kitchen()
         _stop = true;
     }
     _condition.notify_all();
-    for (std::thread &cook : _cooks)
-        cook.join();
+    for (std::shared_ptr<Thread> &cook : _cooks)
+        cook->join();
 }
 
 
@@ -174,7 +177,6 @@ void Kitchen::sendKitchenStatus(const std::shared_ptr<Client> &client) const
     std::cout << "\t[Order in progress] " << _orders.size() << std::endl;
     for (const auto &order : _orders)
         std::cout << "\t\tOrder n°" << order.first.first << " " << Utils::getStringPizzaType(order.first.second->getType()) << " " << Utils::getStringPizzaSize(order.first.second->getSize()) << std::endl;
-
     std::cout << std::endl;
     client->write(std::string("400\n"));
 }

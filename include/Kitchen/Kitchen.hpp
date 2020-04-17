@@ -13,6 +13,7 @@
 #include "Stock/Stock.hpp"
 #include "Socket/Client.hpp"
 #include "Utils.hpp"
+#include "Thread/Thread.hpp"
 #include <future>
 #include <vector>
 #include <queue>
@@ -58,7 +59,7 @@ namespace Plazza
                 long _cookingMultiplier;
 
                 size_t _cookNb;
-                std::vector<std::thread> _cooks;
+                std::vector<std::shared_ptr<Thread>> _cooks;
 
                 std::queue<std::function<void()>> _tasks;
 
