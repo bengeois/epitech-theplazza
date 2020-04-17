@@ -15,7 +15,7 @@ namespace Plazza
 {
     class IProcess {
         public:
-            ~IProcess() = default;
+            virtual ~IProcess() = default;
 
             virtual pid_t getPid() const = 0;
             virtual bool isInChild() const = 0;
