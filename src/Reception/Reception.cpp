@@ -61,16 +61,26 @@ Reception &Reception::operator=(const Reception &reception)
 void Reception::run()
 {
     std::string command;
-    fd_set writefs;
-    fd_set readfs;
+    UserShell shell;
 
-    while (!std::cin.eof()) {
-        resetFdSet(&readfs, &writefs);
-        FD_SET(1, &readfs);
-        if (select(FD_SETSIZE, &readfs, &writefs, NULL, NULL) < 0)
-            throw ReceptionError("Select fail", "Select");
-        translateSelect(readfs, writefs);
+    while(shell.isShellActive()) {
+        shell.update();
+        command = shell.getUserCommand();
+        if (!command.empty())
+            translateCommand(command);
+        readProcess();
     }
+}
+
+void Reception::readProcess()
+{
+    std::for_each(_process.begin(), _process.end(), [this](std::shared_ptr<IProcess> &process) {
+        process->read();
+        std::string data = process->getData();
+        if (data.size() == 0)
+            return;
+        this->translateFinishOrder(data);
+    });
 }
 
 const std::string Reception::nextStrFinishOrder(const std::string &order, size_t &i) const
@@ -96,6 +106,7 @@ try {
     nOrderStr = nextStrFinishOrder(order, i);
     typeStr = nextStrFinishOrder(order, i);
     sizeStr = nextStrFinishOrder(order, i);
+    
 
     int nOrder = std::stoi(nOrderStr);
     IPizza::PizzaType type = Utils::getPizzaType(typeStr);
@@ -128,32 +139,18 @@ bool Reception::isStatusCommand(const std::string &command) const
 
 void Reception::sendStatus(int i)
 {
-    _server->getClientAt(i)->write("500\n");
-    fd_set writefs;
-    fd_set readfs;
+    _process[i]->send("500\n");
 
-    while (_server->getClientAt(i)->isWriting()) {
-        resetFdSet(&readfs, &writefs);
-        _server->getClientAt(i)->setFdSet(&readfs, &writefs);
-        if (select(FD_SETSIZE, &readfs, &writefs, NULL, NULL) < 0)
-            throw ReceptionError("Select fail", "Select");
-        _server->getClientAt(i)->translateSelect(readfs, writefs);
-    }
+    while (_process[i]->send() != false);
 }
 
 void Reception::waitResponseStatus(int i)
 {
     std::string data = "";
-    fd_set writefs;
-    fd_set readfs;
 
-    while ((data.size() == 0 || getCode(data) != 400) && _server->getClientAt(i)->exist()) {
-        resetFdSet(&readfs, &writefs);
-        _server->getClientAt(i)->setFdSet(&readfs, &writefs);
-        if (select(FD_SETSIZE, &readfs, &writefs, NULL, NULL) < 0)
-            throw ReceptionError("Select fail", "Select");
-        _server->getClientAt(i)->translateSelect(readfs, writefs);
-        data = _server->getClientAt(i)->getData();
+    while ((data.size() == 0 || getCode(data) != 400) && _process[i]->isAlive()) {
+        _process[i]->read();
+        data = _process[i]->getData();
         if (!data.empty() && getCode(data) == 300)
             translateFinishOrder(data);
     }
@@ -161,53 +158,17 @@ void Reception::waitResponseStatus(int i)
 
 void Reception::statusCommand()
 {
-    for (int i = 0; i < _server->getNbClient(); i++) {
+    for (int i = 0; i < _process.size(); i++) {
         sendStatus(i);
         waitResponseStatus(i);
     }
 }
 
-void Reception::translateSelect(const fd_set &readfs, const fd_set &writefs)
-{
-    if (FD_ISSET(1, &readfs)) {
-        std::string command;
-
-        std::getline(std::cin, command);
-        if (!command.empty()) {
-            if (isStatusCommand(command))
-                statusCommand();
-            else
-                translateCommand(command);
-        }
-    }
-    _server->translateSelect(readfs, writefs);
-    for (int i = 0; i < _server->getNbClient(); i++) {
-        std::string data;
-        if ((data = _server->getClientAt(i)->getData()).empty())
-            continue;
-        translateFinishOrder(data);
-    }
-}
-
-void Reception::resetFdSet(fd_set *readfs, fd_set *writefs)
-{
-    FD_ZERO(readfs);
-    FD_ZERO(writefs);
-}
-
 void Reception::writeOrderToClient(std::shared_ptr<Order> &order, int i, const std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t> &pizza)
 {
-    _server->getClientAt(i)->write(std::string(std::to_string(order->getId()) + " " + Utils::getStringPizzaType(std::get<0>(pizza)) + " " + Utils::getStringPizzaSize(std::get<1>(pizza)) + "\n"));
-    fd_set writefs;
-    fd_set readfs;
+    _process[i]->send(std::string(std::to_string(order->getId()) + " " + Utils::getStringPizzaType(std::get<0>(pizza)) + " " + Utils::getStringPizzaSize(std::get<1>(pizza)) + "\n"));
 
-    while (_server->getClientAt(i)->isWriting()) {
-        resetFdSet(&readfs, &writefs);
-        _server->getClientAt(i)->setFdSet(&readfs, &writefs);
-        if (select(FD_SETSIZE, &readfs, &writefs, NULL, NULL) < 0)
-            throw ReceptionError("Select fail", "Select");
-        _server->getClientAt(i)->translateSelect(readfs, writefs);
-    }
+    while (_process[i]->send() != false);
 }
 
 int Reception::getCode(const std::string &res) const
@@ -225,16 +186,10 @@ int Reception::getCode(const std::string &res) const
 bool Reception::clientAcceptOrder(int i)
 {
     std::string data = "";
-    fd_set writefs;
-    fd_set readfs;
 
     while (data.empty() || getCode(data) != 100) {
-        resetFdSet(&readfs, &writefs);
-        _server->getClientAt(i)->setFdSet(&readfs, &writefs);
-        if (select(FD_SETSIZE, &readfs, &writefs, NULL, NULL) < 0)
-            throw ReceptionError("Select fail", "Select");
-        _server->getClientAt(i)->translateSelect(readfs, writefs);
-        data = _server->getClientAt(i)->getData();
+        _process[i]->read();
+        data = _process[i]->getData();
         if (!data.empty() && getCode(data) == 300)
             translateFinishOrder(data);
     }
@@ -244,12 +199,11 @@ bool Reception::clientAcceptOrder(int i)
 void Reception::childConnection()
 {
     int fd = _server->getFd();
-    fd_set writefs;
     fd_set readfs;
 
-    resetFdSet(&readfs, &writefs);
+    FD_ZERO(&readfs);
     FD_SET(fd, &readfs);
-    if (select(FD_SETSIZE, &readfs, &writefs, NULL, NULL) < 0)
+    if (select(FD_SETSIZE, &readfs, NULL, NULL, NULL) < 0)
         throw ReceptionError("Select fail", "childConnection");
     _server->newConnection();
 }
@@ -266,7 +220,8 @@ try {
     int a = 0;
     std::for_each(pizzas.begin(), pizzas.end(), [this, &order, &a](std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t> &pizza) {
         // Find a kitchen which can accept the pizza
-        for (int i = 0; i < _server->getNbClient(); i++) {
+
+        for (int i = 0; i < _process.size(); i++) {
             writeOrderToClient(order, i, pizza);
             if (clientAcceptOrder(i)) {
                 order->setSend(a, true);
@@ -277,14 +232,14 @@ try {
         // Fork if no kitchen can take the pizza
         std::shared_ptr<IProcess> process = std::make_shared<Process>();
 
+        _process.push_back(process);
         if (process->isInChild())
             kitchenProcess();
         childConnection();
-        writeOrderToClient(order, _server->getNbClient() - 1, pizza);
-        if (!clientAcceptOrder(_server->getNbClient() - 1))
+        writeOrderToClient(order, _process.size() - 1, pizza);
+        if (!clientAcceptOrder(_process.size() - 1))
             throw ReceptionError("Fatal error : Unable to send the pizza");
         order->setSend(a, true);
-        _process.push_back(process);
         a++;
     });
 

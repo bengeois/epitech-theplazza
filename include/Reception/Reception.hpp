@@ -39,11 +39,9 @@ namespace Plazza
 
         private:
             void translateCommand(const std::string &command);
-            void resetFdSet(fd_set *readfs, fd_set *writefs);
-            void translateSelect(const fd_set &read, const fd_set &writefs);
 
             void kitchenProcess();
-            void connectKitchen(std::shared_ptr<Client> &client);
+            void connectKitchen(std::shared_ptr<IIPC> &client);
 
             void writeOrderToClient(std::shared_ptr<Order> &order, int i, const std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t> &pizza);
             bool clientAcceptOrder(int i);
@@ -58,6 +56,8 @@ namespace Plazza
 
             void sendStatus(int i);
             void waitResponseStatus(int i);
+
+            void readProcess();
 
         private:
             long _cookingMultiplier;

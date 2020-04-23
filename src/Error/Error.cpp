@@ -78,3 +78,7 @@ FileError::FileError(const std::string &message, const std::string &component) :
 ProcessError::ProcessError(const std::string &message, const std::string &component) : PlazzaError(message, component)
 {
 }
+
+SocketError::SocketError(const std::string &message, const std::string &component) : PlazzaError(message, component)
+{
+}

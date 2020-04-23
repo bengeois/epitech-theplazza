@@ -86,7 +86,7 @@ auto Kitchen::enqueue(const std::shared_ptr<IPizza> &pizza) -> std::future<bool>
     return res;
 }
 
-void Kitchen::run(const std::shared_ptr<Client> &client)
+void Kitchen::run(const std::shared_ptr<IIPC> &client)
 {
     try {
         while (!_stop) {
@@ -94,8 +94,7 @@ void Kitchen::run(const std::shared_ptr<Client> &client)
             _stock->regenerateIngredient();
             this->checkFinishOrder(client);
             this->receiveFromReception(client);
-            while (client->isWriting())
-                client->write();
+            client->send();
         }
     } catch (const PlazzaError &e) {
         throw e;
@@ -110,11 +109,11 @@ bool Kitchen::canAcceptPizza(const std::shared_ptr<IPizza> &pizza)
     return (_stock->canCookPizza(pizza));
 }
 
-void Kitchen::checkFinishOrder(const std::shared_ptr<Client> &client)
+void Kitchen::checkFinishOrder(const std::shared_ptr<IIPC> &client)
 {
     _orders.erase(std::remove_if(_orders.begin(), _orders.end(), [this, client](const auto &order){
         if (future_ready(order.second)) {
-            client->write(std::string(
+            client->send(std::string(
                 "300 "
                 + std::to_string(order.first.first)
                 + " "
@@ -150,7 +149,7 @@ void Kitchen::checkActivity()
 }
 
 
-void Kitchen::receiveFromReception(const std::shared_ptr<Client> &client)
+void Kitchen::receiveFromReception(const std::shared_ptr<IIPC> &client)
 {
     try {
         client->read();
@@ -166,7 +165,7 @@ void Kitchen::receiveFromReception(const std::shared_ptr<Client> &client)
 }
 
 
-void Kitchen::sendKitchenStatus(const std::shared_ptr<Client> &client) const
+void Kitchen::sendKitchenStatus(const std::shared_ptr<IIPC> &client) const
 {
     std::cout << std::endl << "[KITCHEN " << _id << "]" << std::endl;
     std::cout << "\t[Number ok cook] " << _cookNb << std::endl;
@@ -178,10 +177,10 @@ void Kitchen::sendKitchenStatus(const std::shared_ptr<Client> &client) const
     for (const auto &order : _orders)
         std::cout << "\t\tOrder n°" << order.first.first << " " << Utils::getStringPizzaType(order.first.second->getType()) << " " << Utils::getStringPizzaSize(order.first.second->getSize()) << std::endl;
     std::cout << std::endl;
-    client->write(std::string("400\n"));
+    client->send(std::string("400\n"));
 }
 
-void Kitchen::checkNewCommand(const std::shared_ptr<Client> &client, const std::string &pingReception)
+void Kitchen::checkNewCommand(const std::shared_ptr<IIPC> &client, const std::string &pingReception)
 {
     size_t orderID;
     std::string pizzaType;
@@ -198,7 +197,7 @@ void Kitchen::checkNewCommand(const std::shared_ptr<Client> &client, const std::
         _cookingMultiplier
         );
     if (!canAcceptPizza(preparationPizza)) {
-        client->write(std::string("100 0\n"));
+        client->send(std::string("100 0\n"));
         return;
     }
     std::pair<size_t, std::shared_ptr<IPizza>> orderInfos(orderID, preparationPizza);
@@ -208,7 +207,7 @@ void Kitchen::checkNewCommand(const std::shared_ptr<Client> &client, const std::
             enqueue(preparationPizza)
             )
         );
-    client->write(std::string("100 1\n"));
+    client->send(std::string("100 1\n"));
 }
 
 std::shared_ptr<IPizza> Kitchen::createPizzaOrder(APizza::PizzaType type, APizza::PizzaSize size, long cookingMultiplier)

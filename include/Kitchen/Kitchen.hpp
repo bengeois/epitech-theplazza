@@ -14,6 +14,7 @@
 #include "Socket/Client.hpp"
 #include "Utils.hpp"
 #include "Thread/Thread.hpp"
+#include "IPC/Socket.hpp"
 #include <future>
 #include <vector>
 #include <queue>
@@ -29,7 +30,7 @@ namespace Plazza
             explicit Kitchen(size_t cooks, float regenerateTime, long cookingMultiplier);
             ~Kitchen();
 
-            void run(const std::shared_ptr<Client> &client);
+            void run(const std::shared_ptr<IIPC> &client);
 
             auto enqueue(const std::shared_ptr<IPizza> &pizza) -> std::future<bool>;
 
@@ -37,11 +38,11 @@ namespace Plazza
 
         private:
             void checkActivity();
-            void receiveFromReception(const std::shared_ptr<Client> &client);
-            void sendKitchenStatus(const std::shared_ptr<Client> &client) const;
-            void checkNewCommand(const std::shared_ptr<Client> &client, const std::string &pingReception);
+            void receiveFromReception(const std::shared_ptr<IIPC> &client);
+            void sendKitchenStatus(const std::shared_ptr<IIPC> &client) const;
+            void checkNewCommand(const std::shared_ptr<IIPC> &client, const std::string &pingReception);
             bool canAcceptPizza(const std::shared_ptr<IPizza> &pizza);
-            void checkFinishOrder(const std::shared_ptr<Client> &client);
+            void checkFinishOrder(const std::shared_ptr<IIPC> &client);
 
             template <class T>
             std::shared_ptr<T> createPizzaOrder(APizza::PizzaSize size, long cookingMultiplier) {

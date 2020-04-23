@@ -43,17 +43,18 @@ bool Process::isInChild() const
 
 bool Process::read()
 {
-    _ipc->read();
+    return (_ipc->read());
 }
 
 bool Process::send()
 {
-    _ipc->send();
+    return (_ipc->send());
 }
 
 bool Process::send(const std::string &data)
 {
     _ipc->send(data);
+    return (true);
 }
 
 const std::string Process::getData()

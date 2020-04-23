@@ -52,3 +52,8 @@ void SmartBuffer::remove(int len)
 {
     _data.erase(0, len);
 }
+
+size_t SmartBuffer::size() const
+{
+    return (_data.size());
+}

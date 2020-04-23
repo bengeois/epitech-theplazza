@@ -26,6 +26,8 @@ SRC	=	src/Error/Error.cpp	\
 		src/Utils/Utils.cpp		\
 		src/File.cpp		\
 		src/Process/Process.cpp		\
+		src/IPC/Socket.cpp	\
+		src/SmartBuffer/SmartBuffer.cpp	\
 
 SRC_MAIN	=	src/main.cpp	\
 

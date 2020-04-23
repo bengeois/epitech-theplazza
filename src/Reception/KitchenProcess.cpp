@@ -11,7 +11,7 @@
 
 using namespace Plazza;
 
-void Reception::connectKitchen(std::shared_ptr<Client> &client)
+void Reception::connectKitchen(std::shared_ptr<IIPC> &client)
 {
     fd_set writefs;
     fd_set readfs;
@@ -21,22 +21,18 @@ void Reception::connectKitchen(std::shared_ptr<Client> &client)
 
     // Connection to server
     while (client->getData() != "200\n") {
-        resetFdSet(&readfs, &writefs);
-        client->setFdSet(&readfs, &writefs);
-        if (select(FD_SETSIZE, &readfs, &writefs, NULL, NULL) < 0)
-            throw ReceptionError("Select fail", "Select");
-        client->translateSelect(readfs, writefs);
+        client->read();
     }
 }
 
 void Reception::kitchenProcess()
 {
-    std::shared_ptr<Client> client = std::make_shared<Client>(_server->getPort());
+    std::shared_ptr<IIPC> client = std::make_shared<Socket>();
     std::shared_ptr<Kitchen> kitchen = std::make_shared<Kitchen>(_cooksPerKitchen, _regenerateTime, _cookingMultiplier);
 
     try {
         connectKitchen(client);
-        client->makeNonBlocking();
+        client->read();
         std::cout << "New kitchen create. ID = " << kitchen->getID() << std::endl;
         kitchen->run(client);
     } catch (const PlazzaError &e) {
