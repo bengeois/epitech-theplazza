@@ -10,13 +10,16 @@
 
 #include <string>
 #include "IPC/IIPC.hpp"
+#include "SmartBuffer/SmartBuffer.hpp"
 
 namespace Plazza
 {
     class Socket : public IIPC {
         public:
-            Socket();
+            Socket(int port);
             ~Socket();
+            Socket(const Socket &socket) = default;
+            Socket &operator=(const Socket &socket) = default;
 
             bool read() override;
             const std::string getData() override;
@@ -25,6 +28,11 @@ namespace Plazza
             void send(const std::string &msg) override;
 
         private:
+            int _fd;
+            sockaddr_in _addr;
+            bool _exist = true;
+            SmartBuffer _data;
+            SmartBuffer _msg;
     };
 } // namespace Plazza
 
