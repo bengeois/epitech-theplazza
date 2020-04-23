@@ -32,6 +32,8 @@ pid_t Process::getPid() const
 
 bool Process::isAlive() const
 {
+    if (!_ipc->exist())
+        return (false);
     return kill(_pid, 0) == 0;
 }
 

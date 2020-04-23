@@ -68,6 +68,7 @@ void Reception::run()
         command = shell.getUserCommand();
         if (!command.empty())
             translateCommand(command);
+        clearProcess();
         readProcess();
     }
 }
@@ -81,6 +82,13 @@ void Reception::readProcess()
             return;
         this->translateFinishOrder(data);
     });
+}
+
+void Reception::clearProcess()
+{
+    _process.erase(std::remove_if(_process.begin(), _process.end(), [](const std::shared_ptr<IProcess> &client) {
+        return (!client->isAlive());
+    }), _process.end());
 }
 
 const std::string Reception::nextStrFinishOrder(const std::string &order, size_t &i) const

@@ -29,7 +29,7 @@ Socket::~Socket()
 {
     close(_fd);
 }
-
+#include <iostream>
 bool Socket::read()
 {
     char buffer[1] = {0};
@@ -92,4 +92,9 @@ bool Socket::send()
 void Socket::send(const std::string &msg)
 {
     _msg += msg;
+}
+
+bool Socket::exist() const
+{
+    return (_exist);
 }

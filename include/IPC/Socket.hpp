@@ -31,6 +31,7 @@ namespace Plazza
 
             bool send() override;
             void send(const std::string &msg) override;
+            bool exist() const override;
 
         private:
             int _fd;

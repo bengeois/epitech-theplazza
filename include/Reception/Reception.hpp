@@ -58,6 +58,7 @@ namespace Plazza
             void waitResponseStatus(int i);
 
             void readProcess();
+            void clearProcess();
 
         private:
             long _cookingMultiplier;
