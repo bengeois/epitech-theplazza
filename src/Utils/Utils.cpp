@@ -7,6 +7,8 @@
 
 #include "Utils.hpp"
 #include "Error/Error.hpp"
+#include <unistd.h>
+#include <fcntl.h>
 
 using namespace Plazza;
 
@@ -86,4 +88,26 @@ const std::string Utils::getStringIngredient(Ingredient type)
     if (!types.count(type))
         throw UtilsError("Index out of range", "getStringIngredient");
     return (types[type]);
+}
+
+bool Utils::blockRead(int fd)
+{
+    int flags;
+
+    flags = fcntl(fd, F_GETFL, 0);
+    if (flags == -1)
+        return false;
+    flags &= ~O_NONBLOCK;
+    return fcntl(fd, F_SETFL, flags) != 1;
+}
+
+bool Utils::unblockRead(int fd)
+{
+    int flags;
+
+    flags = fcntl(fd, F_GETFL, 0);
+    if (flags == -1)
+        return false;
+    flags |= O_NONBLOCK;
+    return fcntl(fd, F_SETFL, flags) != 1;
 }

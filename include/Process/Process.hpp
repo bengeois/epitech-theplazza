@@ -9,6 +9,8 @@
 #define PROCESS_HPP_
 
 #include "IProcess.hpp"
+#include "IPC/Socket.hpp"
+#include <memory>
 
 namespace Plazza
 {
@@ -22,9 +24,14 @@ namespace Plazza
             [[nodiscard]] pid_t getPid() const override;
             [[nodiscard]] bool isInChild() const override;
             [[nodiscard]] bool isAlive() const override;
+            bool send();
+            bool send(const std::string &data);
+            bool read();
+            [[nodiscard]] const std::string getData();
 
         private:
             pid_t _pid;
+            std::shared_ptr<IIPC> _ipc;
     };
 } // namespace Plazza
 

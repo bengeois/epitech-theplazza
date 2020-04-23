@@ -16,13 +16,13 @@ namespace Plazza
 {
     class Socket : public IIPC {
         public:
-            Socket(int port);
+            Socket();
             ~Socket();
             Socket(const Socket &socket) = default;
             Socket &operator=(const Socket &socket) = default;
 
             bool read() override;
-            const std::string getData() override;
+            [[nodiscard]] const std::string getData() override;
 
             bool send() override;
             void send(const std::string &msg) override;

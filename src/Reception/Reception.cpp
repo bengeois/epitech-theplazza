@@ -67,7 +67,6 @@ void Reception::run()
     while (!std::cin.eof()) {
         resetFdSet(&readfs, &writefs);
         FD_SET(1, &readfs);
-        _server->setFdSet(&readfs, &writefs);
         if (select(FD_SETSIZE, &readfs, &writefs, NULL, NULL) < 0)
             throw ReceptionError("Select fail", "Select");
         translateSelect(readfs, writefs);

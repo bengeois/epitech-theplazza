@@ -16,6 +16,7 @@ Process::Process() : _pid(fork())
 {
     if (_pid == -1)
         throw ProcessError("Fail to fork", "Process");
+    _ipc = std::make_shared<Socket>();
 }
 
 Process::~Process()
@@ -37,5 +38,25 @@ bool Process::isAlive() const
 
 bool Process::isInChild() const
 {
-    return (((!_pid)));
+    return ((!_pid));
+}
+
+bool Process::read()
+{
+    _ipc->read();
+}
+
+bool Process::send()
+{
+    _ipc->send();
+}
+
+bool Process::send(const std::string &data)
+{
+    _ipc->send(data);
+}
+
+const std::string Process::getData()
+{
+    return (_ipc->getData());
 }

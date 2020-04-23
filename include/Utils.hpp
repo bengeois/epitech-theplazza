@@ -28,6 +28,8 @@ namespace Plazza
             static IPizza::PizzaSize getPizzaSize(const std::string &size);
 
             static const std::string getStringIngredient(Ingredient type);
+            static bool blockRead(int fd);
+            static bool unblockRead(int fd);
     };
 }
 #endif //EPITECH_THEPLAZZA_UTILS_HPP

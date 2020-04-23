@@ -14,12 +14,12 @@
 
 using namespace Plazza;
 
-Socket::Socket(int port) : _fd(socket(AF_INET, SOCK_STREAM, 0))
+Socket::Socket() : _fd(socket(AF_INET, SOCK_STREAM, 0))
 {
     if (_fd == -1)
         throw SocketError("Unable to create a socket", "Client");
     _addr.sin_family = AF_INET;
-    _addr.sin_port = htons(port);
+    _addr.sin_port = htons(1024);
     _addr.sin_addr.s_addr = inet_addr("127.0.0.1");
     if (connect(_fd, (sockaddr *)(&_addr), sizeof(_addr)) < 0)
         throw SocketError("Unable to connect to the client", "Client");
