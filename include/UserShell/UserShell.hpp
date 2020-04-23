@@ -22,29 +22,29 @@ namespace Plazza
             UserShell(const UserShell &other) = default;
             UserShell &operator=(const UserShell &rhs) = default;
 
-            const std::string &getUserCommand();
-
             bool isShellActive();
-            void setFdSet(fd_set *readfd, fd_set *writefs);
+
+            std::string getUserCommand();
+            void update();
 
         private:
             void checkInput();
             void resetCheck();
 
             void setReadFd(int fd);
-            void setWriteFd(int fd);
             void setExceptFd(int fd);
 
             bool checkReadFdReady(int fd);
-            bool checkWriteFdReady(int fd);
             bool checkExceptFd(int fd);
+
+            void getData();
 
         private:
             fd_set _readFds;
-            fd_set _writeFds;
             fd_set _exceptFds;
             struct timeval _timeout {};
-            std::string _command;
+            std::string _buffer;
+            bool _active;
     };
 }
 
