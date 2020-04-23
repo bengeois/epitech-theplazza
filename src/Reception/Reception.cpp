@@ -70,8 +70,12 @@ void Reception::run()
     while(shell.isShellActive()) {
         shell.update();
         command = shell.getUserCommand();
-        if (!command.empty())
-            translateCommand(command);
+        if (!command.empty()) {
+            if (isStatusCommand(command))
+                statusCommand();
+            else
+                translateCommand(command);
+        }
         clearProcess();
         readProcess();
     }
@@ -298,7 +302,7 @@ bool Reception::isStatusCommand(const std::string &command) const
     for (size_t i = 0; command[i] && command[i] != ' ' && command[i] != '\t'; i++) {
         name += command[i];
     }
-    return (name == "status");
+    return (name == "status\n");
 }
 
 void Reception::sendStatus(int i)
