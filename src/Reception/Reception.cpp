@@ -166,7 +166,7 @@ void Reception::waitResponseStatus(int i)
 
 void Reception::statusCommand()
 {
-    for (int i = 0; i < _process.size(); i++) {
+    for (int i = 0; static_cast<size_t>(i) < _process.size(); i++) {
         sendStatus(i);
         waitResponseStatus(i);
     }
@@ -235,7 +235,7 @@ try {
     std::for_each(pizzas.begin(), pizzas.end(), [this, &order, &a](std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t> &pizza) {
         // Find a kitchen which can accept the pizza
 
-        for (int i = 0; i < _process.size(); i++) {
+        for (int i = 0; static_cast<size_t>(i) < _process.size(); i++) {
             writeOrderToClient(order, i, pizza);
             if (clientAcceptOrder(i)) {
                 order->setSend(a, true);
