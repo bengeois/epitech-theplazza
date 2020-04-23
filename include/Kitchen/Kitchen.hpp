@@ -30,17 +30,18 @@ namespace Plazza
             ~Kitchen();
 
             void run(const std::shared_ptr<Client> &client);
-            void checkActivity();
 
             auto enqueue(const std::shared_ptr<IPizza> &pizza) -> std::future<bool>;
 
+            [[nodiscard]] int getID() const;
+
+        private:
+            void checkActivity();
             void receiveFromReception(const std::shared_ptr<Client> &client);
             void sendKitchenStatus(const std::shared_ptr<Client> &client) const;
             void checkNewCommand(const std::shared_ptr<Client> &client, const std::string &pingReception);
             bool canAcceptPizza(const std::shared_ptr<IPizza> &pizza);
             void checkFinishOrder(const std::shared_ptr<Client> &client);
-
-            [[nodiscard]] int getID() const;
 
             template <class T>
             std::shared_ptr<T> createPizzaOrder(APizza::PizzaSize size, long cookingMultiplier) {
@@ -50,7 +51,7 @@ namespace Plazza
 
             std::shared_ptr<IPizza> createPizzaOrder(APizza::PizzaType type, APizza::PizzaSize size, long cookingMultiplier);
 
-            private:
+        private:
                 int _id;
                 bool _stop;
                 bool _noActivity;
