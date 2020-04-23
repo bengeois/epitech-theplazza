@@ -17,7 +17,7 @@ namespace Plazza
 {
     class Server {
         public:
-            explicit Server(int port = 1024);
+            explicit Server(int port = 1026);
             ~Server() = default;
             Server(const Server &server) = default;
             Server &operator=(const Server &server) = default;
@@ -28,7 +28,7 @@ namespace Plazza
             std::shared_ptr<Client> &getClientAt(int index);
             [[nodiscard]] int getNbClient() const;
             [[nodiscard]] int getFd() const;
-            void newConnection();
+            int newConnection();
 
         private:
             void bindPort(int port);

@@ -20,6 +20,7 @@ namespace Plazza
 {
     class Socket : public IIPC {
         public:
+            Socket(int fd);
             Socket();
             ~Socket();
             Socket(const Socket &socket) = default;

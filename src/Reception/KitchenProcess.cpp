@@ -20,9 +20,12 @@ void Reception::connectKitchen(std::shared_ptr<IIPC> &client)
     FD_ZERO(&readfs);
 
     // Connection to server
+    // std::cout << "{CHILD} waiting for 200 connection" << std::endl;
     while (client->getData() != "200\n") {
+        // std::cout << "{CHILD} getData : " + client->getData() << std::endl;
         client->read();
     }
+    // std::cout << "{CHILD} waiting receive 200 connection" << std::endl;
 }
 
 void Reception::kitchenProcess()

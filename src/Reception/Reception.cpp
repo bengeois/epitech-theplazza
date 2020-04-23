@@ -187,6 +187,7 @@ bool Reception::clientAcceptOrder(int i)
 {
     std::string data = "";
 
+    // std::cout << "{RECEPTION} waiting for client accept order..." << std::endl;
     while (data.empty() || getCode(data) != 100) {
         _process[i]->read();
         data = _process[i]->getData();
@@ -205,7 +206,12 @@ void Reception::childConnection()
     FD_SET(fd, &readfs);
     if (select(FD_SETSIZE, &readfs, NULL, NULL, NULL) < 0)
         throw ReceptionError("Select fail", "childConnection");
-    _server->newConnection();
+    int newFd = _server->newConnection();
+    std::shared_ptr<IProcess> process = _process[_process.size() - 1];
+
+    process->createIPC(newFd);
+    process->send("200\n");
+    while (process->send() != false);
 }
 
 void Reception::translateCommand(const std::string &command)
@@ -229,6 +235,7 @@ try {
                 return;
             }
         }
+        // std::cout << "{RECEPTION}" << " no kitchen found" << std::endl;
         // Fork if no kitchen can take the pizza
         std::shared_ptr<IProcess> process = std::make_shared<Process>();
 
@@ -239,6 +246,7 @@ try {
         writeOrderToClient(order, _process.size() - 1, pizza);
         if (!clientAcceptOrder(_process.size() - 1))
             throw ReceptionError("Fatal error : Unable to send the pizza");
+        // std::cout << "{RECEPTION} client accept order" << std::endl;
         order->setSend(a, true);
         a++;
     });

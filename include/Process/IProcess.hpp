@@ -25,6 +25,7 @@ namespace Plazza
             virtual bool send(const std::string &data) = 0;
             virtual bool read() = 0;
             [[nodiscard]] virtual const std::string getData() = 0;
+            virtual void createIPC(int fd) = 0;
     };
 } // namespace Plazza
 

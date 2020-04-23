@@ -16,7 +16,6 @@ Process::Process() : _pid(fork())
 {
     if (_pid == -1)
         throw ProcessError("Fail to fork", "Process");
-    _ipc = std::make_shared<Socket>();
 }
 
 Process::~Process()
@@ -60,4 +59,9 @@ bool Process::send(const std::string &data)
 const std::string Process::getData()
 {
     return (_ipc->getData());
+}
+
+void Process::createIPC(int newFd)
+{
+    _ipc = std::make_shared<Socket>(newFd);
 }

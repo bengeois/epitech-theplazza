@@ -43,7 +43,7 @@ void Server::bindPort(int port)
     _port = ntohs(_addr.sin_port);
 }
 
-void Server::newConnection()
+int Server::newConnection()
 {
     sockaddr_in client;
     socklen_t len = sizeof(client);
@@ -52,8 +52,9 @@ void Server::newConnection()
     if (_fd == -1)
         throw ServerError("Unable to connect with the client", "newConnection");
     // std::cout << "{SERVER} new connection send 200 to the client" << std::endl;
-    _clients.push_back(std::make_unique<Client>(fd, client));
-    _clients[_clients.size() - 1]->write("200\n");
+    // _clients.push_back(std::make_unique<Client>(fd, client));
+    // _clients[_clients.size() - 1]->write("200\n");
+    return (fd);
 }
 
 void Server::translateSelect(const fd_set &readfs, const fd_set &writefs)
