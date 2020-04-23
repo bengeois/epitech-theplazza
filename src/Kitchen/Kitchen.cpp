@@ -7,6 +7,7 @@
 
 #include <sstream>
 #include <zconf.h>
+#include <csignal>
 #include "Pizza/APizza.hpp"
 #include "Pizza/Americana.hpp"
 #include "Pizza/Margarita.hpp"
@@ -15,6 +16,14 @@
 #include "Kitchen/Kitchen.hpp"
 
 using namespace Plazza;
+
+static bool kill_kitchen = false;
+
+void signal_handler(int signal_num)
+{
+    if (signal_num == SIGINT)
+        kill_kitchen = true;
+}
 
 Kitchen::Kitchen(size_t cooks, float regenerateTime, long cookingMultiplier) :
 _stop(false),
@@ -88,8 +97,9 @@ auto Kitchen::enqueue(const std::shared_ptr<IPizza> &pizza) -> std::future<bool>
 
 void Kitchen::run(const std::shared_ptr<Client> &client)
 {
+    std::signal(SIGINT, signal_handler);
     try {
-        while (!_stop) {
+        while (!_stop && !kill_kitchen) {
             this->checkActivity();
             _stock->regenerateIngredient();
             this->checkFinishOrder(client);
@@ -192,7 +202,7 @@ void Kitchen::checkNewCommand(const std::shared_ptr<Client> &client, const std::
     ss >> pizzaType;
     ss >> pizzaSize;
 
-    std::shared_ptr<IPizza> preparationPizza = createPizzaOrder(
+    std::shared_ptr<IPizza> preparationPizza = createPizza(
         Utils::getPizzaType(pizzaType),
         Utils::getPizzaSize(pizzaSize),
         _cookingMultiplier
@@ -211,15 +221,15 @@ void Kitchen::checkNewCommand(const std::shared_ptr<Client> &client, const std::
     client->write(std::string("100 1\n"));
 }
 
-std::shared_ptr<IPizza> Kitchen::createPizzaOrder(APizza::PizzaType type, APizza::PizzaSize size, long cookingMultiplier)
+std::shared_ptr<IPizza> Kitchen::createPizza(APizza::PizzaType type, APizza::PizzaSize size, long cookingMultiplier)
 {
     if (type == IPizza::Americana)
-        return createPizzaOrder<Americana>(size, cookingMultiplier);
+        return createPizza<Americana>(size, cookingMultiplier);
     if (type == IPizza::Fantasia)
-        return createPizzaOrder<Fantasia>(size, cookingMultiplier);
+        return createPizza<Fantasia>(size, cookingMultiplier);
     if (type == IPizza::Margarita)
-        return createPizzaOrder<Margarita>(size, cookingMultiplier);
-    return createPizzaOrder<Regina>(size, cookingMultiplier);
+        return createPizza<Margarita>(size, cookingMultiplier);
+    return createPizza<Regina>(size, cookingMultiplier);
 }
 
 int Kitchen::getID() const

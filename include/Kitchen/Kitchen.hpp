@@ -44,12 +44,12 @@ namespace Plazza
             void checkFinishOrder(const std::shared_ptr<Client> &client);
 
             template <class T>
-            std::shared_ptr<T> createPizzaOrder(APizza::PizzaSize size, long cookingMultiplier) {
+            std::shared_ptr<T> createPizza(APizza::PizzaSize size, long cookingMultiplier) {
                 std::shared_ptr<T> newPizza = std::make_shared<T>(size, cookingMultiplier);
                 return newPizza;
             }
 
-            std::shared_ptr<IPizza> createPizzaOrder(APizza::PizzaType type, APizza::PizzaSize size, long cookingMultiplier);
+            std::shared_ptr<IPizza> createPizza(APizza::PizzaType type, APizza::PizzaSize size, long cookingMultiplier);
 
         private:
                 int _id;
