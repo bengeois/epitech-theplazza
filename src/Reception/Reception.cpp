@@ -9,11 +9,11 @@
 #include "Socket/Client.hpp"
 #include "Kitchen/Kitchen.hpp"
 #include "Utils.hpp"
+#include "LocalTime/LocalTime.hpp"
 
 #include <iostream>
 #include <sys/ipc.h>
 #include <sys/msg.h>
-#include <ctime>
 
 using namespace Plazza;
 
@@ -24,18 +24,15 @@ regenerateTime) :
     _regenerateTime(regenerateTime),
     _server(std::make_unique<Server>())
 {
-    time_t now = time(0);
-
-    tm *info = localtime(&now);
-    _logDirectory += 
-        std::to_string(1900 + info->tm_year) + "-" + 
-        std::to_string(info->tm_mon) + "-" + 
-        std::to_string(info->tm_mday) + "-" +
-        std::to_string(info->tm_hour) + ":" +
-        std::to_string(info->tm_min) + ":" +
-        std::to_string(info->tm_sec);
-    std::cout << "All finish order will be send in logs/" << _logDirectory << std::endl;
+    createLogDirectory();
 }
+
+
+/****************\
+
+Coplien form
+
+\****************/
 
 Reception::Reception(const Reception &reception) :
     _cookingMultiplier(reception._cookingMultiplier),
@@ -58,6 +55,13 @@ Reception &Reception::operator=(const Reception &reception)
     return (*this);
 }
 
+
+/****************\
+
+Public methods
+
+\****************/
+
 void Reception::run()
 {
     std::string command;
@@ -73,6 +77,37 @@ void Reception::run()
     }
 }
 
+
+/****************\
+
+Private methods
+
+\****************/
+
+void Reception::createLogDirectory()
+{
+    LocalTime time;
+
+    _logDirectory += 
+        std::to_string(time.getHour()) + "-" + 
+        std::to_string(time.getMonth()) + "-" + 
+        std::to_string(time.getDay()) + "-" +
+        std::to_string(time.getHour()) + ":" +
+        std::to_string(time.getMin()) + ":" +
+        std::to_string(time.getSec());
+    std::cout << "All finish order will be send in logs/" << _logDirectory << std::endl;
+}
+
+
+/****************\
+
+Processus management methods
+
+\****************/
+
+/**
+ * Read data which come to kitchens
+*/
 void Reception::readProcess()
 {
     std::for_each(_process.begin(), _process.end(), [this](std::shared_ptr<IProcess> &process) {
@@ -80,10 +115,13 @@ void Reception::readProcess()
         std::string data = process->getData();
         if (data.size() == 0)
             return;
-        this->translateFinishOrder(data);
+        this->translateDataKitchen(data);
     });
 }
 
+/**
+ * Clear processus if there are ending
+*/
 void Reception::clearProcess()
 {
     _process.erase(std::remove_if(_process.begin(), _process.end(), [](const std::shared_ptr<IProcess> &client) {
@@ -91,7 +129,7 @@ void Reception::clearProcess()
     }), _process.end());
 }
 
-const std::string Reception::nextStrFinishOrder(const std::string &order, size_t &i) const
+const std::string Reception::nextStrDataKitchen(const std::string &order, size_t &i) const
 {
     if (order[i] == ' ')
         i++;
@@ -102,7 +140,10 @@ const std::string Reception::nextStrFinishOrder(const std::string &order, size_t
     return (data);
 }
 
-void Reception::translateFinishOrder(const std::string &order)
+/**
+ * Translate data which come to kitchen, this data represent a finish pizza
+ */
+void Reception::translateDataKitchen(const std::string &order)
 try {
     std::string nOrderStr = "";
     std::string typeStr = "";
@@ -111,10 +152,9 @@ try {
 
     if (order.size() <= 4)
         throw ReceptionError("Invalid reply from the client", "tranlateFinishOrder");
-    nOrderStr = nextStrFinishOrder(order, i);
-    typeStr = nextStrFinishOrder(order, i);
-    sizeStr = nextStrFinishOrder(order, i);
-    
+    nOrderStr = nextStrDataKitchen(order, i);
+    typeStr = nextStrDataKitchen(order, i);
+    sizeStr = nextStrDataKitchen(order, i);
 
     int nOrder = std::stoi(nOrderStr);
     IPizza::PizzaType type = Utils::getPizzaType(typeStr);
@@ -133,6 +173,122 @@ try {
 } catch (const std::exception &e) {
     throw ReceptionError("Invalid reply for the client", "translateFinishOrder");
 }
+
+/****************\
+
+End of processus management methods
+
+\****************/
+
+
+
+/****************\
+
+Start of user new order command
+
+\****************/
+
+void Reception::translateCommand(const std::string &command)
+try {
+    std::shared_ptr<Order> order = std::make_shared<Order>(command, _cookingMultiplier);
+
+    std::vector<std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t>> pizzas = order->getPizzas();
+
+    std::cout << "[RECEPTION] Order sent to the kitchens" << std::endl;
+    _orders.push_back(order);
+    int a = 0;
+    std::for_each(pizzas.begin(), pizzas.end(), [this, &order, &a](std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t> &pizza) {
+
+        // Find a kitchen which can accept the pizza
+        for (int i = 0; static_cast<size_t>(i) < _process.size(); i++) {
+            writeOrderToClient(order, i, pizza);
+            if (clientAcceptOrder(i)) {
+                order->setSend(a, true);
+                a++;
+                return;
+            }
+        }
+        // Fork if no kitchen can take the pizza
+        std::shared_ptr<IProcess> process = std::make_shared<Process>();
+
+        _process.push_back(process);
+        if (process->isInChild())
+            kitchenProcess();
+        childConnection();
+        writeOrderToClient(order, _process.size() - 1, pizza);
+        if (!clientAcceptOrder(_process.size() - 1))
+            throw ReceptionError("Fatal error : Unable to send the pizza");
+        order->setSend(a, true);
+        a++;
+    });
+
+} catch (const ParserError &e) {
+    std::cout << "Invalid command" << std::endl;
+} catch (const ProcessError &e) {
+    throw e;
+}
+
+void Reception::writeOrderToClient(std::shared_ptr<Order> &order, int i, const std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t> &pizza)
+{
+    _process[i]->send(std::string(std::to_string(order->getId()) + " " + Utils::getStringPizzaType(std::get<0>(pizza)) + " " + Utils::getStringPizzaSize(std::get<1>(pizza)) + "\n"));
+
+    while (_process[i]->send() != false);
+}
+
+int Reception::getCode(const std::string &res) const
+{
+    std::string codeStr = "";
+
+    for (int i = 0; res[i] != '\n' && res[i] != ' '; i++) {
+        if (!(res[i] >= '0' && res[i] <= '9'))
+            throw ReceptionError("Invalid code reply", "getCode");
+        codeStr += res[i];
+    }
+    return (std::stoi(codeStr));
+}
+
+bool Reception::clientAcceptOrder(int i)
+{
+    std::string data = "";
+
+    while (data.empty() || getCode(data) != 100) {
+        _process[i]->read();
+        data = _process[i]->getData();
+        if (!data.empty() && getCode(data) == 300)
+            translateDataKitchen(data);
+    }
+    return data == "100 1\n";
+}
+
+void Reception::childConnection()
+{
+    int fd = _server->getFd();
+    fd_set readfs;
+
+    FD_ZERO(&readfs);
+    FD_SET(fd, &readfs);
+    if (select(FD_SETSIZE, &readfs, NULL, NULL, NULL) < 0)
+        throw ReceptionError("Select fail", "childConnection");
+    int newFd = _server->newConnection();
+    std::shared_ptr<IProcess> process = _process[_process.size() - 1];
+
+    process->createIPC(newFd);
+    process->send("200\n");
+    while (process->send() != false);
+}
+
+/****************\
+
+End of user new order command
+
+\****************/
+
+
+/****************\
+
+Start of user status command
+
+\****************/
 
 bool Reception::isStatusCommand(const std::string &command) const
 {
@@ -160,7 +316,7 @@ void Reception::waitResponseStatus(int i)
         _process[i]->read();
         data = _process[i]->getData();
         if (!data.empty() && getCode(data) == 300)
-            translateFinishOrder(data);
+            translateDataKitchen(data);
     }
 }
 
@@ -172,98 +328,18 @@ void Reception::statusCommand()
     }
 }
 
-void Reception::writeOrderToClient(std::shared_ptr<Order> &order, int i, const std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t> &pizza)
-{
-    _process[i]->send(std::string(std::to_string(order->getId()) + " " + Utils::getStringPizzaType(std::get<0>(pizza)) + " " + Utils::getStringPizzaSize(std::get<1>(pizza)) + "\n"));
+/****************\
 
-    while (_process[i]->send() != false);
-}
+End of user status command
 
-int Reception::getCode(const std::string &res) const
-{
-    std::string codeStr = "";
+\****************/
 
-    for (int i = 0; res[i] != '\n' && res[i] != ' '; i++) {
-        if (!(res[i] >= '0' && res[i] <= '9'))
-            throw ReceptionError("Invalid code reply", "getCode");
-        codeStr += res[i];
-    }
-    return (std::stoi(codeStr));
-}
 
-bool Reception::clientAcceptOrder(int i)
-{
-    std::string data = "";
+/****************\
 
-    // std::cout << "{RECEPTION} waiting for client accept order..." << std::endl;
-    while (data.empty() || getCode(data) != 100) {
-        _process[i]->read();
-        data = _process[i]->getData();
-        if (!data.empty() && getCode(data) == 300)
-            translateFinishOrder(data);
-    }
-    return data == "100 1\n";
-}
+Start getter and setter
 
-void Reception::childConnection()
-{
-    int fd = _server->getFd();
-    fd_set readfs;
-
-    FD_ZERO(&readfs);
-    FD_SET(fd, &readfs);
-    if (select(FD_SETSIZE, &readfs, NULL, NULL, NULL) < 0)
-        throw ReceptionError("Select fail", "childConnection");
-    int newFd = _server->newConnection();
-    std::shared_ptr<IProcess> process = _process[_process.size() - 1];
-
-    process->createIPC(newFd);
-    process->send("200\n");
-    while (process->send() != false);
-}
-
-void Reception::translateCommand(const std::string &command)
-try {
-    std::shared_ptr<Order> order = std::make_shared<Order>(command, _cookingMultiplier);
-
-    std::vector<std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t>> pizzas = order->getPizzas();
-    // std::cout << order << std::endl;
-
-    std::cout << "[RECEPTION] Order sent to the kitchens" << std::endl;
-    _orders.push_back(order);
-    int a = 0;
-    std::for_each(pizzas.begin(), pizzas.end(), [this, &order, &a](std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t> &pizza) {
-        // Find a kitchen which can accept the pizza
-
-        for (int i = 0; static_cast<size_t>(i) < _process.size(); i++) {
-            writeOrderToClient(order, i, pizza);
-            if (clientAcceptOrder(i)) {
-                order->setSend(a, true);
-                a++;
-                return;
-            }
-        }
-        // std::cout << "{RECEPTION}" << " no kitchen found" << std::endl;
-        // Fork if no kitchen can take the pizza
-        std::shared_ptr<IProcess> process = std::make_shared<Process>();
-
-        _process.push_back(process);
-        if (process->isInChild())
-            kitchenProcess();
-        childConnection();
-        writeOrderToClient(order, _process.size() - 1, pizza);
-        if (!clientAcceptOrder(_process.size() - 1))
-            throw ReceptionError("Fatal error : Unable to send the pizza");
-        // std::cout << "{RECEPTION} client accept order" << std::endl;
-        order->setSend(a, true);
-        a++;
-    });
-
-} catch (const ParserError &e) {
-    std::cout << "Invalid command" << std::endl;
-} catch (const ProcessError &e) {
-    throw e;
-}
+\****************/
 
 long Reception::getCookingMultiplier() const
 {
@@ -294,3 +370,9 @@ void Reception::setRegenerateTime(float regenerateTime)
 {
     _regenerateTime = regenerateTime;
 }
+
+/****************\
+
+End getter and setter
+
+\****************/

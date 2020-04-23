@@ -29,25 +29,32 @@ namespace Plazza
 
             void run();
 
+            // Getter and setter
             [[nodiscard]] long getCookingMultiplier() const;
             [[nodiscard]] int getCooksPerKitchen() const;
             [[nodiscard]] float getRegenerateTime() const;
-
             void setCookingMultiplier(long cookingMultiplier);
             void setCooksPerKitchen(int cooksPerKitchen);
             void setRegenerateTime(float regenerateTime);
 
         private:
+            // Processus management
+            void translateDataKitchen(const std::string &order);
+            const std::string nextStrDataKitchen(const std::string &order, size_t &i) const;
+            void readProcess();
+            void clearProcess();
+
+            void createLogDirectory();
+
             void translateCommand(const std::string &command);
 
             void kitchenProcess();
             void connectKitchen(std::shared_ptr<IIPC> &client);
 
+
             void writeOrderToClient(std::shared_ptr<Order> &order, int i, const std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t> &pizza);
             bool clientAcceptOrder(int i);
             void childConnection();
-            void translateFinishOrder(const std::string &order);
-            const std::string nextStrFinishOrder(const std::string &order, size_t &i) const;
 
             [[nodiscard]] int getCode(const std::string &res) const;
 
@@ -57,8 +64,6 @@ namespace Plazza
             void sendStatus(int i);
             void waitResponseStatus(int i);
 
-            void readProcess();
-            void clearProcess();
 
         private:
             long _cookingMultiplier;
