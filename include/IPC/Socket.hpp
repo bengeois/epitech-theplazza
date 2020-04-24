@@ -33,12 +33,16 @@ namespace Plazza
             void send(const std::string &msg) override;
             [[nodiscard]] bool exist() const override;
 
+            void setRelation(Relation relation) override;
+            Relation getRelation() const override;
+
         private:
             int _fd;
             sockaddr_in _addr;
             bool _exist = true;
             SmartBuffer _data;
             SmartBuffer _msg;
+            Relation _relation;
     };
 } // namespace Plazza
 

@@ -99,3 +99,13 @@ bool Socket::exist() const
 {
     return (_exist);
 }
+
+void Socket::setRelation(Relation relation)
+{
+    _relation = relation;
+}
+
+IIPC::Relation Socket::getRelation() const
+{
+    return (_relation);
+}

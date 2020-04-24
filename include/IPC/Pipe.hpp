@@ -24,13 +24,19 @@ namespace Plazza
             bool send() override;
             void send(const std::string &msg) override;
             [[nodiscard]] bool exist() const override;
+            void setRelation(Relation relation) override;
+            Relation getRelation() const override;
+        
+        private:
+            int getFd(bool read) const;
 
         private:
             bool _exist;
-            int _writePipe[2] {};
-            int _readPipe[2] {};
+            int _parentPipe[2] {};
+            int _childPipe[2] {};
             SmartBuffer _received;
             SmartBuffer _sending;
+            Relation _relation;
     };
 } // namespace Plazza
 

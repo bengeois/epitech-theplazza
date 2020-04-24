@@ -19,6 +19,11 @@ namespace Plazza
                 PIPE
             };
 
+            enum Relation {
+                PARENT = 0,
+                CHILD
+            };
+
         public:
             virtual ~IIPC() = default;
 
@@ -28,6 +33,8 @@ namespace Plazza
             virtual bool send() = 0;
             virtual void send(const std::string &msg) = 0;
             [[nodiscard]] virtual bool exist() const = 0;
+            virtual void setRelation(Relation relation) = 0;
+            virtual Relation getRelation() const = 0;
 
         private:
     };

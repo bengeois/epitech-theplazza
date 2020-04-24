@@ -231,8 +231,11 @@ try {
         }
         _process.push_back(process);
 
-        if (process->isInChild())
+        if (process->isInChild()) {
+            process->getIpc()->setRelation(IIPC::CHILD);
             kitchenProcess(process);
+        }
+        process->getIpc()->setRelation(IIPC::PARENT);
         if (_type == IIPC::SOCKET)
             childConnection();
         writeOrderToClient(order, _process.size() - 1, pizza);
