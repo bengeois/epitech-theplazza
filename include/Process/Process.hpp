@@ -10,6 +10,7 @@
 
 #include "IProcess.hpp"
 #include "IPC/Socket.hpp"
+#include "IPC/Pipe.hpp"
 #include <memory>
 
 namespace Plazza

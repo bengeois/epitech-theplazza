@@ -23,6 +23,7 @@ namespace Plazza
             [[nodiscard]] std::shared_ptr<IIPC> createIPC() const;
         private:
             [[nodiscard]] std::shared_ptr<IIPC> createSocket() const;
+            [[nodiscard]] std::shared_ptr<IIPC> createPipe() const;
         private:
             IIPC::IPCType _type;
             int _arg1;

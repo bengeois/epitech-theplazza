@@ -18,7 +18,8 @@ Factory::~Factory() = default;
 std::shared_ptr<IIPC> Factory::createIPC() const
 {
     std::map<IIPC::IPCType, std::shared_ptr<IIPC> (Factory::*)() const> ipcs = {
-        {IIPC::SOCKET, &Factory::createSocket}
+        {IIPC::SOCKET, &Factory::createSocket},
+        {IIPC::PIPE, &Factory::createPipe}
     };
 
     return (this->*ipcs[_type])();
@@ -27,4 +28,9 @@ std::shared_ptr<IIPC> Factory::createIPC() const
 std::shared_ptr<IIPC> Factory::createSocket() const
 {
     return (std::make_shared<Socket>(_arg1, _arg2));
+}
+
+std::shared_ptr<IIPC> Factory::createPipe() const
+{
+    return (std::make_shared<Pipe>());
 }
