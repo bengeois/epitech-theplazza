@@ -66,7 +66,7 @@ namespace Plazza
 
                 std::queue<std::function<void()>> _tasks;
 
-                Mutex _queue_mutex;
+                std::shared_ptr<Mutex> _queue_mutex;
                 std::condition_variable _condition;
 
                 std::shared_ptr<Stock> _stock;

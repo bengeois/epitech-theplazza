@@ -7,7 +7,15 @@
 
 #include "LockGuard/LockGuard.hpp"
 
-Plazza::LockGuard::LockGuard(const std::shared_ptr<Mutex> &mutex) : _mutex(mutex)
+using namespace Plazza;
+
+LockGuard::LockGuard(const std::shared_ptr<Mutex> &mutex) : _lock(mutex->getMutex())
 {
-    _mutex->lock();
+}
+
+LockGuard::~LockGuard() = default;
+
+std::unique_lock<std::mutex> &LockGuard::getUniqueLock()
+{
+    return _lock;
 }
