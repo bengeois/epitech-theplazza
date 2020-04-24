@@ -36,7 +36,7 @@ const std::string &SmartBuffer::getBuffer() const
 
 const std::string SmartBuffer::getNextLine()
 {
-    std::string data;
+    std::string data = "";
     size_t i = 0;
 
     for (; _data[i] && _data[i] != '\n'; i++);

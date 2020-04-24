@@ -28,7 +28,7 @@ namespace Plazza
             [[nodiscard]] size_t size() const;
 
         private:
-            std::string _data;
+            std::string _data = "";
     };
 } // namespace Plazza
 
