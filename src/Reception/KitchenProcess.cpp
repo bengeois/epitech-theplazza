@@ -8,6 +8,7 @@
 #include "Reception/Reception.hpp"
 #include "Kitchen/Kitchen.hpp"
 #include "Plazza.hpp"
+#include "Factory/Factory.hpp"
 
 using namespace Plazza;
 
@@ -30,7 +31,12 @@ void Reception::connectKitchen(std::shared_ptr<IIPC> &client)
 
 void Reception::kitchenProcess()
 {
-    std::shared_ptr<IIPC> client = std::make_shared<Socket>();
+    std::shared_ptr<IIPC> client;
+
+    if (_type == IIPC::SOCKET) {
+        Factory factory(_server->getPort(), -1, IIPC::SOCKET);
+        client = factory.createIPC();
+    }
     std::shared_ptr<Kitchen> kitchen = std::make_shared<Kitchen>(_cooksPerKitchen, _regenerateTime, _cookingMultiplier);
 
     try {

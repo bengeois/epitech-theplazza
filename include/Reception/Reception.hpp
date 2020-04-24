@@ -22,7 +22,7 @@ namespace Plazza
     {
         public:
             Reception(long cookingMultiplier, int _cooksPerKitchen, float
-            _stockTime);
+            _stockTime, IIPC::IPCType type = IIPC::SOCKET);
             ~Reception() = default;
             Reception(const Reception &reception);
             Reception &operator=(const Reception &reception);
@@ -38,43 +38,41 @@ namespace Plazza
             void setRegenerateTime(float regenerateTime);
 
         private:
+            void createLogDirectory();
+
             // Processus management
             void translateDataKitchen(const std::string &order);
             const std::string nextStrDataKitchen(const std::string &order, size_t &i) const;
             void readProcess();
             void clearProcess();
 
-            void createLogDirectory();
-
+            // New order
             void translateCommand(const std::string &command);
-
             void kitchenProcess();
             void connectKitchen(std::shared_ptr<IIPC> &client);
-
-
             void writeOrderToClient(std::shared_ptr<Order> &order, int i, const std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t> &pizza);
             bool clientAcceptOrder(int i);
             void childConnection();
-
             [[nodiscard]] int getCode(const std::string &res) const;
 
+            // User command status
             [[nodiscard]] bool isStatusCommand(const std::string &command) const;
             void statusCommand();
-
             void sendStatus(int i);
             void waitResponseStatus(int i);
-
 
         private:
             long _cookingMultiplier;
             int _cooksPerKitchen;
             float _regenerateTime;
 
-            std::unique_ptr<Server> _server;
+            std::unique_ptr<Server> _server = nullptr;
             std::vector<std::shared_ptr<Order>> _orders;
 
             std::string _logDirectory = "";
             std::vector<std::shared_ptr<IProcess>> _process;
+            IIPC::IPCType _type = IIPC::SOCKET;
+            
     };
 }
 

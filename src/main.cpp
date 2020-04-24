@@ -20,7 +20,8 @@ int main(int argc, char **argv)
         std::unique_ptr<Reception> interface = std::make_unique<Reception>(
             parser->getCookingMultiplier(),
             parser->getCooksPerKitchen(),
-            parser->getRegenerateTime()
+            parser->getRegenerateTime(),
+            parser->getIPCType()
         );
         interface->run();
 

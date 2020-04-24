@@ -17,7 +17,7 @@ namespace Plazza
 {
     class Server {
         public:
-            explicit Server(int port = 1026);
+            explicit Server(int port = 0);
             ~Server() = default;
             Server(const Server &server) = default;
             Server &operator=(const Server &server) = default;

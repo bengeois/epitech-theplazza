@@ -18,12 +18,14 @@
 using namespace Plazza;
 
 Reception::Reception(long cookingMultiplier, int cooksPerKitchen, float
-regenerateTime) :
+regenerateTime, IIPC::IPCType type) :
     _cookingMultiplier(cookingMultiplier),
     _cooksPerKitchen(cooksPerKitchen),
     _regenerateTime(regenerateTime),
-    _server(std::make_unique<Server>())
+    _type(type)
 {
+    if (_type == IIPC::SOCKET)
+        _server = std::make_unique<Server>();
     createLogDirectory();
 }
 
@@ -38,10 +40,11 @@ Reception::Reception(const Reception &reception) :
     _cookingMultiplier(reception._cookingMultiplier),
     _cooksPerKitchen(reception._cooksPerKitchen),
     _regenerateTime(reception._regenerateTime),
-    _server(std::make_unique<Server>(*reception._server)),
     _orders(reception._orders),
     _logDirectory(reception._logDirectory)
 {
+    if (reception._server != nullptr)
+        _server = std::make_unique<Server>(*reception._server);
 }
 
 Reception &Reception::operator=(const Reception &reception)
@@ -49,7 +52,8 @@ Reception &Reception::operator=(const Reception &reception)
     _cookingMultiplier = reception._cookingMultiplier;
     _cooksPerKitchen = reception._cooksPerKitchen;
     _regenerateTime = reception._regenerateTime;
-    _server = std::make_unique<Server>(*reception._server);
+    if (reception._server != nullptr)
+        _server = std::make_unique<Server>(*reception._server);
     _orders = reception._orders;
     _logDirectory = reception._logDirectory;
     return (*this);
@@ -276,7 +280,7 @@ void Reception::childConnection()
     int newFd = _server->newConnection();
     std::shared_ptr<IProcess> process = _process[_process.size() - 1];
 
-    process->createIPC(newFd);
+    process->createIPC(-1, newFd, _type);
     process->send("200\n");
     while (process->send() != false);
 }

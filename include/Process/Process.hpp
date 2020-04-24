@@ -28,7 +28,7 @@ namespace Plazza
             bool send(const std::string &data);
             bool read();
             [[nodiscard]] const std::string getData();
-            void createIPC(int fd) override;
+            void createIPC(int arg1, int arg2, IIPC::IPCType type) override;
 
         private:
             pid_t _pid;
