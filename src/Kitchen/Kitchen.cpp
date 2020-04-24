@@ -42,7 +42,7 @@ _stock(std::make_shared<Stock>(Stock(regenerateTime)))
                 std::function<void()> task;
 
                 {
-                    std::unique_lock<std::mutex> lock(_queue_mutex);
+                    std::unique_lock<std::mutex> lock(_queue_mutex.getMutex());
                     _condition.wait(lock, [this]() {
                         return this->_stop || !this->_tasks.empty();
                     });
@@ -62,7 +62,7 @@ _stock(std::make_shared<Stock>(Stock(regenerateTime)))
 Kitchen::~Kitchen()
 {
     {
-        std::unique_lock<std::mutex> lock(_queue_mutex);
+        std::unique_lock<std::mutex> lock(_queue_mutex.getMutex());
         _stop = true;
     }
     _condition.notify_all();
@@ -81,7 +81,7 @@ auto Kitchen::enqueue(const std::shared_ptr<IPizza> &pizza) -> std::future<bool>
     std::future<bool> res = task->get_future();
 
     {
-        std::unique_lock<std::mutex> lock(_queue_mutex);
+        std::unique_lock<std::mutex> lock(_queue_mutex.getMutex());
 
         if (_stop)
             throw KitchenError("Kitchen Closed", "Kitchen");

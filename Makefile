@@ -10,6 +10,7 @@ NAME	= plazza
 SRC	=	src/Error/Error.cpp	\
 		src/Parser/Parser.cpp	\
 		src/Thread/Thread.cpp	\
+		src/Mutex/Mutex.cpp	\
 		src/Reception/Reception.cpp	\
 		src/Reception/KitchenProcess.cpp	\
 		src/UserShell/UserShell.cpp	\

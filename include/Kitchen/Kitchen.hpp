@@ -14,6 +14,7 @@
 #include "Socket/Client.hpp"
 #include "Utils.hpp"
 #include "Thread/Thread.hpp"
+#include "Mutex/Mutex.hpp"
 #include "IPC/Socket.hpp"
 #include <future>
 #include <vector>
@@ -65,7 +66,7 @@ namespace Plazza
 
                 std::queue<std::function<void()>> _tasks;
 
-                std::mutex _queue_mutex;
+                Mutex _queue_mutex;
                 std::condition_variable _condition;
 
                 std::shared_ptr<Stock> _stock;
