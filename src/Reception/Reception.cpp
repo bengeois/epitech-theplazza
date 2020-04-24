@@ -98,7 +98,7 @@ void Reception::createLogDirectory()
     LocalTime time;
 
     _logDirectory += 
-        std::to_string(time.getHour()) + "-" + 
+        std::to_string(time.getYear()) + "-" + 
         std::to_string(time.getMonth()) + "-" + 
         std::to_string(time.getDay()) + "-" +
         std::to_string(time.getHour()) + ":" +
