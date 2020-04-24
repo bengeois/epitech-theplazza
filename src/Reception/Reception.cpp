@@ -254,6 +254,8 @@ try {
 
 void Reception::writeOrderToClient(std::shared_ptr<Order> &order, int i, const std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t> &pizza)
 {
+    if (!_process[i]->isAlive())
+        return;
     _process[i]->send(std::string(std::to_string(order->getId()) + " " + Utils::getStringPizzaType(std::get<0>(pizza)) + " " + Utils::getStringPizzaSize(std::get<1>(pizza)) + "\n"));
 
     while (_process[i]->send());
@@ -273,9 +275,9 @@ int Reception::getCode(const std::string &res) const
 
 bool Reception::clientAcceptOrder(int i)
 {
-    std::string data;
+    std::string data = "";
 
-    while (data.empty() || getCode(data) != 100) {
+    while ((data.empty() || getCode(data) != 100) && _process[i]->isAlive()) {
         _process[i]->read();
         data = _process[i]->getData();
         if (!data.empty() && getCode(data) == 300)

@@ -8,6 +8,8 @@
 #include "Process/Process.hpp"
 #include "Error/Error.hpp"
 #include "Factory/Factory.hpp"
+#include <sys/types.h>
+#include <sys/wait.h>
 
 #include <signal.h>
 
@@ -41,6 +43,7 @@ bool Process::isAlive() const
 {
     if (!_ipc->exist())
         return (false);
+    waitpid(_pid, NULL, WNOHANG);
     return kill(_pid, 0) == 0;
 }
 
