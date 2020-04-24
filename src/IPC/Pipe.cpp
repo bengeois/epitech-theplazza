@@ -24,7 +24,7 @@ Pipe::~Pipe()
     close(_childPipe[0]);
     close(_childPipe[1]);
 }
-#include <iostream>
+
 bool Pipe::read()
 {
     timeval time = {0, 100};
