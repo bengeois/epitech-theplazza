@@ -7,6 +7,7 @@
 
 #include "Process/Process.hpp"
 #include "Error/Error.hpp"
+#include "Factory/Factory.hpp"
 
 #include <signal.h>
 
@@ -63,7 +64,9 @@ const std::string Process::getData()
     return (_ipc->getData());
 }
 
-void Process::createIPC(int newFd)
+void Process::createIPC(int arg1, int arg2, IIPC::IPCType type)
 {
-    _ipc = std::make_shared<Socket>(newFd);
+    Factory factory(arg1, arg2, type);
+
+    _ipc = factory.createIPC();
 }

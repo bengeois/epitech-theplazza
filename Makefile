@@ -29,6 +29,7 @@ SRC	=	src/Error/Error.cpp	\
 		src/IPC/Socket.cpp	\
 		src/SmartBuffer/SmartBuffer.cpp	\
 		src/LocalTime/LocalTime.cpp	\
+		src/Factory/Factory.cpp		\
 
 SRC_MAIN	=	src/main.cpp	\
 

@@ -11,6 +11,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <string>
+#include "IPC/IIPC.hpp"
 
 namespace Plazza
 {
@@ -25,7 +26,7 @@ namespace Plazza
             virtual bool send(const std::string &data) = 0;
             virtual bool read() = 0;
             [[nodiscard]] virtual const std::string getData() = 0;
-            virtual void createIPC(int fd) = 0;
+            virtual void createIPC(int arg1, int arg2, IIPC::IPCType type) = 0;
     };
 } // namespace Plazza
 

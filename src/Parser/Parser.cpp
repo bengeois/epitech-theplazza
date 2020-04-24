@@ -21,9 +21,11 @@ _regenerateTime(0)
 
 void Plazza::Parser::build()
 {
-    if (_argv.empty() || _argv.size() != 3)
+    if (_argv.empty() || (_argv.size() != 3 && _argv.size() != 4))
         throw ParserError("Invalid number of argument.", "Parser");
 
+    if (_argv.size() == 4 && _argv[3] == "-p")
+        _type = IIPC::PIPE;
     if ((std::istringstream(_argv[0]) >> _cookingMultiplier).fail()
     || (std::istringstream(_argv[1]) >> _cooksPerKitchen).fail()
     || (std::istringstream(_argv[2]) >> _regenerateTime).fail())
@@ -46,4 +48,9 @@ int Plazza::Parser::getCooksPerKitchen() const
 float Plazza::Parser::getRegenerateTime() const
 {
     return _regenerateTime;
+}
+
+IIPC::IPCType Plazza::Parser::getIPCType() const
+{
+    return (_type);
 }

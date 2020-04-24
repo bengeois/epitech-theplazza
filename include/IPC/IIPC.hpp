@@ -12,6 +12,12 @@ namespace Plazza
 {
     class IIPC {
         public:
+            enum IPCType {
+                SOCKET,
+                PIPE
+            };
+
+        public:
             virtual ~IIPC() = default;
 
             virtual bool read() = 0;

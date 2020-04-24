@@ -11,6 +11,7 @@
 #include <string>
 #include <vector>
 #include "Error/Error.hpp"
+#include "IPC/IIPC.hpp"
 
 namespace Plazza
 {
@@ -27,12 +28,14 @@ namespace Plazza
             [[nodiscard]] long getCookingMultiplier() const;
             [[nodiscard]] int getCooksPerKitchen() const;
             [[nodiscard]] float getRegenerateTime() const;
+            [[nodiscard]] IIPC::IPCType getIPCType() const;
 
         private:
             std::vector<std::string> _argv;
             long _cookingMultiplier;
             int _cooksPerKitchen;
             float _regenerateTime;
+            IIPC::IPCType _type = IIPC::SOCKET;
     };
 }
 
