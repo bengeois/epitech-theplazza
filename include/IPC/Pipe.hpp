@@ -8,6 +8,7 @@
 #ifndef PIPE_HPP_
 #define PIPE_HPP_
 
+#include <SmartBuffer/SmartBuffer.hpp>
 #include "IIPC.hpp"
 
 namespace Plazza
@@ -15,18 +16,21 @@ namespace Plazza
     class Pipe : public IIPC {
         public:
             Pipe();
-            ~Pipe();
+            ~Pipe() override;
 
-            bool read();
-            const std::string getData();
+            bool read() override;
+            const std::string getData() override;
 
-            bool send();
-            void send(const std::string &msg);
-            bool exist() const;
+            bool send() override;
+            void send(const std::string &msg) override;
+            [[nodiscard]] bool exist() const override;
 
         private:
-            int _writePipe[2];
-            int _readPipe[2];
+            bool _exist;
+            int _writePipe[2] {};
+            int _readPipe[2] {};
+            SmartBuffer _received;
+            SmartBuffer _sending;
     };
 } // namespace Plazza
 
