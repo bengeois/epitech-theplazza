@@ -22,6 +22,7 @@
 #include <memory>
 #include <functional>
 #include <algorithm>
+#include <ConditionVariable/ConditionVariable.hpp>
 
 namespace Plazza
 {
@@ -67,7 +68,8 @@ namespace Plazza
                 std::queue<std::function<void()>> _tasks;
 
                 std::shared_ptr<Mutex> _queue_mutex;
-                std::condition_variable _condition;
+                ConditionVariable _condition;
+                //std::condition_variable _condition;
 
                 std::shared_ptr<Stock> _stock;
 

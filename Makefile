@@ -12,6 +12,7 @@ SRC	=	src/Error/Error.cpp	\
 		src/Thread/Thread.cpp	\
 		src/Mutex/Mutex.cpp	\
 		src/LockGuard/LockGuard.cpp	\
+		src/ConditionVariable/ConditionVariable.cpp	\
 		src/Reception/Reception.cpp	\
 		src/Reception/KitchenProcess.cpp	\
 		src/UserShell/UserShell.cpp	\

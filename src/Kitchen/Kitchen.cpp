@@ -45,7 +45,7 @@ _stock(std::make_shared<Stock>(Stock(regenerateTime)))
 
                 {
                     LockGuard lock(_queue_mutex);
-                    _condition.wait(lock.getUniqueLock(), [this]() {
+                    _condition.wait(lock, [this]() {
                         return this->_stop || !this->_tasks.empty();
                     });
                     if (this->_stop && this->_tasks.empty())
