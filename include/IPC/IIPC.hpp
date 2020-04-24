@@ -35,6 +35,7 @@ namespace Plazza
             [[nodiscard]] virtual bool exist() const = 0;
             virtual void setRelation(Relation relation) = 0;
             virtual Relation getRelation() const = 0;
+            virtual const std::string &getBuffer() const = 0;
 
         private:
     };

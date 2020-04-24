@@ -39,10 +39,16 @@ pid_t Process::getPid() const
     return (_pid);
 }
 
+bool Process::hasData() const
+{
+    _ipc->read();
+    if (!_ipc->exist() && _ipc->getBuffer().empty())
+        return (false);
+    return (true);
+}
+
 bool Process::isAlive() const
 {
-    if (!_ipc->exist())
-        return (false);
     waitpid(_pid, NULL, WNOHANG);
     return kill(_pid, 0) == 0;
 }

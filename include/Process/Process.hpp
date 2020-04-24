@@ -25,7 +25,8 @@ namespace Plazza
 
             [[nodiscard]] pid_t getPid() const override;
             [[nodiscard]] bool isInChild() const override;
-            [[nodiscard]] bool isAlive() const override;
+            [[nodiscard]] bool hasData() const override;
+            bool isAlive() const override;
             bool send() override;
             bool send(const std::string &data) override;
             bool read() override;

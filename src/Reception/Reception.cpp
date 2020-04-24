@@ -134,7 +134,7 @@ void Reception::readProcess()
 void Reception::clearProcess()
 {
     _process.erase(std::remove_if(_process.begin(), _process.end(), [](const std::shared_ptr<IProcess> &client) {
-        return (!client->isAlive());
+        return (!client->hasData() && !client->isAlive());
     }), _process.end());
 }
 

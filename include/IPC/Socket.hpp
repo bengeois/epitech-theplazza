@@ -35,6 +35,7 @@ namespace Plazza
 
             void setRelation(Relation relation) override;
             Relation getRelation() const override;
+            const std::string &getBuffer() const override;
 
         private:
             int _fd;

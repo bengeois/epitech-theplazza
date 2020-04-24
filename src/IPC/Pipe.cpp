@@ -117,3 +117,8 @@ int Pipe::getFd(bool read) const
         return (_childPipe[0]);
     return (_parentPipe[1]);
 }
+
+const std::string &Pipe::getBuffer() const
+{
+    return (_received.getBuffer());
+}

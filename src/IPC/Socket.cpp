@@ -30,7 +30,7 @@ Socket::~Socket()
 {
     close(_fd);
 }
-#include <iostream>
+
 bool Socket::read()
 {
     char buffer[1] = {0};
@@ -108,4 +108,9 @@ void Socket::setRelation(Relation relation)
 IIPC::Relation Socket::getRelation() const
 {
     return (_relation);
+}
+
+const std::string &Socket::getBuffer() const
+{
+    return (_data.getBuffer());
 }
