@@ -122,9 +122,9 @@ void Reception::readProcess()
     std::for_each(_process.begin(), _process.end(), [this](std::shared_ptr<IProcess> &process) {
         process->read();
         std::string data = process->getData();
-        if (data.empty())
-            return;
-        this->translateDataKitchen(data);
+        while (!(data = process->getData()).empty()) {
+            this->translateDataKitchen(data);
+        }
     });
 }
 
@@ -158,7 +158,10 @@ try {
     std::string typeStr = "";
     std::string sizeStr = "";
     size_t i = 4;
+    // static int tmp = 0;
 
+    // tmp++;
+    // std::cout << "Pizza " << tmp << std::endl;
     if (order.size() <= 4)
         throw ReceptionError("Invalid reply from the client", "tranlateFinishOrder");
     nOrderStr = nextStrDataKitchen(order, i);

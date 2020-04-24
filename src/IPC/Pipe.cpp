@@ -58,7 +58,7 @@ bool Pipe::send()
     if (_sending.size() == 0)
         return false;
 
-    timeval time = {0, 100};
+    timeval time = {0, 1000};
     fd_set writefs;
 
     FD_ZERO(&writefs);
