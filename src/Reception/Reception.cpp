@@ -232,12 +232,13 @@ try {
         _process.push_back(process);
 
         if (process->isInChild()) {
-            process->getIpc()->setRelation(IIPC::CHILD);
+            if (_type == IIPC::PIPE)
+                process->getIpc()->setRelation(IIPC::CHILD);
             kitchenProcess(process);
         }
-        process->getIpc()->setRelation(IIPC::PARENT);
         if (_type == IIPC::SOCKET)
             childConnection();
+        process->getIpc()->setRelation(IIPC::PARENT);
         writeOrderToClient(order, _process.size() - 1, pizza);
         if (!clientAcceptOrder(_process.size() - 1))
             throw ReceptionError("Fatal error : Unable to send the pizza");
