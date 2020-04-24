@@ -18,9 +18,9 @@ namespace Plazza
             Factory(int arg1, int arg2, IIPC::IPCType type);
             ~Factory();
 
-            std::shared_ptr<IIPC> createIPC() const;
+            [[nodiscard]] std::shared_ptr<IIPC> createIPC() const;
         private:
-            std::shared_ptr<IIPC> createSocket() const;
+            [[nodiscard]] std::shared_ptr<IIPC> createSocket() const;
         private:
             IIPC::IPCType _type;
             int _arg1;

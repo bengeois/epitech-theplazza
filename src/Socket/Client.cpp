@@ -98,7 +98,7 @@ void Client::setFdSet(fd_set *readfs, fd_set *writefs)
 
 const std::string Client::getData()
 {
-    std::string data = "";
+    std::string data;
     size_t i = 0;
 
     for (; _data[i] && _data[i] != '\n'; i++);

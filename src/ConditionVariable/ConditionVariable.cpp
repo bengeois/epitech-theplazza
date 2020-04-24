@@ -9,11 +9,9 @@
 
 using namespace Plazza;
 
-ConditionVariable::ConditionVariable()
-= default;
+ConditionVariable::ConditionVariable() = default;
 
-ConditionVariable::~ConditionVariable()
-= default;
+ConditionVariable::~ConditionVariable() = default;
 
 void ConditionVariable::notify_one()
 {

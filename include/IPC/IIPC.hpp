@@ -25,7 +25,7 @@ namespace Plazza
 
             virtual bool send() = 0;
             virtual void send(const std::string &msg) = 0;
-            virtual bool exist() const = 0;
+            [[nodiscard]] virtual bool exist() const = 0;
 
         private:
     };

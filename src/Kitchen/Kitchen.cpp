@@ -5,15 +5,6 @@
 ** TODO: add description
 */
 
-#include <sstream>
-#include <zconf.h>
-#include <csignal>
-#include <LockGuard/LockGuard.hpp>
-#include "Pizza/APizza.hpp"
-#include "Pizza/Americana.hpp"
-#include "Pizza/Margarita.hpp"
-#include "Pizza/Regina.hpp"
-#include "Pizza/Fantasia.hpp"
 #include "Kitchen/Kitchen.hpp"
 
 using namespace Plazza;
@@ -32,6 +23,7 @@ _noActivity(false),
 _cookingMultiplier(cookingMultiplier),
 _cookNb(cooks),
 _queue_mutex(std::make_shared<Mutex>()),
+_condition(std::make_shared<ConditionVariable>()),
 _stock(std::make_shared<Stock>(Stock(regenerateTime)))
 {
     _id = getpid();
@@ -45,7 +37,7 @@ _stock(std::make_shared<Stock>(Stock(regenerateTime)))
 
                 {
                     LockGuard lock(_queue_mutex);
-                    _condition.wait(lock, [this]() {
+                    _condition->wait(lock, [this]() {
                         return this->_stop || !this->_tasks.empty();
                     });
                     if (this->_stop && this->_tasks.empty())
@@ -67,7 +59,7 @@ Kitchen::~Kitchen()
         LockGuard lock(_queue_mutex);
         _stop = true;
     }
-    _condition.notify_all();
+    _condition->notify_all();
     for (std::shared_ptr<Thread> &cook : _cooks)
         cook->join();
 }
@@ -93,7 +85,7 @@ auto Kitchen::enqueue(const std::shared_ptr<IPizza> &pizza) -> std::future<bool>
             (*task)();
         });
     }
-    _condition.notify_one();
+    _condition->notify_one();
     return res;
 }
 

@@ -13,9 +13,7 @@ Factory::Factory(int arg1, int arg2, IIPC::IPCType type) : _type(type), _arg1(ar
 {
 }
 
-Factory::~Factory()
-{
-}
+Factory::~Factory() = default;
 
 std::shared_ptr<IIPC> Factory::createIPC() const
 {

@@ -22,10 +22,10 @@ namespace Plazza
 
             SmartBuffer &operator+=(const std::string &str);
             SmartBuffer &operator+=(char c);
-            const std::string &getBuffer() const;
+            [[nodiscard]] const std::string &getBuffer() const;
             const std::string getNextLine();
             void remove(int len);
-            size_t size() const;
+            [[nodiscard]] size_t size() const;
 
         private:
             std::string _data;

@@ -121,7 +121,7 @@ void Reception::readProcess()
     std::for_each(_process.begin(), _process.end(), [this](std::shared_ptr<IProcess> &process) {
         process->read();
         std::string data = process->getData();
-        if (data.size() == 0)
+        if (data.empty())
             return;
         this->translateDataKitchen(data);
     });
@@ -240,12 +240,12 @@ void Reception::writeOrderToClient(std::shared_ptr<Order> &order, int i, const s
 {
     _process[i]->send(std::string(std::to_string(order->getId()) + " " + Utils::getStringPizzaType(std::get<0>(pizza)) + " " + Utils::getStringPizzaSize(std::get<1>(pizza)) + "\n"));
 
-    while (_process[i]->send() != false);
+    while (_process[i]->send());
 }
 
 int Reception::getCode(const std::string &res) const
 {
-    std::string codeStr = "";
+    std::string codeStr;
 
     for (int i = 0; res[i] != '\n' && res[i] != ' '; i++) {
         if (!(res[i] >= '0' && res[i] <= '9'))
@@ -257,7 +257,7 @@ int Reception::getCode(const std::string &res) const
 
 bool Reception::clientAcceptOrder(int i)
 {
-    std::string data = "";
+    std::string data;
 
     while (data.empty() || getCode(data) != 100) {
         _process[i]->read();
@@ -282,7 +282,7 @@ void Reception::childConnection()
 
     process->createIPC(-1, newFd, _type);
     process->send("200\n");
-    while (process->send() != false);
+    while (process->send());
 }
 
 /****************\
@@ -300,7 +300,7 @@ Start of user status command
 
 bool Reception::isStatusCommand(const std::string &command) const
 {
-    std::string name = "";
+    std::string name;
 
     for (size_t i = 0; command[i] && (command[i] == ' ' || command[i] == '\t'); i++);
     for (size_t i = 0; command[i] && command[i] != ' ' && command[i] != '\t'; i++) {
@@ -313,14 +313,14 @@ void Reception::sendStatus(int i)
 {
     _process[i]->send("500\n");
 
-    while (_process[i]->send() != false);
+    while (_process[i]->send());
 }
 
 void Reception::waitResponseStatus(int i)
 {
-    std::string data = "";
+    std::string data;
 
-    while ((data.size() == 0 || getCode(data) != 400) && _process[i]->isAlive()) {
+    while ((data.empty() || getCode(data) != 400) && _process[i]->isAlive()) {
         _process[i]->read();
         data = _process[i]->getData();
         if (!data.empty() && getCode(data) == 300)

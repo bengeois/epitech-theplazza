@@ -8,21 +8,25 @@
 #ifndef CPP_PLAZZA_2019_KITCHEN_HPP
 #define CPP_PLAZZA_2019_KITCHEN_HPP
 
+#include <csignal>
+#include <sstream>
+
 #include "Error/Error.hpp"
-#include "Pizza/APizza.hpp"
+
+#include "Pizza/Americana.hpp"
+#include "Pizza/Margarita.hpp"
+#include "Pizza/Regina.hpp"
+#include "Pizza/Fantasia.hpp"
 #include "Stock/Stock.hpp"
-#include "Socket/Client.hpp"
 #include "Utils.hpp"
+
+#include "LockGuard/LockGuard.hpp"
 #include "Thread/Thread.hpp"
 #include "Mutex/Mutex.hpp"
+#include "ConditionVariable/ConditionVariable.hpp"
+
+#include "Socket/Client.hpp"
 #include "IPC/Socket.hpp"
-#include <future>
-#include <vector>
-#include <queue>
-#include <memory>
-#include <functional>
-#include <algorithm>
-#include <ConditionVariable/ConditionVariable.hpp>
 
 namespace Plazza
 {
@@ -68,8 +72,7 @@ namespace Plazza
                 std::queue<std::function<void()>> _tasks;
 
                 std::shared_ptr<Mutex> _queue_mutex;
-                ConditionVariable _condition;
-                //std::condition_variable _condition;
+                std::shared_ptr<ConditionVariable> _condition;
 
                 std::shared_ptr<Stock> _stock;
 
