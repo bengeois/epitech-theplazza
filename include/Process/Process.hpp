@@ -30,6 +30,7 @@ namespace Plazza
             bool read() override;
             [[nodiscard]] const std::string getData() override;
             void createIPC(int arg1, int arg2, IIPC::IPCType type) override;
+            std::shared_ptr<IIPC> getIpc() const override;
 
         private:
             std::shared_ptr<IIPC> _ipc;

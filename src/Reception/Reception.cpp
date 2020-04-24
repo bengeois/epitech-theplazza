@@ -219,16 +219,22 @@ try {
         }
         // Fork if no kitchen can take the pizza
         std::shared_ptr<IIPC> ipc;
+        std::shared_ptr<IProcess> process;
 
         if (_type == IIPC::PIPE) {
-            Factory factory();
-        }
-        std::shared_ptr<IProcess> process = std::make_shared<Process>();
+            Factory factory(-1, -1, IIPC::PIPE);
 
+            ipc = factory.createIPC();
+            process = std::make_shared<Process>(ipc);
+        } else {
+            process = std::make_shared<Process>();
+        }
         _process.push_back(process);
+
         if (process->isInChild())
-            kitchenProcess();
-        childConnection();
+            kitchenProcess(process);
+        if (_type == IIPC::SOCKET)
+            childConnection();
         writeOrderToClient(order, _process.size() - 1, pizza);
         if (!clientAcceptOrder(_process.size() - 1))
             throw ReceptionError("Fatal error : Unable to send the pizza");

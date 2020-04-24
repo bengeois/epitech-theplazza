@@ -12,7 +12,7 @@
 
 using namespace Plazza;
 
-void Reception::connectKitchen(std::shared_ptr<IIPC> &client)
+void Reception::connectKitchen(std::shared_ptr<IIPC> client)
 {
     fd_set writefs;
     fd_set readfs;
@@ -29,24 +29,20 @@ void Reception::connectKitchen(std::shared_ptr<IIPC> &client)
     // std::cout << "{CHILD} waiting receive 200 connection" << std::endl;
 }
 
-void Reception::kitchenProcess()
-{
-    std::shared_ptr<IIPC> client;
-
+void Reception::kitchenProcess(std::shared_ptr<IProcess> &process)
+try {
     if (_type == IIPC::SOCKET) {
-        Factory factory(_server->getPort(), -1, IIPC::SOCKET);
-        client = factory.createIPC();
+        process->createIPC(_server->getPort(), -1, IIPC::SOCKET);
+        connectKitchen(process->getIpc());
     }
     std::shared_ptr<Kitchen> kitchen = std::make_shared<Kitchen>(_cooksPerKitchen, _regenerateTime, _cookingMultiplier);
 
-    try {
-        connectKitchen(client);
-        client->read();
-        std::cout << "New kitchen create. ID = " << kitchen->getID() << std::endl;
-        kitchen->run(client);
-    } catch (const PlazzaError &e) {
-        std::cout << "[PLAZZA]" << " {" << e.getComponent() << "} " << e.what() << std::endl;
-        exit(PLAZZA_ERROR);
-    }
+    process->read();
+    std::cout << "New kitchen create. ID = " << kitchen->getID() << std::endl;
+    kitchen->run(process->getIpc());
     exit(0);
+
+} catch(const PlazzaError &e) {
+    std::cout << "[PLAZZA]" << " {" << e.getComponent() << "} " << e.what() << std::endl;
+    exit(PLAZZA_ERROR);
 }

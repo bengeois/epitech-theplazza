@@ -76,3 +76,8 @@ void Process::createIPC(int arg1, int arg2, IIPC::IPCType type)
 
     _ipc = factory.createIPC();
 }
+
+std::shared_ptr<IIPC> Process::getIpc() const
+{
+    return (_ipc);
+}

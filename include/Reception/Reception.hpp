@@ -48,8 +48,8 @@ namespace Plazza
 
             // New order
             void translateCommand(const std::string &command);
-            void kitchenProcess();
-            void connectKitchen(std::shared_ptr<IIPC> &client);
+            void kitchenProcess(std::shared_ptr<IProcess> &process);
+            void connectKitchen(std::shared_ptr<IIPC> client);
             void writeOrderToClient(std::shared_ptr<Order> &order, int i, const std::tuple<IPizza::PizzaType, IPizza::PizzaSize, finish_t, send_t> &pizza);
             bool clientAcceptOrder(int i);
             void childConnection();
