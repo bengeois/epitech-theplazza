@@ -104,6 +104,13 @@ namespace Plazza
             explicit SocketError(const std::string &message, const std::string &component = "Unknown");
             ~SocketError() override = default;
     };
+
+    class PipeError : public PlazzaError
+    {
+        public:
+            explicit PipeError(const std::string &message, const std::string &component = "Unknown");
+            ~PipeError() override = default;
+    };
 }
 
 #endif //CPP_PLAZZA_2019_ERROR_HPP

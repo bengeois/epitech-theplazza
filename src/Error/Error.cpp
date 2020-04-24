@@ -82,3 +82,7 @@ ProcessError::ProcessError(const std::string &message, const std::string &compon
 SocketError::SocketError(const std::string &message, const std::string &component) : PlazzaError(message, component)
 {
 }
+
+PipeError::PipeError(const std::string &message, const std::string &component) : PlazzaError(message, component)
+{
+}

@@ -10,6 +10,7 @@
 #include "Kitchen/Kitchen.hpp"
 #include "Utils.hpp"
 #include "LocalTime/LocalTime.hpp"
+#include "Factory/Factory.hpp"
 
 #include <iostream>
 #include <sys/ipc.h>
@@ -217,6 +218,11 @@ try {
             }
         }
         // Fork if no kitchen can take the pizza
+        std::shared_ptr<IIPC> ipc;
+
+        if (_type == IIPC::PIPE) {
+            Factory factory();
+        }
         std::shared_ptr<IProcess> process = std::make_shared<Process>();
 
         _process.push_back(process);

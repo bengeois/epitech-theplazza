@@ -8,6 +8,8 @@
 #ifndef IIPC_HPP_
 #define IIPC_HPP_
 
+#include <string>
+
 namespace Plazza
 {
     class IIPC {

@@ -19,6 +19,12 @@ Process::Process() : _pid(fork())
         throw ProcessError("Fail to fork", "Process");
 }
 
+Process::Process(std::shared_ptr<IIPC> &ipc) : _ipc(ipc), _pid(fork())
+{
+    if (_pid == -1)
+        throw ProcessError("Fail to fork", "Process");
+}
+
 Process::~Process()
 {
     if (!isAlive())

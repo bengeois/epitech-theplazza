@@ -17,6 +17,7 @@ namespace Plazza
     class Process : public IProcess {
         public:
             Process();
+            Process(std::shared_ptr<IIPC> &ipc);
             ~Process() override;
             Process(const Process &process) = default;
             Process &operator=(const Process &process) = default;
@@ -31,8 +32,8 @@ namespace Plazza
             void createIPC(int arg1, int arg2, IIPC::IPCType type) override;
 
         private:
-            pid_t _pid;
             std::shared_ptr<IIPC> _ipc;
+            pid_t _pid;
     };
 } // namespace Plazza
 

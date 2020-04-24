@@ -30,6 +30,7 @@ SRC	=	src/Error/Error.cpp	\
 		src/SmartBuffer/SmartBuffer.cpp	\
 		src/LocalTime/LocalTime.cpp	\
 		src/Factory/Factory.cpp		\
+		src/IPC/Pipe.cpp		\
 
 SRC_MAIN	=	src/main.cpp	\
 

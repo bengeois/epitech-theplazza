@@ -17,6 +17,8 @@ namespace Plazza
             // For socket
             Factory(int arg1, int arg2, IIPC::IPCType type);
             ~Factory();
+            Factory(const Factory &factory) = default;
+            Factory &operator=(const Factory &factory) = default;
 
             std::shared_ptr<IIPC> createIPC() const;
         private:
