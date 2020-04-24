@@ -22,7 +22,7 @@ namespace Plazza
         public:
             Socket();
             Socket(int port, int fd);
-            ~Socket();
+            ~Socket() override;
             Socket(const Socket &socket) = default;
             Socket &operator=(const Socket &socket) = default;
 
@@ -31,7 +31,7 @@ namespace Plazza
 
             bool send() override;
             void send(const std::string &msg) override;
-            bool exist() const override;
+            [[nodiscard]] bool exist() const override;
 
         private:
             int _fd;

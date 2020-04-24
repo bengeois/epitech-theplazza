@@ -25,10 +25,10 @@ namespace Plazza
             [[nodiscard]] pid_t getPid() const override;
             [[nodiscard]] bool isInChild() const override;
             [[nodiscard]] bool isAlive() const override;
-            bool send();
-            bool send(const std::string &data);
-            bool read();
-            [[nodiscard]] const std::string getData();
+            bool send() override;
+            bool send(const std::string &data) override;
+            bool read() override;
+            [[nodiscard]] const std::string getData() override;
             void createIPC(int arg1, int arg2, IIPC::IPCType type) override;
 
         private:

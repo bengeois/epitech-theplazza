@@ -17,12 +17,12 @@ namespace Plazza
             LocalTime();
             ~LocalTime() = default;
 
-            int getYear() const;
-            int getMonth() const;
-            int getDay() const;
-            int getHour() const;
-            int getMin() const;
-            int getSec() const;
+            [[nodiscard]] int getYear() const;
+            [[nodiscard]] int getMonth() const;
+            [[nodiscard]] int getDay() const;
+            [[nodiscard]] int getHour() const;
+            [[nodiscard]] int getMin() const;
+            [[nodiscard]] int getSec() const;
 
         private:
             tm *_info = nullptr;

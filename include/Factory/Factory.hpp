@@ -20,9 +20,9 @@ namespace Plazza
             Factory(const Factory &factory) = default;
             Factory &operator=(const Factory &factory) = default;
 
-            std::shared_ptr<IIPC> createIPC() const;
+            [[nodiscard]] std::shared_ptr<IIPC> createIPC() const;
         private:
-            std::shared_ptr<IIPC> createSocket() const;
+            [[nodiscard]] std::shared_ptr<IIPC> createSocket() const;
         private:
             IIPC::IPCType _type;
             int _arg1;
