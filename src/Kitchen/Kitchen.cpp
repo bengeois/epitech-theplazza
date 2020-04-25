@@ -94,11 +94,11 @@ void Kitchen::run(const std::shared_ptr<IIPC> &client)
     std::signal(SIGINT, signal_handler);
     try {
         while (!_stop && !kill_kitchen) {
-            this->checkActivity();
             _stock->regenerateIngredient();
             this->checkFinishOrder(client);
             this->receiveFromReception(client);
             client->send();
+            this->checkActivity();
         }
     } catch (const PlazzaError &e) {
         throw e;

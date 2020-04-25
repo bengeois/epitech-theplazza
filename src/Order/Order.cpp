@@ -68,6 +68,8 @@ void Order::nextPizza(std::string &order)
     }
     try {
         nb = std::stoi(tmpNumber);
+        if (nb < 1)
+            throw ParserError("Wrong argument, wrong number", "nextPizza");
     } catch(const std::exception& e) {
         throw ParserError("Wrong argument, wrong number", "nextPizza");
     }
