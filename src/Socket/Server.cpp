@@ -45,48 +45,11 @@ void Server::bindPort(int port)
 
 int Server::newConnection()
 {
-    sockaddr_in client;
-    socklen_t len = sizeof(client);
-    int fd = accept(_fd, (sockaddr *)(&client), &len);
+    int fd = accept(_fd, nullptr, nullptr);
 
     if (_fd == -1)
         throw ServerError("Unable to connect with the client", "newConnection");
-    // std::cout << "{SERVER} new connection send 200 to the client" << std::endl;
-    // _clients.push_back(std::make_unique<Client>(fd, client));
-    // _clients[_clients.size() - 1]->write("200\n");
     return (fd);
-}
-
-void Server::translateSelect(const fd_set &readfs, const fd_set &writefs)
-{
-    if (FD_ISSET(_fd, &readfs))
-        newConnection();
-    std::for_each(_clients.begin(), _clients.end(), [&readfs, &writefs](const std::shared_ptr<Client> &client) {
-        client->translateSelect(readfs, writefs);
-    });
-}
-
-void Server::setFdSet(fd_set *readfs, fd_set *writefs)
-{
-    FD_SET(_fd, readfs);
-    _clients.erase(std::remove_if(_clients.begin(), _clients.end(), [](const std::shared_ptr<Client> &client) {
-        return (!client->exist());
-    }), _clients.end());
-    std::for_each(_clients.begin(), _clients.end(), [&readfs, &writefs](const std::shared_ptr<Client> &client) {
-        client->setFdSet(readfs, writefs);
-    });
-}
-
-int Server::getNbClient() const
-{
-    return (_clients.size());
-}
-
-std::shared_ptr<Client> &Server::getClientAt(int index)
-{
-    if (index >= static_cast<int>(_clients.size()))
-        throw ServerError("Index out of range", "operator[]");
-    return (_clients[index]);
 }
 
 int Server::getFd() const

@@ -6,7 +6,6 @@
 */
 
 #include "Reception/Reception.hpp"
-#include "Socket/Client.hpp"
 #include "Kitchen/Kitchen.hpp"
 #include "Utils.hpp"
 #include "LocalTime/LocalTime.hpp"
@@ -225,14 +224,11 @@ try {
             Factory factory(-1, -1, IIPC::PIPE);
             ipc = factory.createIPC();
             process = std::make_shared<Process>([this, &process](){
-                if (_type == IIPC::PIPE)
-                    process->getIpc()->setRelation(IIPC::CHILD);
+                process->getIpc()->setRelation(IIPC::CHILD);
                 kitchenProcess(process);
             }, ipc);
         } else {
             process = std::make_shared<Process>([this, &process](){
-                if (_type == IIPC::PIPE)
-                    process->getIpc()->setRelation(IIPC::CHILD);
                 kitchenProcess(process);
             });
         }

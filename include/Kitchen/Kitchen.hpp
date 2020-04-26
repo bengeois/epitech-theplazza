@@ -25,7 +25,6 @@
 #include "Mutex/Mutex.hpp"
 #include "ConditionVariable/ConditionVariable.hpp"
 
-#include "Socket/Client.hpp"
 #include "IPC/Socket.hpp"
 
 namespace Plazza

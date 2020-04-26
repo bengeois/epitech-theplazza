@@ -23,7 +23,6 @@ SRC	=	src/Error/Error.cpp	\
 		src/Pizza/Regina.cpp		\
 		src/Stock/Stock.cpp	\
 		src/Kitchen/Kitchen.cpp	\
-		src/Socket/Client.cpp	\
 		src/Socket/Server.cpp	\
 		src/Order/Order.cpp		\
 		src/Utils/Utils.cpp		\
