@@ -12,13 +12,14 @@
 #include "IPC/Socket.hpp"
 #include "IPC/Pipe.hpp"
 #include <memory>
+#include <functional>
 
 namespace Plazza
 {
     class Process : public IProcess {
         public:
-            Process();
-            Process(std::shared_ptr<IIPC> &ipc);
+            explicit Process(std::function<void()> ft);
+            Process(std::function<void()> ft, std::shared_ptr<IIPC> &ipc);
             ~Process() override;
             Process(const Process &process) = default;
             Process &operator=(const Process &process) = default;
@@ -26,15 +27,17 @@ namespace Plazza
             [[nodiscard]] pid_t getPid() const override;
             [[nodiscard]] bool isInChild() const override;
             [[nodiscard]] bool hasData() const override;
-            bool isAlive() const override;
+            [[nodiscard]] bool isAlive() const override;
             bool send() override;
             bool send(const std::string &data) override;
             bool read() override;
             [[nodiscard]] const std::string getData() override;
             void createIPC(int arg1, int arg2, IIPC::IPCType type) override;
-            std::shared_ptr<IIPC> getIpc() const override;
+            [[nodiscard]] std::shared_ptr<IIPC> getIpc() const override;
+            void runChild() override;
 
         private:
+            std::function <void()> _ft;
             std::shared_ptr<IIPC> _ipc;
             pid_t _pid;
     };

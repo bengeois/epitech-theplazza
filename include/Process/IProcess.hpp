@@ -30,6 +30,7 @@ namespace Plazza
             virtual void createIPC(int arg1, int arg2, IIPC::IPCType type) = 0;
             virtual std::shared_ptr<IIPC> getIpc() const = 0;
             virtual bool isAlive() const = 0;
+            virtual void runChild() = 0;
     };
 } // namespace Plazza
 

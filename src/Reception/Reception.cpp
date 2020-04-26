@@ -223,21 +223,22 @@ try {
 
         if (_type == IIPC::PIPE) {
             Factory factory(-1, -1, IIPC::PIPE);
-
             ipc = factory.createIPC();
-            process = std::make_shared<Process>(ipc);
+            process = std::make_shared<Process>([this, &process](){
+                if (_type == IIPC::PIPE)
+                    process->getIpc()->setRelation(IIPC::CHILD);
+                kitchenProcess(process);
+            }, ipc);
         } else {
-            process = std::make_shared<Process>();
+            process = std::make_shared<Process>([this, &process](){
+                if (_type == IIPC::PIPE)
+                    process->getIpc()->setRelation(IIPC::CHILD);
+                kitchenProcess(process);
+            });
         }
         _process.push_back(process);
-
-        if (process->isInChild()) {
-            if (_type == IIPC::PIPE)
-                process->getIpc()->setRelation(IIPC::CHILD);
-            kitchenProcess(process);
-        }
-        if (_type == IIPC::SOCKET)
-            childConnection();
+        process->runChild();
+        if (_type == IIPC::SOCKET) childConnection();
         process->getIpc()->setRelation(IIPC::PARENT);
         writeOrderToClient(order, _process.size() - 1, pizza);
         if (!clientAcceptOrder(_process.size() - 1))

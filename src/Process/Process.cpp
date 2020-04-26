@@ -13,15 +13,17 @@
 
 #include <signal.h>
 
+#include <utility>
+
 using namespace Plazza;
 
-Process::Process() : _pid(fork())
+Process::Process(std::function <void()> ft) : _ft(std::move(ft)), _pid(fork())
 {
     if (_pid == -1)
         throw ProcessError("Fail to fork", "Process");
 }
 
-Process::Process(std::shared_ptr<IIPC> &ipc) : _ipc(ipc), _pid(fork())
+Process::Process(std::function <void()> ft, std::shared_ptr<IIPC> &ipc) : _ft(std::move(ft)), _ipc(ipc), _pid(fork())
 {
     if (_pid == -1)
         throw ProcessError("Fail to fork", "Process");
@@ -89,4 +91,11 @@ void Process::createIPC(int arg1, int arg2, IIPC::IPCType type)
 std::shared_ptr<IIPC> Process::getIpc() const
 {
     return (_ipc);
+}
+
+void Process::runChild()
+{
+    if (!isInChild())
+        return;
+    _ft();
 }
