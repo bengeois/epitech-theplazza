@@ -21,8 +21,8 @@ namespace Plazza
             explicit Process(std::function<void()> ft);
             Process(std::function<void()> ft, std::shared_ptr<IIPC> &ipc);
             ~Process() override;
-            Process(const Process &process) = default;
-            Process &operator=(const Process &process) = default;
+            Process(const Process &process) = delete;
+            Process &operator=(const Process &process) = delete;
 
             [[nodiscard]] pid_t getPid() const override;
             [[nodiscard]] bool isInChild() const override;

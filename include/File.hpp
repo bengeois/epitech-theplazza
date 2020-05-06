@@ -17,6 +17,8 @@ namespace Plazza
         public:
             File(const std::string &path, std::ios_base::openmode mode);
             ~File();
+            File(const File &file) = delete;
+            File &operator=(const File &file) = delete;
 
             bool getNextLine(std::string &line);
 

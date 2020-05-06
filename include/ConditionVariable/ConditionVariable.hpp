@@ -18,6 +18,8 @@ namespace Plazza
         public:
             ConditionVariable();
             ~ConditionVariable() override;
+            ConditionVariable(const ConditionVariable &var) = delete;
+            ConditionVariable &operator=(const ConditionVariable &var) = delete;
 
             void notify_one() override;
             void notify_all() override;

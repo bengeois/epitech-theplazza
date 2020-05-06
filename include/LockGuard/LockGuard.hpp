@@ -17,6 +17,8 @@ namespace Plazza
         public:
             explicit LockGuard(const std::shared_ptr<Mutex> &mutex);
             ~LockGuard();
+            LockGuard(const LockGuard &lock) = delete;
+            LockGuard &operator=(const LockGuard &lock) = delete;
 
             std::unique_lock<std::mutex> &getUniqueLock();
 
