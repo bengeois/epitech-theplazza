@@ -17,6 +17,8 @@ namespace Plazza
         public:
             Pipe();
             ~Pipe() override;
+            Pipe(const Pipe &pipe) = default;
+            Pipe &operator=(const Pipe &pipe) = default;
 
             bool read() override;
             const std::string getData() override;

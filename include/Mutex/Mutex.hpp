@@ -19,6 +19,8 @@ namespace Plazza
         public:
             Mutex();
             ~Mutex() override;
+            Mutex(const Mutex &mutex) = delete;
+            Mutex &operator=(const Mutex &mutex) = delete;
 
             void lock() override;
             void unlock() override;
