@@ -42,11 +42,12 @@ namespace Plazza
             [[nodiscard]] int getID() const;
 
         private:
+            void runOrder();
             void checkActivity();
             void receiveFromReception(const std::shared_ptr<IIPC> &client);
             void sendKitchenStatus(const std::shared_ptr<IIPC> &client) const;
             void checkNewCommand(const std::shared_ptr<IIPC> &client, const std::string &pingReception);
-            bool canAcceptPizza(const std::shared_ptr<IPizza> &pizza);
+            bool canAcceptPizza();
             void checkFinishOrder(const std::shared_ptr<IIPC> &client);
 
             template <class T>
@@ -68,7 +69,7 @@ namespace Plazza
                 size_t _cookNb;
                 std::vector<std::shared_ptr<Thread>> _cooks;
 
-                std::queue<std::function<void()>> _tasks;
+                std::vector<std::pair<std::pair<std::shared_ptr<IPizza>, bool>, std::function<void()>>> _tasks;
 
                 std::shared_ptr<Mutex> _queue_mutex;
                 std::shared_ptr<ConditionVariable> _condition;

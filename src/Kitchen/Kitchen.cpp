@@ -42,8 +42,10 @@ _stock(std::make_shared<Stock>(Stock(regenerateTime)))
                     });
                     if (this->_stop && this->_tasks.empty())
                         return;
-                    task = std::move(this->_tasks.front());
-                    this->_tasks.pop();
+                    if (!this->_tasks.front().first.second)
+                        continue;
+                    task = std::move(this->_tasks.front().second);
+                    this->_tasks.erase(_tasks.begin());
                 }
                 task();
             }
@@ -80,14 +82,33 @@ auto Kitchen::enqueue(const std::shared_ptr<IPizza> &pizza) -> std::future<bool>
         if (_stop)
             throw KitchenError("Kitchen Closed", "Kitchen");
 
-        _stock->reserveIngredient(pizza);
-        _tasks.emplace([task](){
+        _tasks.emplace_back(std::pair<std::shared_ptr<IPizza>, bool>(pizza, false), [task](){
             (*task)();
         });
     }
-    _condition->notify_one();
     return res;
 }
+
+void Kitchen::runOrder()
+{
+    int i = 0;
+    {
+        LockGuard lock(_queue_mutex);
+
+        std::all_of(_tasks.begin(), _tasks.end(), [this, &i](auto &elem) {
+            if (_stock->canCookPizza(elem.first.first)) {
+                _stock->reserveIngredient(elem.first.first);
+                elem.first.second = true;
+                i++;
+                return true;
+            }
+            return false;
+        });
+    }
+    for (int j = 0; j < i; j++)
+        _condition->notify_one();
+}
+
 
 void Kitchen::run(const std::shared_ptr<IIPC> &client)
 {
@@ -95,6 +116,7 @@ void Kitchen::run(const std::shared_ptr<IIPC> &client)
     try {
         while (!_stop && !kill_kitchen) {
             _stock->regenerateIngredient();
+            this->runOrder();
             this->checkFinishOrder(client);
             this->receiveFromReception(client);
             client->send();
@@ -106,11 +128,9 @@ void Kitchen::run(const std::shared_ptr<IIPC> &client)
     std::cout << "[KITCHEN " << _id << "] No more pizza to cook, kitchen close its doors" << std::endl;
 }
 
-bool Kitchen::canAcceptPizza(const std::shared_ptr<IPizza> &pizza)
+bool Kitchen::canAcceptPizza()
 {
-    if (_orders.size() + 1 > (2 * _cookNb))
-        return false;
-    return (_stock->canCookPizza(pizza));
+    return _orders.size() + 1 <= 2 * _cookNb;
 }
 
 void Kitchen::checkFinishOrder(const std::shared_ptr<IIPC> &client)
@@ -200,7 +220,7 @@ void Kitchen::checkNewCommand(const std::shared_ptr<IIPC> &client, const std::st
         Utils::getPizzaSize(pizzaSize),
         _cookingMultiplier
         );
-    if (!canAcceptPizza(preparationPizza)) {
+    if (!canAcceptPizza()) {
         client->send(std::string("100 0\n"));
         return;
     }
