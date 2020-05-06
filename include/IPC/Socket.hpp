@@ -34,8 +34,8 @@ namespace Plazza
             [[nodiscard]] bool exist() const override;
 
             void setRelation(Relation relation) override;
-            Relation getRelation() const override;
-            const std::string &getBuffer() const override;
+            [[nodiscard]] Relation getRelation() const override;
+            [[nodiscard]] const std::string &getBuffer() const override;
 
         private:
             int _fd;
