@@ -20,56 +20,53 @@ Order::Order(const std::string &order, int cookingMultiplier) : _order(order), _
     static int id = 0;
     std::string tmpOrder = order;
 
-    _id = id++;
+    tmpOrder.erase(0, tmpOrder.find_first_not_of("; \t"));
     try {
-        while (1)
-            nextPizza(tmpOrder);
-    } catch(const OrderError &e) {
+        while (nextPizza(tmpOrder));
     } catch(const ParserError &e) {
         throw e;
     }
+    _id = id++;
 }
 
-const std::string Order::nextWord(std::string &order) const
+const std::string Order::nextWord(std::string &order, bool extremity) const
 {
-    size_t i = 0;
+    int begin = 0;
     std::string word = "";
+    int end = 0;
 
-    for (; order[i] && (order[i] == ';' || order[i] == ' ' || order[i] == '\t'); i++);
-    for (; order[i] && order[i] != ' ' && order[i] != ';' && order[i] != '\t'; i++) {
-        word += order[i];
+    begin = order.find_first_not_of(" \t");
+    end = order.find_first_of((extremity ? " \t;\n" : " \t\n"), begin);
+    if (end == -1) {
+        order = "";
+        return (word);
     }
-    for (; order[i] && (order[i] == ';' || order[i] == ' ' || order[i] == '\t'); i++);
-    order.erase(0, i);
+    word = order.substr(begin, end);
+    end = order.find_first_not_of((extremity ? " \t;\n" : " \t\n"), end);
+    order.erase(0, end);
     return (word);
 }
 
-void Order::nextPizza(std::string &order)
+bool Order::nextPizza(std::string &order)
 {
-    std::string typeWord = nextWord(order);
-    std::string sizeWord = nextWord(order);
-    std::string numberWord = nextWord(order);
+    std::string typeWord = nextWord(order, false);
+    std::string sizeWord = nextWord(order, false);
+    std::string numberWord = nextWord(order, true);
     IPizza::PizzaType type;
     IPizza::PizzaSize size;
     int nb = 0;
 
     try {
-        type = Utils::getPizzaType(typeWord);
+        type = Utils::getPizzaType(Utils::toLower(typeWord));
         size = Utils::getPizzaSize(sizeWord);
     } catch(const UtilsError& e) {
         throw ParserError("Wrong command", "nextPizza");
     }
 
-    if (numberWord[0] != 'x')
+    if (numberWord.size() <= 1 || numberWord[0] != 'x' || numberWord[1] <= '0' || numberWord[1] > '9')
         throw ParserError("Wrong argument, cannot find the number", "nextPizza");
-    std::string tmpNumber;
-    for (size_t i = 1; numberWord[i]; i++) {
-        tmpNumber += numberWord[i];
-    }
     try {
-        nb = std::stoi(tmpNumber);
-        if (nb < 1)
-            throw ParserError("Wrong argument, wrong number", "nextPizza");
+        nb = std::stoi(numberWord.substr(1, numberWord.size()));
     } catch(const std::exception& e) {
         throw ParserError("Wrong argument, wrong number", "nextPizza");
     }
@@ -77,7 +74,8 @@ void Order::nextPizza(std::string &order)
         _pizzas.emplace_back(type, size, false, false);
     }
     if (order.empty())
-        throw OrderError("No more pizza");
+        return (false);
+    return (true);
 }
 
 std::shared_ptr<IPizza> Order::getNextPizza() const

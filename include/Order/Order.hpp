@@ -38,8 +38,8 @@ namespace Plazza
             void setSend(int i, send_t send);
 
         private:
-            void nextPizza(std::string &order);
-            const std::string nextWord(std::string &order) const;
+            bool nextPizza(std::string &order);
+            const std::string nextWord(std::string &order, bool extremity) const;
 
             [[nodiscard]] std::shared_ptr<IPizza> createMargarita(IPizza::PizzaSize size) const;
             [[nodiscard]] std::shared_ptr<IPizza> createAmericana(IPizza::PizzaSize size) const;
