@@ -1,10 +1,6 @@
 var searchData=
 [
-  ['read',['read',['../class_plazza_1_1_client.html#a67ddea6aadbced660c55350187362bda',1,'Plazza::Client']]],
-  ['reception',['Reception',['../class_plazza_1_1_reception.html#a2c6629b39f7dc21bbdeafc0a9e6b4808',1,'Plazza::Reception']]],
-  ['receptionerror',['ReceptionError',['../class_plazza_1_1_reception_error.html#a415f10560705f76feccb46110fcf88c6',1,'Plazza::ReceptionError']]],
-  ['regenerateingredient',['regenerateIngredient',['../class_plazza_1_1_stock.html#a8809f13dfad248d048f42a874f3d7413',1,'Plazza::Stock']]],
-  ['regina',['Regina',['../class_plazza_1_1_regina.html#a67dadd0139efc799e78050966035ac82',1,'Plazza::Regina']]],
-  ['reserveingredient',['reserveIngredient',['../class_plazza_1_1_stock.html#a62e3a37c99c49f81d3acaf17b71b1011',1,'Plazza::Stock']]],
-  ['run',['run',['../class_plazza_1_1_kitchen.html#adc14861f0180ceab7d8c7160eb47a267',1,'Plazza::Kitchen::run()'],['../class_plazza_1_1_reception.html#a73430319934872441506482fba8cf642',1,'Plazza::Reception::run()']]]
+  ['newconnection',['newConnection',['../class_plazza_1_1_server.html#aef34ac2e4c8fa64e248790856fea31dc',1,'Plazza::Server']]],
+  ['notify_5fall',['notify_all',['../class_plazza_1_1_condition_variable.html#aac76946802a3b12ae5775935dd6cab7a',1,'Plazza::ConditionVariable::notify_all()'],['../class_plazza_1_1_i_condition_variable.html#afe1bfdb31436aeb3b04c4508dd6981e3',1,'Plazza::IConditionVariable::notify_all()']]],
+  ['notify_5fone',['notify_one',['../class_plazza_1_1_condition_variable.html#a489caf53c93810b84b64a060eb54a9fb',1,'Plazza::ConditionVariable::notify_one()'],['../class_plazza_1_1_i_condition_variable.html#a21e9461f49c815284c6ce304bdd6e2f8',1,'Plazza::IConditionVariable::notify_one()']]]
 ];

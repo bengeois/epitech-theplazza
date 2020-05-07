@@ -1,6 +1,9 @@
 <map id="main" name="main">
-<area shape="rect" id="node1" title=" " alt="" coords="5,64,60,91"/>
-<area shape="rect" id="node2" href="$class_plazza_1_1_reception.html#a73430319934872441506482fba8cf642" title=" " alt="" coords="108,5,273,32"/>
-<area shape="rect" id="node3" href="$class_plazza_1_1_plazza_error.html#a66df02d9fd1323d218e0ebeccfef942e" title=" " alt="" coords="118,57,263,98"/>
-<area shape="rect" id="node4" href="$class_plazza_1_1_plazza_error.html#aafd47cb568e353a259e2de5f64f60aa4" title=" " alt="" coords="118,122,263,163"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,137,60,163"/>
+<area shape="rect" id="node2" href="$class_plazza_1_1_reception.html#a73430319934872441506482fba8cf642" title=" " alt="" coords="108,78,273,105"/>
+<area shape="rect" id="node6" href="$class_plazza_1_1_plazza_error.html#a66df02d9fd1323d218e0ebeccfef942e" title=" " alt="" coords="118,129,263,171"/>
+<area shape="rect" id="node7" href="$class_plazza_1_1_plazza_error.html#aafd47cb568e353a259e2de5f64f60aa4" title=" " alt="" coords="118,195,263,236"/>
+<area shape="rect" id="node3" href="$class_plazza_1_1_user_shell.html#aecb2b7fc5ab1ac9cec2615cd96d300ee" title=" " alt="" coords="321,5,464,47"/>
+<area shape="rect" id="node4" href="$class_plazza_1_1_user_shell.html#ad5fd6666cd8caee6dc608c0c52872f13" title=" " alt="" coords="321,71,464,112"/>
+<area shape="rect" id="node5" href="$class_plazza_1_1_user_shell.html#acb2ecfbb0c43b0d9e38ee0f97414aa72" title=" " alt="" coords="321,136,464,177"/>
 </map>

@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['isfinish',['isFinish',['../class_plazza_1_1_order.html#a607eadf6da2ab82916aa5a68e09f277d',1,'Plazza::Order']]],
-  ['isshellactive',['isShellActive',['../class_plazza_1_1_user_shell.html#aecb2b7fc5ab1ac9cec2615cd96d300ee',1,'Plazza::UserShell']]],
-  ['iswriting',['isWriting',['../class_plazza_1_1_client.html#a5ccf67f0a60b9706beb7c5cd8d651524',1,'Plazza::Client']]]
+  ['hasdata',['hasData',['../class_plazza_1_1_i_process.html#ae8a8bef25536233cef367ebaa052ec7e',1,'Plazza::IProcess::hasData()'],['../class_plazza_1_1_process.html#a5053fdca24bc174a5b087e0b283c482a',1,'Plazza::Process::hasData()']]]
 ];

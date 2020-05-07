@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['newconnection',['newConnection',['../class_plazza_1_1_server.html#a4caf81e22e3a0535dd5955b422b897f0',1,'Plazza::Server']]]
+  ['kitchen',['Kitchen',['../class_plazza_1_1_kitchen.html#aff0b2c3aee7290110062b962ad3082d6',1,'Plazza::Kitchen']]],
+  ['kitchenerror',['KitchenError',['../class_plazza_1_1_kitchen_error.html#a8ec8a1648d3cde56bedab34b8d20954e',1,'Plazza::KitchenError']]]
 ];

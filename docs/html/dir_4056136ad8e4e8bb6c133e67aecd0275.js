@@ -10,6 +10,9 @@ var dir_4056136ad8e4e8bb6c133e67aecd0275 =
       [ "KitchenError", "class_plazza_1_1_kitchen_error.html", "class_plazza_1_1_kitchen_error" ],
       [ "OrderError", "class_plazza_1_1_order_error.html", "class_plazza_1_1_order_error" ],
       [ "UtilsError", "class_plazza_1_1_utils_error.html", "class_plazza_1_1_utils_error" ],
-      [ "FileError", "class_plazza_1_1_file_error.html", "class_plazza_1_1_file_error" ]
+      [ "FileError", "class_plazza_1_1_file_error.html", "class_plazza_1_1_file_error" ],
+      [ "ProcessError", "class_plazza_1_1_process_error.html", "class_plazza_1_1_process_error" ],
+      [ "SocketError", "class_plazza_1_1_socket_error.html", "class_plazza_1_1_socket_error" ],
+      [ "PipeError", "class_plazza_1_1_pipe_error.html", "class_plazza_1_1_pipe_error" ]
     ] ]
 ];

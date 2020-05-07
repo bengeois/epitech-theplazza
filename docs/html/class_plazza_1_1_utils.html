@@ -107,11 +107,47 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:a3bc919dd2fe10d6296a7ec3cb985a507"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6e9dfab89b9fb3665089a8e66b195a96"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_plazza_1_1_i_pizza.html#a9ff7e2d098749b4b45380917f0fe3df6">IPizza::PizzaSize</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plazza_1_1_utils.html#a6e9dfab89b9fb3665089a8e66b195a96">getPizzaSize</a> (const std::string &amp;size)</td></tr>
 <tr class="separator:a6e9dfab89b9fb3665089a8e66b195a96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9340b72684a8ff409b6429c23a4689d4"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plazza_1_1_utils.html#a9340b72684a8ff409b6429c23a4689d4">toLower</a> (std::string &amp;str)</td></tr>
+<tr class="separator:a9340b72684a8ff409b6429c23a4689d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a762a51f15c36783eb6a0edb6009b44bd"><td class="memItemLeft" align="right" valign="top">static const std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plazza_1_1_utils.html#a762a51f15c36783eb6a0edb6009b44bd">getStringIngredient</a> (<a class="el" href="namespace_plazza.html#afe5346ec7639f5c2136a71f0cdc30d8b">Ingredient</a> type)</td></tr>
+<tr class="separator:a762a51f15c36783eb6a0edb6009b44bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e150b5f237fa826f28e7220509a9225"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plazza_1_1_utils.html#a6e150b5f237fa826f28e7220509a9225">blockRead</a> (int fd)</td></tr>
+<tr class="separator:a6e150b5f237fa826f28e7220509a9225"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b65707bc618bb87e156c8c5db73e6b5"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plazza_1_1_utils.html#a0b65707bc618bb87e156c8c5db73e6b5">unblockRead</a> (int fd)</td></tr>
+<tr class="separator:a0b65707bc618bb87e156c8c5db73e6b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_utils_8hpp_source.html#l00021">21</a> of file <a class="el" href="_utils_8hpp_source.html">Utils.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_utils_8hpp_source.html#l00022">22</a> of file <a class="el" href="_utils_8hpp_source.html">Utils.hpp</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a6e150b5f237fa826f28e7220509a9225"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e150b5f237fa826f28e7220509a9225">&#9670;&nbsp;</a></span>blockRead()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Utils::blockRead </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fd</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_utils_8cpp_source.html#l00102">102</a> of file <a class="el" href="_utils_8cpp_source.html">Utils.cpp</a>.</p>
+
+</div>
+</div>
 <a id="a6e9dfab89b9fb3665089a8e66b195a96"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6e9dfab89b9fb3665089a8e66b195a96">&#9670;&nbsp;</a></span>getPizzaSize()</h2>
 
@@ -136,18 +172,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_utils_8cpp_source.html#l00056">56</a> of file <a class="el" href="_utils_8cpp_source.html">Utils.cpp</a>.</p>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_plazza_1_1_utils_a6e9dfab89b9fb3665089a8e66b195a96_icgraph.png" border="0" usemap="#class_plazza_1_1_utils_a6e9dfab89b9fb3665089a8e66b195a96_icgraph" alt=""/></div>
-<map name="class_plazza_1_1_utils_a6e9dfab89b9fb3665089a8e66b195a96_icgraph" id="class_plazza_1_1_utils_a6e9dfab89b9fb3665089a8e66b195a96_icgraph">
-<area shape="rect"  title=" " alt="" coords="551,13,743,39"/>
-<area shape="rect"  href="class_plazza_1_1_kitchen.html#ae3d8733465da16c44a8180ab0a6b2754" title=" " alt="" coords="307,5,503,47"/>
-<area shape="rect"  href="class_plazza_1_1_kitchen.html#adc14861f0180ceab7d8c7160eb47a267" title=" " alt="" coords="108,13,259,39"/>
-<area shape="rect"  href="main2_8cpp.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,13,60,39"/>
-</map>
-</div>
+<p class="definition">Definition at line <a class="el" href="_utils_8cpp_source.html#l00067">67</a> of file <a class="el" href="_utils_8cpp_source.html">Utils.cpp</a>.</p>
 
 </div>
 </div>
@@ -175,18 +200,35 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_utils_8cpp_source.html#l00042">42</a> of file <a class="el" href="_utils_8cpp_source.html">Utils.cpp</a>.</p>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_plazza_1_1_utils_a3bc919dd2fe10d6296a7ec3cb985a507_icgraph.png" border="0" usemap="#class_plazza_1_1_utils_a3bc919dd2fe10d6296a7ec3cb985a507_icgraph" alt=""/></div>
-<map name="class_plazza_1_1_utils_a3bc919dd2fe10d6296a7ec3cb985a507_icgraph" id="class_plazza_1_1_utils_a3bc919dd2fe10d6296a7ec3cb985a507_icgraph">
-<area shape="rect"  title=" " alt="" coords="551,13,745,39"/>
-<area shape="rect"  href="class_plazza_1_1_kitchen.html#ae3d8733465da16c44a8180ab0a6b2754" title=" " alt="" coords="307,5,503,47"/>
-<area shape="rect"  href="class_plazza_1_1_kitchen.html#adc14861f0180ceab7d8c7160eb47a267" title=" " alt="" coords="108,13,259,39"/>
-<area shape="rect"  href="main2_8cpp.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,13,60,39"/>
-</map>
+<p class="definition">Definition at line <a class="el" href="_utils_8cpp_source.html#l00053">53</a> of file <a class="el" href="_utils_8cpp_source.html">Utils.cpp</a>.</p>
+
 </div>
+</div>
+<a id="a762a51f15c36783eb6a0edb6009b44bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a762a51f15c36783eb6a0edb6009b44bd">&#9670;&nbsp;</a></span>getStringIngredient()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::string Utils::getStringIngredient </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespace_plazza.html#afe5346ec7639f5c2136a71f0cdc30d8b">Ingredient</a>&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_utils_8cpp_source.html#l00082">82</a> of file <a class="el" href="_utils_8cpp_source.html">Utils.cpp</a>.</p>
 
 </div>
 </div>
@@ -214,18 +256,15 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_utils_8cpp_source.html#l00027">27</a> of file <a class="el" href="_utils_8cpp_source.html">Utils.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_utils_8cpp_source.html#l00038">38</a> of file <a class="el" href="_utils_8cpp_source.html">Utils.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_plazza_1_1_utils_a70c4746916ac314a8a8cde49fdbf4db8_icgraph.png" border="0" usemap="#class_plazza_1_1_utils_a70c4746916ac314a8a8cde49fdbf4db8_icgraph" alt=""/></div>
 <map name="class_plazza_1_1_utils_a70c4746916ac314a8a8cde49fdbf4db8_icgraph" id="class_plazza_1_1_utils_a70c4746916ac314a8a8cde49fdbf4db8_icgraph">
-<area shape="rect"  title=" " alt="" coords="559,64,728,105"/>
-<area shape="rect"  href="class_plazza_1_1_kitchen.html#a5e3368266f4341879a9a22dc295d21e3" title=" " alt="" coords="307,5,511,47"/>
-<area shape="rect"  href="class_plazza_1_1_order.html#a9260ac9c418efe4b543619676ea3aa82" title=" " alt="" coords="335,71,482,98"/>
-<area shape="rect"  href="_order_8cpp.html#aa9fb89b015ab07ad4d271159c549ba52" title=" " alt="" coords="359,122,458,149"/>
-<area shape="rect"  href="class_plazza_1_1_kitchen.html#adc14861f0180ceab7d8c7160eb47a267" title=" " alt="" coords="108,13,259,39"/>
-<area shape="rect"  href="main2_8cpp.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,13,60,39"/>
+<area shape="rect"  title=" " alt="" coords="200,23,369,65"/>
+<area shape="rect"  href="class_plazza_1_1_order.html#a9260ac9c418efe4b543619676ea3aa82" title=" " alt="" coords="5,5,152,32"/>
+<area shape="rect"  href="_order_8cpp.html#aa9fb89b015ab07ad4d271159c549ba52" title=" " alt="" coords="29,56,128,83"/>
 </map>
 </div>
 
@@ -255,20 +294,73 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_utils_8cpp_source.html#l00013">13</a> of file <a class="el" href="_utils_8cpp_source.html">Utils.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_utils_8cpp_source.html#l00024">24</a> of file <a class="el" href="_utils_8cpp_source.html">Utils.cpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_plazza_1_1_utils_a042287a5dc26501bc3c39648bafdbbc2_icgraph.png" border="0" usemap="#class_plazza_1_1_utils_a042287a5dc26501bc3c39648bafdbbc2_icgraph" alt=""/></div>
 <map name="class_plazza_1_1_utils_a042287a5dc26501bc3c39648bafdbbc2_icgraph" id="class_plazza_1_1_utils_a042287a5dc26501bc3c39648bafdbbc2_icgraph">
-<area shape="rect"  title=" " alt="" coords="559,64,728,105"/>
-<area shape="rect"  href="class_plazza_1_1_kitchen.html#a5e3368266f4341879a9a22dc295d21e3" title=" " alt="" coords="307,5,511,47"/>
-<area shape="rect"  href="class_plazza_1_1_order.html#a9260ac9c418efe4b543619676ea3aa82" title=" " alt="" coords="335,71,482,98"/>
-<area shape="rect"  href="_order_8cpp.html#aa9fb89b015ab07ad4d271159c549ba52" title=" " alt="" coords="359,122,458,149"/>
-<area shape="rect"  href="class_plazza_1_1_kitchen.html#adc14861f0180ceab7d8c7160eb47a267" title=" " alt="" coords="108,13,259,39"/>
-<area shape="rect"  href="main2_8cpp.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,13,60,39"/>
+<area shape="rect"  title=" " alt="" coords="200,23,369,65"/>
+<area shape="rect"  href="class_plazza_1_1_order.html#a9260ac9c418efe4b543619676ea3aa82" title=" " alt="" coords="5,5,152,32"/>
+<area shape="rect"  href="_order_8cpp.html#aa9fb89b015ab07ad4d271159c549ba52" title=" " alt="" coords="29,56,128,83"/>
 </map>
 </div>
+
+</div>
+</div>
+<a id="a9340b72684a8ff409b6429c23a4689d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9340b72684a8ff409b6429c23a4689d4">&#9670;&nbsp;</a></span>toLower()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Utils::toLower </td>
+          <td>(</td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>str</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_utils_8cpp_source.html#l00016">16</a> of file <a class="el" href="_utils_8cpp_source.html">Utils.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a0b65707bc618bb87e156c8c5db73e6b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b65707bc618bb87e156c8c5db73e6b5">&#9670;&nbsp;</a></span>unblockRead()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Utils::unblockRead </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fd</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_utils_8cpp_source.html#l00113">113</a> of file <a class="el" href="_utils_8cpp_source.html">Utils.cpp</a>.</p>
 
 </div>
 </div>

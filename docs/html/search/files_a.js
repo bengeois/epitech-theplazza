@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['server_2ecpp',['Server.cpp',['../_server_8cpp.html',1,'']]],
-  ['server_2ehpp',['Server.hpp',['../_server_8hpp.html',1,'']]],
-  ['stock_2ecpp',['Stock.cpp',['../_stock_8cpp.html',1,'']]],
-  ['stock_2ehpp',['Stock.hpp',['../_stock_8hpp.html',1,'']]]
+  ['reception_2ecpp',['Reception.cpp',['../_reception_8cpp.html',1,'']]],
+  ['reception_2ehpp',['Reception.hpp',['../_reception_8hpp.html',1,'']]],
+  ['regina_2ecpp',['Regina.cpp',['../_regina_8cpp.html',1,'']]],
+  ['regina_2ehpp',['Regina.hpp',['../_regina_8hpp.html',1,'']]]
 ];

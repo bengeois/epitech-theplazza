@@ -1,7 +1,10 @@
 var searchData=
 [
-  ['reception_2ecpp',['Reception.cpp',['../_reception_8cpp.html',1,'']]],
-  ['reception_2ehpp',['Reception.hpp',['../_reception_8hpp.html',1,'']]],
-  ['regina_2ecpp',['Regina.cpp',['../_regina_8cpp.html',1,'']]],
-  ['regina_2ehpp',['Regina.hpp',['../_regina_8hpp.html',1,'']]]
+  ['parser_2ecpp',['Parser.cpp',['../_parser_8cpp.html',1,'']]],
+  ['parser_2ehpp',['Parser.hpp',['../_parser_8hpp.html',1,'']]],
+  ['pipe_2ecpp',['Pipe.cpp',['../_pipe_8cpp.html',1,'']]],
+  ['pipe_2ehpp',['Pipe.hpp',['../_pipe_8hpp.html',1,'']]],
+  ['plazza_2ehpp',['Plazza.hpp',['../_plazza_8hpp.html',1,'']]],
+  ['process_2ecpp',['Process.cpp',['../_process_8cpp.html',1,'']]],
+  ['process_2ehpp',['Process.hpp',['../_process_8hpp.html',1,'']]]
 ];

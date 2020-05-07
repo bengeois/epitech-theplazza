@@ -1,10 +1,9 @@
 <map id="include/Utils.hpp" name="include/Utils.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="642,5,773,32"/>
-<area shape="rect" id="node2" href="$_kitchen_8hpp.html" title=" " alt="" coords="359,80,562,107"/>
-<area shape="rect" id="node6" href="$_reception_8cpp.html" title=" " alt="" coords="604,155,808,181"/>
-<area shape="rect" id="node7" href="$_order_8cpp.html" title=" " alt="" coords="690,80,837,107"/>
-<area shape="rect" id="node8" href="$_utils_8cpp.html" title=" " alt="" coords="861,80,997,107"/>
+<area shape="rect" id="node1" title=" " alt="" coords="531,5,662,32"/>
+<area shape="rect" id="node2" href="$_kitchen_8hpp.html" title=" " alt="" coords="249,80,451,107"/>
+<area shape="rect" id="node5" href="$_reception_8cpp.html" title=" " alt="" coords="467,155,671,181"/>
+<area shape="rect" id="node6" href="$_order_8cpp.html" title=" " alt="" coords="579,80,726,107"/>
+<area shape="rect" id="node7" href="$_utils_8cpp.html" title=" " alt="" coords="750,80,886,107"/>
 <area shape="rect" id="node3" href="$_kitchen_8cpp.html" title=" " alt="" coords="5,155,180,181"/>
-<area shape="rect" id="node4" href="$main2_8cpp.html" title=" " alt="" coords="204,155,317,181"/>
-<area shape="rect" id="node5" href="$_kitchen_process_8cpp.html" title=" " alt="" coords="341,155,580,181"/>
+<area shape="rect" id="node4" href="$_kitchen_process_8cpp.html" title=" " alt="" coords="204,155,443,181"/>
 </map>

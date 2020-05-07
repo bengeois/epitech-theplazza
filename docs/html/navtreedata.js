@@ -38,8 +38,8 @@ var NAVTREE =
       [ "Class Index", "classes.html", null ],
       [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
       [ "Class Members", "functions.html", [
-        [ "All", "functions.html", null ],
-        [ "Functions", "functions_func.html", null ],
+        [ "All", "functions.html", "functions_dup" ],
+        [ "Functions", "functions_func.html", "functions_func" ],
         [ "Variables", "functions_vars.html", null ],
         [ "Enumerations", "functions_enum.html", null ],
         [ "Enumerator", "functions_eval.html", null ]
@@ -60,7 +60,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_a_pizza_8cpp.html",
-"class_plazza_1_1_utils_error.html#a0f9c33c18a78042449511cbf40253618"
+"class_plazza_1_1_kitchen.html#a89f27b5d0afb147a6e6cdc405b9f50cb",
+"functions_func.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

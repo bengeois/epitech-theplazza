@@ -1,9 +1,21 @@
 var searchData=
 [
+  ['iconditionvariable',['IConditionVariable',['../class_plazza_1_1_i_condition_variable.html',1,'Plazza']]],
+  ['iconditionvariable_2ehpp',['IConditionVariable.hpp',['../_i_condition_variable_8hpp.html',1,'']]],
+  ['iipc',['IIPC',['../class_plazza_1_1_i_i_p_c.html',1,'Plazza']]],
+  ['iipc_2ehpp',['IIPC.hpp',['../_i_i_p_c_8hpp.html',1,'']]],
+  ['imutex',['IMutex',['../class_plazza_1_1_i_mutex.html',1,'Plazza']]],
+  ['imutex_2ehpp',['IMutex.hpp',['../_i_mutex_8hpp.html',1,'']]],
   ['ingredient',['Ingredient',['../namespace_plazza.html#afe5346ec7639f5c2136a71f0cdc30d8b',1,'Plazza']]],
+  ['ipctype',['IPCType',['../class_plazza_1_1_i_i_p_c.html#a55bf792d4ffbb0e22ad15b6d9d61321c',1,'Plazza::IIPC']]],
   ['ipizza',['IPizza',['../class_plazza_1_1_i_pizza.html',1,'Plazza']]],
   ['ipizza_2ehpp',['IPizza.hpp',['../_i_pizza_8hpp.html',1,'']]],
+  ['iprocess',['IProcess',['../class_plazza_1_1_i_process.html',1,'Plazza']]],
+  ['iprocess_2ehpp',['IProcess.hpp',['../_i_process_8hpp.html',1,'']]],
+  ['isalive',['isAlive',['../class_plazza_1_1_i_process.html#ac343050393fffb1aad0eafb1502cef78',1,'Plazza::IProcess::isAlive()'],['../class_plazza_1_1_process.html#ae06f5872d980ea129cdeed1a36a6ac08',1,'Plazza::Process::isAlive()']]],
   ['isfinish',['isFinish',['../class_plazza_1_1_order.html#a607eadf6da2ab82916aa5a68e09f277d',1,'Plazza::Order']]],
+  ['isinchild',['isInChild',['../class_plazza_1_1_i_process.html#a085efffb1363d9807208f9454aa05522',1,'Plazza::IProcess::isInChild()'],['../class_plazza_1_1_process.html#ad0841677dbb18f4c2d680885e2e0a2aa',1,'Plazza::Process::isInChild()']]],
   ['isshellactive',['isShellActive',['../class_plazza_1_1_user_shell.html#aecb2b7fc5ab1ac9cec2615cd96d300ee',1,'Plazza::UserShell']]],
-  ['iswriting',['isWriting',['../class_plazza_1_1_client.html#a5ccf67f0a60b9706beb7c5cd8d651524',1,'Plazza::Client']]]
+  ['ithread',['IThread',['../class_plazza_1_1_i_thread.html',1,'Plazza']]],
+  ['ithread_2ehpp',['IThread.hpp',['../_i_thread_8hpp.html',1,'']]]
 ];

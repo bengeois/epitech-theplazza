@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['order',['Order',['../class_plazza_1_1_order.html',1,'Plazza']]],
-  ['ordererror',['OrderError',['../class_plazza_1_1_order_error.html',1,'Plazza']]]
+  ['margarita',['Margarita',['../class_plazza_1_1_margarita.html',1,'Plazza']]],
+  ['mutex',['Mutex',['../class_plazza_1_1_mutex.html',1,'Plazza']]]
 ];

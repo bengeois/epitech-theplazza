@@ -1,15 +1,6 @@
 <map id="main" name="main">
-<area shape="rect" id="node1" title=" " alt="" coords="5,123,60,149"/>
-<area shape="rect" id="node2" href="$class_plazza_1_1_kitchen.html#ac71cd620e95727e3c5f3eae7cb79c910" title=" " alt="" coords="581,5,767,32"/>
-<area shape="rect" id="node3" href="$class_plazza_1_1_kitchen.html#adc14861f0180ceab7d8c7160eb47a267" title=" " alt="" coords="108,152,259,179"/>
-<area shape="rect" id="node4" href="$class_plazza_1_1_kitchen.html#a92b7c04e08b86ad7554a89708d223684" title=" " alt="" coords="307,181,524,208"/>
-<area shape="rect" id="node5" href="$class_plazza_1_1_kitchen.html#a5e3368266f4341879a9a22dc295d21e3" title=" " alt="" coords="313,319,517,361"/>
-<area shape="rect" id="node9" href="$class_plazza_1_1_kitchen.html#ae3d8733465da16c44a8180ab0a6b2754" title=" " alt="" coords="317,115,513,157"/>
-<area shape="rect" id="node6" href="$namespace_plazza.html#ab9e356a65043a9cbf81a28d2e155f03a" title=" " alt="" coords="597,356,751,383"/>
-<area shape="rect" id="node7" href="$class_plazza_1_1_utils.html#a042287a5dc26501bc3c39648bafdbbc2" title=" " alt="" coords="589,407,759,449"/>
-<area shape="rect" id="node8" href="$class_plazza_1_1_utils.html#a70c4746916ac314a8a8cde49fdbf4db8" title=" " alt="" coords="589,290,759,331"/>
-<area shape="rect" id="node10" href="$class_plazza_1_1_kitchen.html#a05143de7514f73e5897888efcddb83c3" title=" " alt="" coords="572,57,776,98"/>
-<area shape="rect" id="node11" href="$class_plazza_1_1_utils.html#a3bc919dd2fe10d6296a7ec3cb985a507" title=" " alt="" coords="577,123,771,149"/>
-<area shape="rect" id="node12" href="$class_plazza_1_1_utils.html#a6e9dfab89b9fb3665089a8e66b195a96" title=" " alt="" coords="578,173,770,200"/>
-<area shape="rect" id="node13" href="$class_plazza_1_1_kitchen.html#a543f688d7f17fc7eea1bc940af383940" title=" " alt="" coords="576,225,772,266"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,78,60,105"/>
+<area shape="rect" id="node2" href="$class_plazza_1_1_user_shell.html#aecb2b7fc5ab1ac9cec2615cd96d300ee" title=" " alt="" coords="108,5,251,47"/>
+<area shape="rect" id="node3" href="$class_plazza_1_1_user_shell.html#ad5fd6666cd8caee6dc608c0c52872f13" title=" " alt="" coords="108,71,251,112"/>
+<area shape="rect" id="node4" href="$class_plazza_1_1_user_shell.html#acb2ecfbb0c43b0d9e38ee0f97414aa72" title=" " alt="" coords="108,136,251,177"/>
 </map>

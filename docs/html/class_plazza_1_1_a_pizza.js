@@ -6,8 +6,8 @@ var class_plazza_1_1_a_pizza =
     [ "getIngredient", "class_plazza_1_1_a_pizza.html#a7a215e979da008dc26e04a3173e3b04c", null ],
     [ "getSize", "class_plazza_1_1_a_pizza.html#a5d9e26ef299b5fa48d4990f13a0c1eab", null ],
     [ "getType", "class_plazza_1_1_a_pizza.html#ab452ba7a335adfdeeb35b9b792a8ddfd", null ],
-    [ "_cookingMultiplier", "class_plazza_1_1_a_pizza.html#ae2621bfb2da4d0b819621f4b42f3cd2c", null ],
+    [ "_cookingMultiplier", "class_plazza_1_1_a_pizza.html#a7d2a7dc07a0ae0d8561d540cff46a1d0", null ],
     [ "_ingredients", "class_plazza_1_1_a_pizza.html#acf5aa27d99f2c8ce002fd447572118d8", null ],
-    [ "_size", "class_plazza_1_1_a_pizza.html#a1dd3c3d65634dd96a84ee5e2e7e39161", null ],
-    [ "_type", "class_plazza_1_1_a_pizza.html#a4bd657a1c55b9e81d6c6594ce6a3d4f6", null ]
+    [ "_size", "class_plazza_1_1_a_pizza.html#a723d73fb39c2886e2bc6249742ae5754", null ],
+    [ "_type", "class_plazza_1_1_a_pizza.html#aa747aa8f77279c660145bb7e9c8248c4", null ]
 ];

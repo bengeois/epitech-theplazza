@@ -103,6 +103,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a77614bf0c9cbefa152bdc0b9e799e967"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aab8dba6999960cddf47e1f94554f5997"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plazza_1_1_stock.html#aab8dba6999960cddf47e1f94554f5997">~Stock</a> ()=default</td></tr>
 <tr class="separator:aab8dba6999960cddf47e1f94554f5997"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a833f0526babf892fff3df795c26478"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plazza_1_1_stock.html#a6a833f0526babf892fff3df795c26478">Stock</a> (const <a class="el" href="class_plazza_1_1_stock.html">Stock</a> &amp;other)=default</td></tr>
+<tr class="separator:a6a833f0526babf892fff3df795c26478"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72fda3c5c508ac93872978bdf9a5b0fb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_plazza_1_1_stock.html">Stock</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plazza_1_1_stock.html#a72fda3c5c508ac93872978bdf9a5b0fb">operator=</a> (const <a class="el" href="class_plazza_1_1_stock.html">Stock</a> &amp;rhs)=default</td></tr>
+<tr class="separator:a72fda3c5c508ac93872978bdf9a5b0fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8809f13dfad248d048f42a874f3d7413"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plazza_1_1_stock.html#a8809f13dfad248d048f42a874f3d7413">regenerateIngredient</a> ()</td></tr>
 <tr class="separator:a8809f13dfad248d048f42a874f3d7413"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a62e3a37c99c49f81d3acaf17b71b1011"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plazza_1_1_stock.html#a62e3a37c99c49f81d3acaf17b71b1011">reserveIngredient</a> (const std::shared_ptr&lt; <a class="el" href="class_plazza_1_1_i_pizza.html">IPizza</a> &gt; &amp;pizza)</td></tr>
@@ -113,13 +117,15 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aa637651abc6f6fab089533094ebda80f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8b9427ea8277a5cedb236d22dd3f288f"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plazza_1_1_stock.html#a8b9427ea8277a5cedb236d22dd3f288f">getRegenerateTime</a> () const</td></tr>
 <tr class="separator:a8b9427ea8277a5cedb236d22dd3f288f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ae777023cd85f5147abc896a925292e"><td class="memItemLeft" align="right" valign="top">const std::map&lt; size_t, size_t &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plazza_1_1_stock.html#a5ae777023cd85f5147abc896a925292e">getStock</a> () const</td></tr>
+<tr class="separator:a5ae777023cd85f5147abc896a925292e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
 <p class="definition">Definition at line <a class="el" href="_stock_8hpp_source.html#l00033">33</a> of file <a class="el" href="_stock_8hpp_source.html">Stock.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a77614bf0c9cbefa152bdc0b9e799e967"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a77614bf0c9cbefa152bdc0b9e799e967">&#9670;&nbsp;</a></span>Stock()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a77614bf0c9cbefa152bdc0b9e799e967">&#9670;&nbsp;</a></span>Stock() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -171,6 +177,32 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a6a833f0526babf892fff3df795c26478"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a833f0526babf892fff3df795c26478">&#9670;&nbsp;</a></span>Stock() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Plazza::Stock::Stock </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_plazza_1_1_stock.html">Stock</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="abf224ddc08ac62af6eafc882505f40fe"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abf224ddc08ac62af6eafc882505f40fe">&#9670;&nbsp;</a></span>canCookPizza()</h2>
@@ -208,6 +240,51 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="_stock_8cpp_source.html#l00050">50</a> of file <a class="el" href="_stock_8cpp_source.html">Stock.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a5ae777023cd85f5147abc896a925292e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ae777023cd85f5147abc896a925292e">&#9670;&nbsp;</a></span>getStock()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::map&lt; size_t, size_t &gt; &amp; Stock::getStock </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_stock_8cpp_source.html#l00055">55</a> of file <a class="el" href="_stock_8cpp_source.html">Stock.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a72fda3c5c508ac93872978bdf9a5b0fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72fda3c5c508ac93872978bdf9a5b0fb">&#9670;&nbsp;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_plazza_1_1_stock.html">Stock</a>&amp; Plazza::Stock::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_plazza_1_1_stock.html">Stock</a> &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>

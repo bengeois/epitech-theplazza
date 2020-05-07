@@ -104,19 +104,23 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ae19396e645fce6d28db1d7675b71e221"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a43dc760e4009299f38dc74d86bbc0df4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plazza_1_1_user_shell.html#a43dc760e4009299f38dc74d86bbc0df4">~UserShell</a> ()=default</td></tr>
 <tr class="separator:a43dc760e4009299f38dc74d86bbc0df4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2b038a8bb5ceff598c959d922825e68f"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plazza_1_1_user_shell.html#a2b038a8bb5ceff598c959d922825e68f">getUserCommand</a> ()</td></tr>
-<tr class="separator:a2b038a8bb5ceff598c959d922825e68f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06297775f0309737180daaa9faf36234"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plazza_1_1_user_shell.html#a06297775f0309737180daaa9faf36234">UserShell</a> (const <a class="el" href="class_plazza_1_1_user_shell.html">UserShell</a> &amp;other)=default</td></tr>
+<tr class="separator:a06297775f0309737180daaa9faf36234"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c8ab479b4c0c3be3b92595f826eac2a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_plazza_1_1_user_shell.html">UserShell</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plazza_1_1_user_shell.html#a3c8ab479b4c0c3be3b92595f826eac2a">operator=</a> (const <a class="el" href="class_plazza_1_1_user_shell.html">UserShell</a> &amp;rhs)=default</td></tr>
+<tr class="separator:a3c8ab479b4c0c3be3b92595f826eac2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aecb2b7fc5ab1ac9cec2615cd96d300ee"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plazza_1_1_user_shell.html#aecb2b7fc5ab1ac9cec2615cd96d300ee">isShellActive</a> ()</td></tr>
 <tr class="separator:aecb2b7fc5ab1ac9cec2615cd96d300ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a63881ceec2ba755ad82853e0fa76bd56"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plazza_1_1_user_shell.html#a63881ceec2ba755ad82853e0fa76bd56">setFdSet</a> (fd_set *readfd, fd_set *writefs)</td></tr>
-<tr class="separator:a63881ceec2ba755ad82853e0fa76bd56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb2ecfbb0c43b0d9e38ee0f97414aa72"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plazza_1_1_user_shell.html#acb2ecfbb0c43b0d9e38ee0f97414aa72">getUserCommand</a> ()</td></tr>
+<tr class="separator:acb2ecfbb0c43b0d9e38ee0f97414aa72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5fd6666cd8caee6dc608c0c52872f13"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plazza_1_1_user_shell.html#ad5fd6666cd8caee6dc608c0c52872f13">update</a> ()</td></tr>
+<tr class="separator:ad5fd6666cd8caee6dc608c0c52872f13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
 <p class="definition">Definition at line <a class="el" href="_user_shell_8hpp_source.html#l00017">17</a> of file <a class="el" href="_user_shell_8hpp_source.html">UserShell.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ae19396e645fce6d28db1d7675b71e221"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae19396e645fce6d28db1d7675b71e221">&#9670;&nbsp;</a></span>UserShell()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae19396e645fce6d28db1d7675b71e221">&#9670;&nbsp;</a></span>UserShell() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -130,7 +134,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_user_shell_8cpp_source.html#l00013">13</a> of file <a class="el" href="_user_shell_8cpp_source.html">UserShell.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_user_shell_8cpp_source.html#l00014">14</a> of file <a class="el" href="_user_shell_8cpp_source.html">UserShell.cpp</a>.</p>
 
 </div>
 </div>
@@ -159,15 +163,41 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a06297775f0309737180daaa9faf36234"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06297775f0309737180daaa9faf36234">&#9670;&nbsp;</a></span>UserShell() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Plazza::UserShell::UserShell </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_plazza_1_1_user_shell.html">UserShell</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a2b038a8bb5ceff598c959d922825e68f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2b038a8bb5ceff598c959d922825e68f">&#9670;&nbsp;</a></span>getUserCommand()</h2>
+<a id="acb2ecfbb0c43b0d9e38ee0f97414aa72"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb2ecfbb0c43b0d9e38ee0f97414aa72">&#9670;&nbsp;</a></span>getUserCommand()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const std::string &amp; UserShell::getUserCommand </td>
+          <td class="memname">std::string UserShell::getUserCommand </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -175,7 +205,18 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_user_shell_8cpp_source.html#l00017">17</a> of file <a class="el" href="_user_shell_8cpp_source.html">UserShell.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_user_shell_8cpp_source.html#l00040">40</a> of file <a class="el" href="_user_shell_8cpp_source.html">UserShell.cpp</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_plazza_1_1_user_shell_acb2ecfbb0c43b0d9e38ee0f97414aa72_icgraph.png" border="0" usemap="#class_plazza_1_1_user_shell_acb2ecfbb0c43b0d9e38ee0f97414aa72_icgraph" alt=""/></div>
+<map name="class_plazza_1_1_user_shell_acb2ecfbb0c43b0d9e38ee0f97414aa72_icgraph" id="class_plazza_1_1_user_shell_acb2ecfbb0c43b0d9e38ee0f97414aa72_icgraph">
+<area shape="rect"  title=" " alt="" coords="321,23,464,65"/>
+<area shape="rect"  href="main2_8cpp.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="163,5,218,32"/>
+<area shape="rect"  href="class_plazza_1_1_reception.html#a73430319934872441506482fba8cf642" title=" " alt="" coords="108,56,273,83"/>
+<area shape="rect"  href="main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title=" " alt="" coords="5,56,60,83"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -194,35 +235,74 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_user_shell_8cpp_source.html#l00036">36</a> of file <a class="el" href="_user_shell_8cpp_source.html">UserShell.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_user_shell_8cpp_source.html#l00018">18</a> of file <a class="el" href="_user_shell_8cpp_source.html">UserShell.cpp</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_plazza_1_1_user_shell_aecb2b7fc5ab1ac9cec2615cd96d300ee_icgraph.png" border="0" usemap="#class_plazza_1_1_user_shell_aecb2b7fc5ab1ac9cec2615cd96d300ee_icgraph" alt=""/></div>
+<map name="class_plazza_1_1_user_shell_aecb2b7fc5ab1ac9cec2615cd96d300ee_icgraph" id="class_plazza_1_1_user_shell_aecb2b7fc5ab1ac9cec2615cd96d300ee_icgraph">
+<area shape="rect"  title=" " alt="" coords="321,23,464,65"/>
+<area shape="rect"  href="main2_8cpp.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="163,5,218,32"/>
+<area shape="rect"  href="class_plazza_1_1_reception.html#a73430319934872441506482fba8cf642" title=" " alt="" coords="108,56,273,83"/>
+<area shape="rect"  href="main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title=" " alt="" coords="5,56,60,83"/>
+</map>
+</div>
 
 </div>
 </div>
-<a id="a63881ceec2ba755ad82853e0fa76bd56"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a63881ceec2ba755ad82853e0fa76bd56">&#9670;&nbsp;</a></span>setFdSet()</h2>
+<a id="a3c8ab479b4c0c3be3b92595f826eac2a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c8ab479b4c0c3be3b92595f826eac2a">&#9670;&nbsp;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_plazza_1_1_user_shell.html">UserShell</a>&amp; Plazza::UserShell::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_plazza_1_1_user_shell.html">UserShell</a> &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad5fd6666cd8caee6dc608c0c52872f13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5fd6666cd8caee6dc608c0c52872f13">&#9670;&nbsp;</a></span>update()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void Plazza::UserShell::setFdSet </td>
+          <td class="memname">void UserShell::update </td>
           <td>(</td>
-          <td class="paramtype">fd_set *&#160;</td>
-          <td class="paramname"><em>readfd</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
-          <td class="paramtype">fd_set *&#160;</td>
-          <td class="paramname"><em>writefs</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_user_shell_8cpp_source.html#l00023">23</a> of file <a class="el" href="_user_shell_8cpp_source.html">UserShell.cpp</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_plazza_1_1_user_shell_ad5fd6666cd8caee6dc608c0c52872f13_icgraph.png" border="0" usemap="#class_plazza_1_1_user_shell_ad5fd6666cd8caee6dc608c0c52872f13_icgraph" alt=""/></div>
+<map name="class_plazza_1_1_user_shell_ad5fd6666cd8caee6dc608c0c52872f13_icgraph" id="class_plazza_1_1_user_shell_ad5fd6666cd8caee6dc608c0c52872f13_icgraph">
+<area shape="rect"  title=" " alt="" coords="321,23,464,65"/>
+<area shape="rect"  href="main2_8cpp.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="163,5,218,32"/>
+<area shape="rect"  href="class_plazza_1_1_reception.html#a73430319934872441506482fba8cf642" title=" " alt="" coords="108,56,273,83"/>
+<area shape="rect"  href="main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title=" " alt="" coords="5,56,60,83"/>
+</map>
+</div>
 
 </div>
 </div>

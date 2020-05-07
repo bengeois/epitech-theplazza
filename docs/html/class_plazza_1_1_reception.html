@@ -99,10 +99,14 @@ $(document).ready(function(){initNavTree('class_plazza_1_1_reception.html','');}
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a2c6629b39f7dc21bbdeafc0a9e6b4808"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plazza_1_1_reception.html#a2c6629b39f7dc21bbdeafc0a9e6b4808">Reception</a> (long cookingMultiplier, int _cooksPerKitchen, float _stockTime)</td></tr>
-<tr class="separator:a2c6629b39f7dc21bbdeafc0a9e6b4808"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac37f6fa654246202f57bce962a18aff5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plazza_1_1_reception.html#ac37f6fa654246202f57bce962a18aff5">Reception</a> (long cookingMultiplier, int _cooksPerKitchen, float _stockTime, <a class="el" href="class_plazza_1_1_i_i_p_c.html#a55bf792d4ffbb0e22ad15b6d9d61321c">IIPC::IPCType</a> type=<a class="el" href="class_plazza_1_1_i_i_p_c.html#a55bf792d4ffbb0e22ad15b6d9d61321cafadfd4224d023d6a57eaffd337efb6c3">IIPC::SOCKET</a>)</td></tr>
+<tr class="separator:ac37f6fa654246202f57bce962a18aff5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae303969b9a08af6e7012d168cd54972c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plazza_1_1_reception.html#ae303969b9a08af6e7012d168cd54972c">~Reception</a> ()=default</td></tr>
 <tr class="separator:ae303969b9a08af6e7012d168cd54972c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04549793756f56f9ede929a42efe2a1a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plazza_1_1_reception.html#a04549793756f56f9ede929a42efe2a1a">Reception</a> (const <a class="el" href="class_plazza_1_1_reception.html">Reception</a> &amp;reception)</td></tr>
+<tr class="separator:a04549793756f56f9ede929a42efe2a1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50a01ff04ecc1758c30f9b8e62811538"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_plazza_1_1_reception.html">Reception</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plazza_1_1_reception.html#a50a01ff04ecc1758c30f9b8e62811538">operator=</a> (const <a class="el" href="class_plazza_1_1_reception.html">Reception</a> &amp;reception)</td></tr>
+<tr class="separator:a50a01ff04ecc1758c30f9b8e62811538"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a73430319934872441506482fba8cf642"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plazza_1_1_reception.html#a73430319934872441506482fba8cf642">run</a> ()</td></tr>
 <tr class="separator:a73430319934872441506482fba8cf642"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a178a2a378ec0c838092e7d195022adb4"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plazza_1_1_reception.html#a178a2a378ec0c838092e7d195022adb4">getCookingMultiplier</a> () const</td></tr>
@@ -122,8 +126,8 @@ Public Member Functions</h2></td></tr>
 <div class="textblock">
 <p class="definition">Definition at line <a class="el" href="_reception_8hpp_source.html#l00020">20</a> of file <a class="el" href="_reception_8hpp_source.html">Reception.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a2c6629b39f7dc21bbdeafc0a9e6b4808"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2c6629b39f7dc21bbdeafc0a9e6b4808">&#9670;&nbsp;</a></span>Reception()</h2>
+<a id="ac37f6fa654246202f57bce962a18aff5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac37f6fa654246202f57bce962a18aff5">&#9670;&nbsp;</a></span>Reception() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -144,7 +148,13 @@ Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>_stockTime</em>&#160;</td>
+          <td class="paramname"><em>_stockTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_plazza_1_1_i_i_p_c.html#a55bf792d4ffbb0e22ad15b6d9d61321c">IIPC::IPCType</a>&#160;</td>
+          <td class="paramname"><em>type</em> = <code><a class="el" href="class_plazza_1_1_i_i_p_c.html#a55bf792d4ffbb0e22ad15b6d9d61321cafadfd4224d023d6a57eaffd337efb6c3">IIPC::SOCKET</a></code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -183,6 +193,26 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a04549793756f56f9ede929a42efe2a1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04549793756f56f9ede929a42efe2a1a">&#9670;&nbsp;</a></span>Reception() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Reception::Reception </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_plazza_1_1_reception.html">Reception</a> &amp;&#160;</td>
+          <td class="paramname"><em>reception</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_reception_8cpp_source.html#l00039">39</a> of file <a class="el" href="_reception_8cpp_source.html">Reception.cpp</a>.</p>
+
+</div>
+</div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a178a2a378ec0c838092e7d195022adb4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a178a2a378ec0c838092e7d195022adb4">&#9670;&nbsp;</a></span>getCookingMultiplier()</h2>
@@ -199,7 +229,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_reception_8cpp_source.html#l00278">278</a> of file <a class="el" href="_reception_8cpp_source.html">Reception.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_reception_8cpp_source.html#l00367">367</a> of file <a class="el" href="_reception_8cpp_source.html">Reception.cpp</a>.</p>
 
 </div>
 </div>
@@ -218,7 +248,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_reception_8cpp_source.html#l00283">283</a> of file <a class="el" href="_reception_8cpp_source.html">Reception.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_reception_8cpp_source.html#l00372">372</a> of file <a class="el" href="_reception_8cpp_source.html">Reception.cpp</a>.</p>
 
 </div>
 </div>
@@ -237,7 +267,27 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_reception_8cpp_source.html#l00288">288</a> of file <a class="el" href="_reception_8cpp_source.html">Reception.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_reception_8cpp_source.html#l00377">377</a> of file <a class="el" href="_reception_8cpp_source.html">Reception.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a50a01ff04ecc1758c30f9b8e62811538"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50a01ff04ecc1758c30f9b8e62811538">&#9670;&nbsp;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_plazza_1_1_reception.html">Reception</a> &amp; Reception::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_plazza_1_1_reception.html">Reception</a> &amp;&#160;</td>
+          <td class="paramname"><em>reception</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_reception_8cpp_source.html#l00050">50</a> of file <a class="el" href="_reception_8cpp_source.html">Reception.cpp</a>.</p>
 
 </div>
 </div>
@@ -256,7 +306,18 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_reception_8cpp_source.html#l00042">42</a> of file <a class="el" href="_reception_8cpp_source.html">Reception.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_reception_8cpp_source.html#l00069">69</a> of file <a class="el" href="_reception_8cpp_source.html">Reception.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_plazza_1_1_reception_a73430319934872441506482fba8cf642_cgraph.png" border="0" usemap="#class_plazza_1_1_reception_a73430319934872441506482fba8cf642_cgraph" alt=""/></div>
+<map name="class_plazza_1_1_reception_a73430319934872441506482fba8cf642_cgraph" id="class_plazza_1_1_reception_a73430319934872441506482fba8cf642_cgraph">
+<area shape="rect"  title=" " alt="" coords="5,78,171,105"/>
+<area shape="rect"  href="class_plazza_1_1_user_shell.html#aecb2b7fc5ab1ac9cec2615cd96d300ee" title=" " alt="" coords="219,5,361,47"/>
+<area shape="rect"  href="class_plazza_1_1_user_shell.html#ad5fd6666cd8caee6dc608c0c52872f13" title=" " alt="" coords="219,71,361,112"/>
+<area shape="rect"  href="class_plazza_1_1_user_shell.html#acb2ecfbb0c43b0d9e38ee0f97414aa72" title=" " alt="" coords="219,136,361,177"/>
+</map>
+</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -285,7 +346,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_reception_8cpp_source.html#l00293">293</a> of file <a class="el" href="_reception_8cpp_source.html">Reception.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_reception_8cpp_source.html#l00382">382</a> of file <a class="el" href="_reception_8cpp_source.html">Reception.cpp</a>.</p>
 
 </div>
 </div>
@@ -305,7 +366,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_reception_8cpp_source.html#l00298">298</a> of file <a class="el" href="_reception_8cpp_source.html">Reception.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_reception_8cpp_source.html#l00387">387</a> of file <a class="el" href="_reception_8cpp_source.html">Reception.cpp</a>.</p>
 
 </div>
 </div>
@@ -325,7 +386,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_reception_8cpp_source.html#l00303">303</a> of file <a class="el" href="_reception_8cpp_source.html">Reception.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_reception_8cpp_source.html#l00392">392</a> of file <a class="el" href="_reception_8cpp_source.html">Reception.cpp</a>.</p>
 
 </div>
 </div>
