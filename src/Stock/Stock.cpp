@@ -5,6 +5,7 @@
 ** TODO: add description
 */
 
+#include <cmath>
 #include "Stock/Stock.hpp"
 
 using namespace Plazza;
@@ -18,12 +19,14 @@ Stock::Stock(float regenerateTime) : _regenerateTime(regenerateTime), _beginRege
 void Stock::regenerateIngredient()
 {
     std::chrono::steady_clock::time_point endRegeneration = std::chrono::steady_clock::now();
+    int nb_to_regenerate = 0;
 
     if (std::chrono::duration_cast<std::chrono::milliseconds>(endRegeneration - _beginRegeneration).count() < _regenerateTime)
         return;
 
+    nb_to_regenerate = std::floor(std::chrono::duration_cast<std::chrono::milliseconds>(endRegeneration - _beginRegeneration).count() / _regenerateTime);
     for (const auto e : Plazza::availableIngredients)
-        _stock[e] += 1;
+        _stock[e] += nb_to_regenerate;
     _beginRegeneration = std::chrono::steady_clock::now();
 }
 

@@ -96,7 +96,7 @@ void Kitchen::runOrder()
         LockGuard lock(_queue_mutex);
 
         std::all_of(_tasks.begin(), _tasks.end(), [this, &i](auto &elem) {
-            if (_stock->canCookPizza(elem.first.first)) {
+            if (elem.first.second == false && _stock->canCookPizza(elem.first.first)) {
                 _stock->reserveIngredient(elem.first.first);
                 elem.first.second = true;
                 i++;
